@@ -33,7 +33,8 @@ var Transaction = mongoose.model('Transaction', transactionSchema);
 class Model {
   static readAll() {
     return new Promise((resolve, reject) => {
-      Transaction.find({}).then((data) => {
+      Transaction.find({}).populate('customer').populate('productlist').then((data) => {
+        console.log(data);
         resolve(data)
       }).catch((err) => {
         reject(err)
