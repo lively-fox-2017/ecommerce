@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const customer = require('./routes/customer')
 const product = require('./routes/product')
-// const transaction = require('./routes/transaction')
+const transaction = require('./routes/transaction')
 const auth = require('./routes/auth')
 require('dotenv').config()
 const app = express();
@@ -17,7 +17,7 @@ app.use(cors())
 
 app.use('/api/customer', customer)
 app.use('/api/product', product)
-// app.use('/api/transaction', transaction)
+app.use('/api/transaction', transaction)
 app.use('/api/auth', auth)
 
 app.listen(3000)
