@@ -70,6 +70,12 @@ new Vue({
     }
   },
   created() {
-    this.getAllCustomers();
+    axios.post('http://localhost:3000/api/auth/isAdmin', {token:localStorage.getItem('accessToken')}).then((response) => {
+      console.log(response);
+      this.getAllCustomers();
+    }).catch((err) => {
+      console.error(err)
+      window.location.href = "/";
+    })
   }
 })
