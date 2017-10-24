@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Panel</title>
+    <link rel="icon" type="icon" href="assets/images/icons/icon.jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous">
+    </script>
+    <script src="assets/js/filter.js"></script>
+  </head>
+  <body>
+    <!-- <form class="loginform" action="#" method="post">
+      <h1>Admin Login</h1>
+      <label>Username</label>
+      <input type="text" name="username">
+      <label>Password</label>
+      <input type="password" name="" value="">
+      <input type="submit" value="Submit">
+    </form> -->
+    <div class="flex-container">
+      <div class="lineheader"></div>
+      <header class="flex-item header">
+        <div class="header-logo">
+          <img src="assets/images/icons/icon.jpg" alt="my web icon">
+          <h1>Admin Site</h1>
+        </div>
+        <nav>
+          <a class="product" href="#">Product</a>
+          <a class="contact" href="#">Contact</a>
+          <a class="logout" href="#">Logout</a>
+        </nav>
+      </header>
+      <div class="flex-item content">
+        <div class="adminproduct">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button type="button" name="add">Add</button>
+          </div>
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td>001</td>
+                <td>Topi Babe 1</td>
+                <td>Rp. 1.000.000</td>
+                <td>10</td>
+                <td>
+                  <button name="edit">Edit</button>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>002</td>
+                <td>Topi Babe 2</td>
+                <td>Rp. 1.000.000</td>
+                <td>15</td>
+                <td>
+                  <button name="edit">Edit</button>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="admincontact">
+          <table cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Contact List</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td>Address</td>
+                <td>Jl. xyz jakarta selatan</td>
+                <td>
+                  <button name="edit">Edit</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>Handphone Number</td>
+                <td>082123081818</td>
+                <td>
+                  <button name="edit">Edit</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      $('.contact').on('click', function(){
+        $(this).addClass('active');
+        $('.product').removeClass('active');
+
+        $('.admincontact').toggle(200)
+        $('.adminproduct').hide(200);
+      })
+
+      $('.product').on('click', function(){
+        $(this).addClass('active');
+        $('.contact').removeClass('active');
+
+        $('.adminproduct').toggle(200)
+        $('.admincontact').hide();
+      })
+    </script>
+  </body>
+</html>
