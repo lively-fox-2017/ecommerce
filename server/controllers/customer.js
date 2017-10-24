@@ -50,6 +50,13 @@ class CustomerCtrl {
       res.status(500).send(err);
     })
   }
+  static isAdmin(req, res, next){
+    model.Customer.isAdmin(req.body.token).then((data)=>{
+      res.status(200).send(data);
+    }).catch((err)=>{
+      res.status(500).send(err);
+    })
+  }
 }
 
 module.exports = CustomerCtrl;

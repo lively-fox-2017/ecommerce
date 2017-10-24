@@ -137,6 +137,17 @@ class Model {
       })
     })
   }
+  static isAdmin(token) {
+    return new Promise((resolve, reject)=>{
+      jwt.verify(token, process.env.JWT_KEY, function(err, decoded) {
+        if(decoded.role == 'admin'){
+          resolve()
+        } else{
+          reject()
+        }
+      });
+    })
+  }
 }
 
 module.exports = Model;
