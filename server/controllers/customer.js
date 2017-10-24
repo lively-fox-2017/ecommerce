@@ -30,7 +30,7 @@ class CustomerCtrl {
     })
   }
   static delete(req, res, next){
-    model.Customer.update(req.params.id).then((data)=>{
+    model.Customer.delete(req.params.id).then((data)=>{
       res.status(200).send(data);
     }).catch((err)=>{
       res.status(500).send(err);

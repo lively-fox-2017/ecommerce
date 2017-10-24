@@ -1,6 +1,6 @@
 const model = require('../models/index');
 
-class CustomerCtrl {
+class ProductCtrl {
   static readAll(req, res, next){
     model.Product.readAll().then((data)=>{
       res.status(200).send(data);
@@ -30,7 +30,7 @@ class CustomerCtrl {
     })
   }
   static delete(req, res, next){
-    model.Product.update(req.params.id).then((data)=>{
+    model.Product.delete(req.params.id).then((data)=>{
       res.status(200).send(data);
     }).catch((err)=>{
       res.status(500).send(err);
@@ -38,4 +38,4 @@ class CustomerCtrl {
   }
 }
 
-module.exports = CustomerCtrl;
+module.exports = ProductCtrl;
