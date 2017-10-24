@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/menu.css">
+  <link rel="stylesheet" href="./assets/css/container.css">
+  <link rel="stylesheet" href="./assets/css/footer.css">
+  <script type="text/javascript" src="./assets/js/container.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid" >
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categori <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="item.html">Handphone</a></li>
+            <li><a href="#">Laptop</a></li>
+            <li><a href="#">Televisi</a></li>
+          </ul>
+        </li>
+        <li><a href="#">About Us</a></li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="button" name="button" class="btn btn-default"> <span class="glyphicon glyphicon-search"></span></button>
+
+
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+
+      <!-- CART -->
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 1 - Items<span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-cart" role="menu">
+
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- SLIDER -->
+  <div class="row-fluid">
+    <div id="myCarousel" class="carousel slide">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+      </ol>
+      <div class="carousel-inner" style="background-image:url(./assets/img/cor1.jpg)" style="width:100%; height:600px">
+        <div class="item active">
+          <img src="./assets/img/iphone8.png" alt="post image">
+          <div class="carousel-caption">
+            <h1>Iphone 8 Plus 64Gb</h1>
+            <p>Harga Mulai dari 10Jt-an, Bisa ngutang</p>
+          </div>
+        </div>
+        <div class="item" style="background-image:url(./assets/img/cor3.png)" alt="post image" style="width:100%; height:600px">
+          <img src="./assets/img/zenphone.png">
+          <div class="carousel-caption">
+            <h1>Laptop MSI GT73EVR 120Hz Titan</h1>
+            <p>Harga Mulai dari 20 Jt-an, Bisa ngutang</p>
+          </div>
+        </div>
+        <div class="item" style="background-image:url(./assets/img/cor3.png)" alt="post image" style="width:100%; height:600px">
+          <img src="./assets/img/tv.png">
+          <div class="carousel-caption">
+            <h1>TV LCD Sony BRAVIA</h1>
+            <p>Harga Mulai dari 15 Jt-an, Bisa ngutang</p>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+    </div>
+  </div>
+
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- <div class="col-md-4">
+        <p>jhasjhajshjas</p>
+      </div> -->
+      <div class="col-md-10" style="margin-left:130px">
+        <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <h1 class="gallery-title">Categories</h1>
+        </div>
+
+        <div align="center">
+          <button class="btn btn-default filter-button" data-filter="all">All</button>
+          <button class="btn btn-default filter-button" data-filter="hp">Handphone</button>
+          <button class="btn btn-default filter-button" data-filter="tv">TV</button>
+          <button class="btn btn-default filter-button" data-filter="laptop">Computer</button>
+          <button class="btn btn-default filter-button" data-filter="camera">Camera</button>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hp">
+          <div class="thumbnail">
+            <img src="./assets/img/iphone8.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.3.500.000</p>
+              <h3 style="text-align:center">Iphone 4 8Gb</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter laptop">
+          <div class="thumbnail">
+            <img src="./assets/img/rog.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.15.000.000</p>
+              <h3 style="text-align:center">Asus ROG GL553V </h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hp">
+          <div class="thumbnail">
+            <img src="./assets/img/oppor9s.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.9.050.000</p>
+              <h3 style="text-align:center">Oppo R9S</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter camera">
+          <div class="thumbnail">
+            <img src="./assets/img/drone.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.77.950.000</p>
+              <h3 style="text-align:center">Mumma Drone</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter tv">
+          <div class="thumbnail">
+            <img src="./assets/img/tv3.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.15.500.000</p>
+              <h3 style="text-align:center">TV Acer</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter tv">
+          <div class="thumbnail">
+            <img src="./assets/img/tv.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.17.000.000</p>
+              <h3 style="text-align:center">TV Asus</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter camera">
+          <div class="thumbnail">
+            <img src="./assets/img/yicamera.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.11.000.000</p>
+              <h3 style="text-align:center">Yii Camera</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hp">
+          <div class="thumbnail">
+            <img src="./assets/img/iphone4.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.22.000.000</p>
+              <h3 style="text-align:center">Iphone 8 Plus 128Gb</h3>
+              <p><a href="#" class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button"> AddCart </a> <a href="#" class="btn btn-default" role="button">Details</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnail -->
+        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter laptop">
+          <div class="thumbnail">
+            <img src="./assets/img/predator.png" class="img-responsive">
+            <div class="caption">
+              <p style="text-align:center">Rp.38.000.000</p>
+              <h3 style="text-align:center">Asus Predator</h3>
+              <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!--footer-->
+<footer class="footer1">
+  <div class="container">
+
+    <div class="row">
+      <!-- row -->
+
+      <div class="col-lg-3 col-md-3">
+        <!-- widgets column left -->
+        <ul class="list-unstyled clear-margins">
+          <!-- widgets -->
+
+          <li class="widget-container widget_nav_menu">
+            <!-- widgets list -->
+            <h1 class="title-widget">Best Sellers</h1>
+            <ul>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Televisi</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Laptop</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Handphone</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Computer</a></li>
+            </ul>
+          </li>
+
+        </ul>
+
+
+      </div>
+      <!-- widgets column left end -->
+
+
+
+      <div class="col-lg-3 col-md-3">
+        <!-- widgets column left -->
+
+        <ul class="list-unstyled clear-margins">
+          <!-- widgets -->
+
+          <li class="widget-container widget_nav_menu">
+            <!-- widgets list -->
+
+            <h1 class="title-widget">Lokasi</h1>
+
+            <ul>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Jakarta</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Bandung</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Bekasi</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Bogor</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Depok</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Tangerang</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i>  Bali</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- widgets column left end -->
+
+      <div class="col-lg-3 col-md-3">
+        <!-- widgets column left -->
+
+        <ul class="list-unstyled clear-margins">
+          <!-- widgets -->
+
+          <li class="widget-container widget_nav_menu">
+            <!-- widgets list -->
+
+            <h1 class="title-widget">Support By</h1>
+
+            <ul>
+        <li><a href="#"><i class="fa fa-angle-double-right"></i> Pacar</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Gebetan</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Selingkuhan</a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Orangtua </a></li>
+              <li><a href="#"><i class="fa fa-angle-double-right"></i> Sahabat</a></li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+      <!-- widgets column left end -->
+    <div class="col-lg-3 col-md-3">
+        <!-- widgets column center -->
+      <ul class="list-unstyled clear-margins">
+          <!-- widgets -->
+          <li class="widget-container widget_recent_news">
+            <!-- widgets list -->
+            <h1 class="title-widget">Contact Detail </h1>
+            <div class="footerp">
+              <h2 class="title-median">Bangkrut Shops</h2>
+              <p><b>Email id:</b> <a href="mailto:info@webenlance.com">harynugrahaputra@gmail.com</a></p>
+              <p><b>Helpline Numbers </b>
+                <b style="color:#ffc106;">(8AM - 10PM):</b> +021-69696969, +682-169232230 </p>
+              <p><b>Phone Numbers : </b>0825134241232, </p>
+              <p> 011-27568832, 9868387223</p>
+            </div>
+            <div class="social-icons">
+              <ul class="nomargin">
+                <a href="https://www.facebook.com/bootsnipp"><i class="fa fa-facebook-square fa-3x social-fb" id="social"></i></a>
+                <a href="https://twitter.com/bootsnipp"><i class="fa fa-twitter-square fa-3x social-tw" id="social"></i></a>
+                <a href="https://plus.google.com/+Bootsnipp-page"><i class="fa fa-google-plus-square fa-3x social-gp" id="social"></i></a>
+                <a href="mailto:bootsnipp@gmail.com"><i class="fa fa-envelope-square fa-3x social-em" id="social"></i></a>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--header-->
+<div class="footer-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="copyright">
+          © 2017, Hary Nugraha Putra, @Hacktiv8
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="design">
+          <a href="#">Bekasi </a> | <a target="_blank" href="http://www.webenlance.com">Programmers & Full Setak Developer</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</html>
