@@ -59,6 +59,16 @@ new Vue({
         console.error(err);
       })
     },
+    doRegister() {
+      var email = $('#email').val();
+      var password = $('#password').val();
+      var name = $('#name').val();
+      axios.post('http://localhost:3000/api/auth/register', {email:email, password:password, name:name}).then((response)=>{
+        $('#modal3').modal('close');
+      }).catch((err)=>{
+        console.error(err);
+      })
+    },
     isLogin() {
       if(localStorage.getItem('accessToken')){
         return true;
