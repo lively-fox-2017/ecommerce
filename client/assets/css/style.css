@@ -1,0 +1,16 @@
+.promo-image {
+  max-height: 400px;
+}
+
+.highlight-newarival-image {
+  max-height: 400px;
+}
+
+.highlight-image {
+  max-height: 150px;
+}
+
+.footer-segment {
+  margin-top: 40px !important;
+  padding: 20px !important;
+}

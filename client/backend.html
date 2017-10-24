@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>E-Commerce</title>
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.semanticui.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="ui stackable container secondary menu">
+      <div class="item">
+        <img src="/assets/images/ketampanan.png">
+      </div>
+      <a class="active item">
+        Home
+      </a>
+      <a class="item">
+        Men
+      </a>
+      <a class="item">
+        Woman
+      </a>
+      <a class="item">
+        Best Seller
+      </a>
+      <div class="right menu">
+        <a class="ui item">
+        Logout
+      </a>
+        <a class="ui item" id="cart-button">
+        <i class="add to cart icon"></i>
+      </a>
+      </div>
+    </div>
+    <datatable>
+    </datatable>
+    <div class="ui container grid">
+      <div class="sixteen wide column">
+        <table id="example" class="ui celled table" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Office</th>
+              <th>Age</th>
+              <th>Start date</th>
+              <th>Salary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <datatable-body>
+            </datatable-body>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script src="assets/js/setup.js" charset="utf-8"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+
+</html>

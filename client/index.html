@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>E-Commerce</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="ui modal" id="cart-modal">
+      <i class="close icon"></i>
+      <div class="header">
+        <div class="ui tablet stackable fluid steps">
+          <a class="active step cart">
+            <i class="in cart icon"></i>
+            <div class="content">
+              <div class="title">Chart List</div>
+              <div class="description">List of your cart</div>
+            </div>
+          </a>
+          <a class="step complete disabled">
+            <i class="check circle icon"></i>
+            <div class="content">
+              <div class="title">Complete</div>
+              <div class="description">Complete your order</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="content">
+        <div class="ui three stackable cards">
+          <cart-component v-for="product in carts" :key="product._id" :item="product">
+          </cart-component>
+        </div>
+      </div>
+      <div class="actions">
+        <div class="ui positive right labeled icon button">
+          Yep, Continue to complete
+          <i class="checkmark icon"></i>
+        </div>
+      </div>
+    </div>
+    <div class="ui modal" id="signup-modal">
+      <i class="close icon"></i>
+      <div class="header">
+        <h2>Sign Up</h2>
+      </div>
+      <signup-content></signup-content>
+    </div>
+    <div class="ui modal" id="login-modal">
+      <i class="close icon"></i>
+      <div class="header">
+        <h2>Login</h2>
+      </div>
+      <login-content v-on:login="setLoginStatus"></login-content>
+    </div>
+    <div class="ui stackable container secondary menu">
+      <div class="item">
+        <img src="/assets/images/ketampanan.png">
+      </div>
+      <a class="active item">
+        Home
+      </a>
+      <a class="item">
+        Men
+      </a>
+      <a class="item">
+        Woman
+      </a>
+      <a class="item">
+        Best Seller
+      </a>
+      <div class="right menu">
+        <div class="item">
+          <div class="ui icon input">
+            <input placeholder="Search..." type="text">
+            <i class="search link icon"></i>
+          </div>
+        </div>
+        <a class="ui item" v-on:click="showSignup">
+          Signup
+        </a>
+        <a v-if="isLogin" v-on:click="setLoginStatus" class="ui item">
+          Logout
+        </a>
+        <a v-if="!isLogin" v-on:click="showLogin" class="ui item" id="login-button">
+          Login
+        </a>
+        <a class="ui item" @click="showCart">
+        <i class="add to cart icon"></i>
+      </a>
+      </div>
+    </div>
+    <div class="ui grid container">
+      <img class="ui fluid image promo-image" src="http://labkimiafarma.co.id/wp-content/uploads/2015/07/code-promo48.jpg" alt="Promo">
+    </div>
+    <div class="ui two column grid container">
+      <div class="stretched row">
+        <div class="column">
+          <div class="ui segment category" v-on:click="getProducts('new')">;
+            <h4 class="ui header">New Arrival</h4>
+            <img src="https://ae01.alicdn.com/kf/HTB1gPXydE3IL1JjSZFMq6yjrFXaC/New-Arrival-Spring-Men-s-Jackets-Solid-Fashion-Coats-Male-Casual-Slim-Stand-Collar-Bomber-Jacket.jpg_640x640.jpg" class="ui fluid image" alt="New Arival">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui three column grid">
+            <div class="row">
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="ui segment category">
+                    <h4 class="ui header">Shirt</h4>
+                    <img src="https://freethumbs.dreamstime.com/500/big/free_5009525.jpg" alt="Shirt" class="ui fluid image">
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui segment category">
+                    <h4 class="ui header">T-Shirt</h4>
+                    <img src="http://images.freeimages.com/images/large-previews/f04/shirt-1-1561628.jpg" alt="T-Shirt" class="ui fluid image">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="ui equal width grid">
+                <div class="column">
+                  <div class="ui segment category">
+                    <h4 class="ui header">Pants</h4>
+                    <img src="https://images.asos-media.com/products/asos-farleigh-high-waist-slim-mom-jeans-in-blossom-darkwash/7948162-1-blossomdarkwash?$XL$" alt="Pants" class="ui fluid image">
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui segment category">
+                    <h4 class="ui header">Bag</h4>
+                    <img src="http://images.freeimages.com/images/large-previews/8bc/leather-bag-1487953.jpg" alt="Bag" class="ui fluid image">
+                  </div>
+                </div>
+                <div class="column">
+                  <div class="ui segment category">
+                    <h4 class="ui header">Footwear</h4>
+                    <img src="http://images.freeimages.com/images/large-previews/b78/nice-shoes-1418807.jpg" alt="Footwear" class="ui fluid image">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui container grid">
+      <div class="sixteen wide column">
+        <div class="ui link three stackable cards">
+          <list-product @add-to-cart="addToCart" v-if="isShowList" v-for="product in products" :key="product._id" :item="product">
+          </list-product>
+        </div>
+      </div>
+    </div>
+    <div class="ui inverted vertical footer segment footer-segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="three wide column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">About Us</a>
+              <a href="#" class="item">Contact Us</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Services</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">How to order</a>
+              <a href="#" class="item">FAQ</a>
+              <a href="#" class="item">Term of services</a>
+            </div>
+          </div>
+          <div class="nine wide column">
+            <h4 class="ui inverted header">Subscribe</h4>
+            <div class="ui fluid action input">
+              <input placeholder="Subscribe" type="text">
+              <div class="ui button">Subscibe</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://unpkg.com/vue"></script>
+<script src="assets/js/setup.js" charset="utf-8"></script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="semantic/dist/semantic.min.js"></script>
+<script src="assets/js/modal-content.js"></script>
+<script src="assets/js/product-content.js"></script>
+<script type="text/javascript">
+  $("#cart-button").click(function() {
+    $("#cart-modal>.content").remove()
+    $("#cart-modal>.actions").remove()
+    $("#cart-modal").append(chartModal)
+    $('#cart-modal').modal('show');
+
+    $('.step').on('click', function() {
+      $('.step').removeClass('active')
+      if ($(this).hasClass('complete')) {
+        $('.complete').removeClass('disabled');
+        $('.complete').addClass('active');
+        $('.step').removeClass('active')
+        $('.complete').addClass('active');
+        $("#cart-modal>.content").remove()
+        $("#cart-modal>.actions").remove()
+        $("#cart-modal").append(shippingModal)
+      } else if ($(this).hasClass('chart')) {
+        $('.chart').addClass('active');
+        $('.complete').addClass('disabled');
+        $('.complete').removeClass('active')
+        $("#cart-modal>.content").remove()
+        $("#cart-modal>.actions").remove()
+        $("#cart-modal").append(chartModal)
+      }
+      $('.actions').on('click', function() {
+        $('.complete').removeClass('disabled');
+        $('.step').removeClass('active')
+        $('.complete').addClass('active');
+        $("#cart-modal>.content").remove()
+        $("#cart-modal>.actions").remove()
+        $("#cart-modal").append(shippingModal)
+      })
+    })
+    $('.actions').on('click', function() {
+      $('.complete').removeClass('disabled');
+      $('.step').removeClass('active')
+      $('.complete').addClass('active');
+      $("#cart-modal>.content").remove()
+      $("#cart-modal>.actions").remove()
+      $("#cart-modal").append(shippingModal)
+    })
+  })
+  $('.category').dimmer({
+    on: 'hover'
+  });
+  $('.category').css('cursor', 'pointer');
+
+</script>
+
+</html>
