@@ -22,9 +22,9 @@ class CustomerController {
 
   static fetchById (req, res) {
 
-    const query = Customer.findById(req.params.id);
+    const execQuery = Customer.findById(req.params.id);
 
-    query
+    execQuery
       .then((customer) => {
 
         if (customer)
@@ -52,9 +52,9 @@ class CustomerController {
       phone: req.body.phone
     };
 
-    const query = Customer.insertMany(newCustomer);
+    const execQuery = Customer.insertMany(newCustomer);
 
-    query
+    execQuery
       .then((customer) => {
 
         res.status(201).json(customer);
