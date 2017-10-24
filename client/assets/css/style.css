@@ -90,24 +90,67 @@ nav ul #cart{
   padding: 30px;
   left: -20px;
   width: 50px;
+  z-index: 11;
   cursor: pointer;
 }
 
 nav ul li{
-  width: 200px;
+  width: 290px;
   display:none;
   color: white;
   background-color: #ffe700;
   position: absolute;
-  left: 0px;
-  top: 80px;
-  border-radius: 0px 100px 0px 0px;
+  text-align: left;
+  left: -80px;
+  top: 60px;
+  /*border-radius: 0px 100px 0px 0px;*/
+  border: 1px solid orange;
   padding: 10px;
   z-index: 10;
 }
 
 .cart h3{
   margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.cart .imgcart{
+  width: 50px;
+}
+
+.cart .removeCart{
+  width: 30px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.cart .removeCart:hover{
+  box-shadow: 0px 0px 1px 1px red;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+}
+
+.cart table{
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.cart td{
+  color: black;
+  border-bottom: 1px solid #ffe700;
+}
+
+.cart input[type='number']{
+  width: 50px;
+}
+
+.cart span{
+  float: right;
+  margin-top: 5px;
+  margin-right: 15px;
 }
 
 .content{

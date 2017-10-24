@@ -14,8 +14,10 @@ module.exports = {
   dataProduct: (reqBody) => {
     let Obj = {
       name: reqBody.name,
+      url: reqBody.url,
       price: reqBody.price,
-      stock: reqBody.stock
+      stock: reqBody.stock,
+      info: reqBody.info
     }
 
     return Obj

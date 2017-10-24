@@ -7,6 +7,7 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
+  url: String,
   price: {
     type: Number,
     required: true
@@ -14,7 +15,8 @@ const schema = new mongoose.Schema({
   stock: {
     type: Number,
     required: true
-  }
+  },
+  info: String
 })
 
 const productModel = mongoose.model('Product', schema)

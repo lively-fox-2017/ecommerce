@@ -14,6 +14,8 @@
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			  crossorigin="anonymous">
     </script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="flex-container">
@@ -23,15 +25,26 @@
           <img src="assets/images/icons/icon.jpg" alt="my web icon">
           <h1>Beli Topi Kuy</h1>
         </div>
-        <nav>
-          <a class="home" href="#">Home</a>
-          <a class="product" href="#">Product</a>
+        <nav id="home">
+          <a class="home" href="#home">Home</a>
+          <a class="product" href="#someitem">Product</a>
           <a class="contact" href="#">Contact</a>
+          <a class="contact" href="#">Login</a>
           <ul>
             <img id="cart" src="assets/images/icons/shoppingcart.png" alt="cart">
             <li class="cart">
               <h3>List of Items</h3>
-              <button>Checkout</button>
+              <form action="#" method="post" v-on:submit.prevent>
+                <table>
+                  <tr v-for="(value, index) in cart">
+                    <td><img class="imgcart" v-bind:src="value.url" v-bind:alt="value.name"></td>
+                    <td><input type="number" name="quantity" min="1" placeholder="Qty"></td>
+                    <td>{{value.rupiah}}</td>
+                    <td v-on:click="removeItem(index)"><img class="removeCart" src="assets/images/icons/false.png" alt=""></td>
+                  </tr>
+                </table>
+                <input type="submit" value="Checkout"> <span>{{totalPriceRupiah}}</span>
+              </form>
             </li>
           </ul>
         </nav>
@@ -59,126 +72,28 @@
           </div>
           <div class="progress-bar"></div>
         </div>
-        <div class="someitem">
-          <h2>Best Selling</h2>
+        <div class="someitem" id="someitem">
+          <h2>Products</h2>
           <div class="itemlist">
-            <figure>
+            <figure v-for="(value, index) in items">
               <ul>
-                <img src="assets/images/hat1.jpg" alt="hat 1">
+                <img v-bind:src="value.url" v-bind:alt="value.name">
                 <p>
-                  <h4>Topi Babe 1</h4>
+                  <h4>{{value.name}}</h4>
                 </p>
-                <li>
+                <li v-on:click="addItem(index)">
                     <div class="titledetail">Price</div>
                     <p class='detail'>
-                      Rp. 1.000.000
+                      {{value.rupiah}}
+                    </p>
+                    <div class="titledetail">Stock</div>
+                    <p class='detail'>
+                      {{value.stock}} pieces
                     </p>
                     <div class="titledetail">Product Info</div>
                     <p class='detail'>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis tristique eros, quis sagittis sapien consequat ac.
-                      Vestibulum auctor, nulla et convallis fringilla, tellus turpis mollis augue, sed posuere odio felis et augue. Vestibulum eu ultricies libero.
-                      Integer ut nulla dignissim, pulvinar leo at, vestibulum neque. Praesent vel tortor feugiat.
+                      {{value.info}}
                     </p>
-                </li>
-              </ul>
-            </figure>
-            <figure>
-              <ul>
-                <img src="assets/images/hat2.png" alt="hat 2">
-                <p>
-                  <h4>Topi Babe 2</h4>
-                </p>
-                <li>
-                  <div class="titledetail">Price</div>
-                  <p class='detail'>
-                    Rp. 1.000.000
-                  </p>
-                  <div class="titledetail">Product Info</div>
-                  <p class='detail'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis tristique eros, quis sagittis sapien consequat ac.
-                    Vestibulum auctor, nulla et convallis fringilla, tellus turpis mollis augue, sed posuere odio felis et augue. Vestibulum eu ultricies libero.
-                    Integer ut nulla dignissim, pulvinar leo at, vestibulum neque. Praesent vel tortor feugiat.
-                  </p>
-                </li>
-              </ul>
-            </figure>
-            <figure>
-              <ul>
-                <img src="assets/images/hat3.png" alt="hat 3">
-                <p>
-                  <h4>Topi Babe 3</h4>
-                </p>
-                <li>
-                  <div class="titledetail">Price</div>
-                  <p class='detail'>
-                    Rp. 1.000.000
-                  </p>
-                  <div class="titledetail">Product Info</div>
-                  <p class='detail'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis tristique eros, quis sagittis sapien consequat ac.
-                    Vestibulum auctor, nulla et convallis fringilla, tellus turpis mollis augue, sed posuere odio felis et augue. Vestibulum eu ultricies libero.
-                    Integer ut nulla dignissim, pulvinar leo at, vestibulum neque. Praesent vel tortor feugiat.
-                  </p>
-                </li>
-              </ul>
-            </figure>
-            <figure>
-              <ul>
-                <img src="assets/images/hat4.jpg" alt="hat 4">
-                <p>
-                  <h4>Topi Babe 4</h4>
-                </p>
-                <li>
-                  <div class="titledetail">Price</div>
-                  <p class='detail'>
-                    Rp. 1.000.000
-                  </p>
-                  <div class="titledetail">Product Info</div>
-                  <p class='detail'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis tristique eros, quis sagittis sapien consequat ac.
-                    Vestibulum auctor, nulla et convallis fringilla, tellus turpis mollis augue, sed posuere odio felis et augue. Vestibulum eu ultricies libero.
-                    Integer ut nulla dignissim, pulvinar leo at, vestibulum neque. Praesent vel tortor feugiat.
-                  </p>
-                </li>
-              </ul>
-            </figure>
-            <figure>
-              <ul>
-                <img src="assets/images/hat5.png" alt="hat 5">
-                <p>
-                  <h4>Topi Babe 5</h4>
-                </p>
-                <li>
-                  <div class="titledetail">Price</div>
-                  <p class='detail'>
-                    Rp. 1.000.000
-                  </p>
-                  <div class="titledetail">Product Info</div>
-                  <p class='detail'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis tristique eros, quis sagittis sapien consequat ac.
-                    Vestibulum auctor, nulla et convallis fringilla, tellus turpis mollis augue, sed posuere odio felis et augue. Vestibulum eu ultricies libero.
-                    Integer ut nulla dignissim, pulvinar leo at, vestibulum neque. Praesent vel tortor feugiat.
-                  </p>
-                </li>
-              </ul>
-            </figure>
-            <figure>
-              <ul>
-                <img src="assets/images/hat1.jpg" alt="hat 6">
-                <p>
-                  <h4>Topi Babe 6</h4>
-                </p>
-                <li>
-                  <div class="titledetail">Price</div>
-                  <p class='detail'>
-                    Rp. 1.000.000
-                  </p>
-                  <div class="titledetail">Product Info</div>
-                  <p class='detail'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas convallis tristique eros, quis sagittis sapien consequat ac.
-                    Vestibulum auctor, nulla et convallis fringilla, tellus turpis mollis augue, sed posuere odio felis et augue. Vestibulum eu ultricies libero.
-                    Integer ut nulla dignissim, pulvinar leo at, vestibulum neque. Praesent vel tortor feugiat.
-                  </p>
                 </li>
               </ul>
             </figure>
@@ -189,7 +104,7 @@
         <span>&copy 2017 Redhaputra @hacktiv8</span>
       </footer>
     </div>
-
+    <script type="text/javascript" src="assets/js/cart.js"></script>
     <script type="text/javascript">
         $('#cart').on('click', function(){
           $('.cart').toggle(200)
