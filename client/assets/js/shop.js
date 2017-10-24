@@ -2,12 +2,12 @@ new Vue({
   el: '#app',
   data: {
     products: [],
-    carts:[],
-    hargaTotal:0,
+    carts: [],
+    hargaTotal: 0,
   },
   methods: {
     getAllProducts() {
-      return new Promise((resolve, reject)=>{
+      return new Promise((resolve, reject) => {
         axios.get('http://localhost:3000/api/product').then((response) => {
           this.products = response.data;
           resolve();
@@ -17,13 +17,13 @@ new Vue({
         })
       })
     },
-    toggleSmall (id) {
-      $('#'+id).toggleClass('small', 200);
+    toggleSmall(id) {
+      $('#' + id).toggleClass('small', 200);
     },
     tambahCart(id) {
-      if(localStorage.getItem('accessToken')){
-        var index = this.products.findIndex((product)=>{
-          if(product._id == id){
+      if (localStorage.getItem('accessToken')) {
+        var index = this.products.findIndex((product) => {
+          if (product._id == id) {
             return product;
           }
         })
@@ -32,14 +32,26 @@ new Vue({
         obj.totalPrice = obj.price * obj.qty;
         this.carts.push(obj);
         this.calculateHargaTotal()
-      }
-      else {
+      } else {
         alert('login dulu bosq')
       }
     },
+    removeCart(index) {
+      this.carts.splice(index, 1);
+    },
+    convertRupiah(price) {
+      var newPrice = ''
+      for (let i = price.length - 1; i >= 0; i--) {
+        newPrice += price[i]
+        if (i % 3 == 0 && i != price.length - 1 && i != 0) {
+          newPrice += "."
+        }
+      }
+      return newPrice.split('').reverse().join('');
+    },
     calculatePrice(id) {
-      var index = this.carts.findIndex((cart)=>{
-        if(cart._id == id){
+      var index = this.carts.findIndex((cart) => {
+        if (cart._id == id) {
           return cart
         }
       })
@@ -48,44 +60,47 @@ new Vue({
     },
     calculateHargaTotal() {
       this.hargaTotal = 0;
-      for(var i = 0;i<this.carts.length;i++){
+      for (var i = 0; i < this.carts.length; i++) {
         this.hargaTotal += this.carts[i].totalPrice;
       }
     },
     doSearch() {
-      this.getAllProducts().then(()=>{
+      this.getAllProducts().then(() => {
         var search = $('#search').val();
         var hasilSearch = [];
-        this.products.forEach(product=>{
-          if(product.name.toLowerCase().indexOf(search.toLowerCase()) > -1){
+        this.products.forEach(product => {
+          if (product.name.toLowerCase().indexOf(search.toLowerCase()) > -1) {
             hasilSearch.push(product)
           }
         })
         this.products = hasilSearch;
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log(err);
       })
     },
     category(category) {
-      this.getAllProducts().then(()=>{
+      this.getAllProducts().then(() => {
         var hasilSearch = [];
-        this.products.forEach(product=>{
-          if(product.category.toLowerCase().indexOf(category.toLowerCase()) > -1){
+        this.products.forEach(product => {
+          if (product.category.toLowerCase().indexOf(category.toLowerCase()) > -1) {
             hasilSearch.push(product)
           }
         })
         this.products = hasilSearch;
-      }).catch((err)=>{
+      }).catch((err) => {
         console.log(err);
       })
     },
     doLogin() {
       var email = $('#email').val();
       var password = $('#password').val();
-      axios.post('http://localhost:3000/api/auth/login', {email:email, password:password}).then((response)=>{
+      axios.post('http://localhost:3000/api/auth/login', {
+        email: email,
+        password: password
+      }).then((response) => {
         localStorage.setItem('accessToken', response.data.token);
         location.reload();
-      }).catch((err)=>{
+      }).catch((err) => {
         console.error(err);
       })
     },
@@ -93,14 +108,18 @@ new Vue({
       var email = $('#email').val();
       var password = $('#password').val();
       var name = $('#name').val();
-      axios.post('http://localhost:3000/api/auth/register', {email:email, password:password, name:name}).then((response)=>{
+      axios.post('http://localhost:3000/api/auth/register', {
+        email: email,
+        password: password,
+        name: name
+      }).then((response) => {
         $('#modal3').modal('close');
-      }).catch((err)=>{
+      }).catch((err) => {
         console.error(err);
       })
     },
     isLogin() {
-      if(localStorage.getItem('accessToken')){
+      if (localStorage.getItem('accessToken')) {
         return true;
       } else {
         return false;
@@ -114,12 +133,16 @@ new Vue({
       var totalHarga = this.hargaTotal;
       var customer_id = localStorage.getItem('accessToken');
       var productlist = [];
-      this.carts.forEach((cart)=>{
+      this.carts.forEach((cart) => {
         productlist.push(cart._id);
       })
-      axios.post('http://localhost:3000/api/transaction', {customer_id:customer_id, productlist:productlist, totalHarga:totalHarga}).then((response)=>{
+      axios.post('http://localhost:3000/api/transaction', {
+        customer_id: customer_id,
+        productlist: productlist,
+        totalHarga: totalHarga
+      }).then((response) => {
         console.log(response)
-      }).catch((err)=>{
+      }).catch((err) => {
         console.error(err);
       })
     }

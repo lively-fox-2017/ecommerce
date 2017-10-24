@@ -114,7 +114,7 @@
                   </div>
                   <div class="card-content">
                     <h6>
-                      Rp. {{product.price}},00
+                      Rp. {{convertRupiah(product.price)}},00
                     </h6>
                     <p>
                       {{product.description}}
@@ -260,11 +260,11 @@
               <th>Total</th>
             </tr>
             <tr v-for="(cart, index) in carts">
-              <td><button class="btn-floating">x</button></td>
+              <td><button class="btn-floating" v-on:click="removeCart(index)">x</button></td>
               <td><img v-bind:src="cart.imageUrl" class="image-logo"></img>
               </td>
               <td>{{cart.name}}</td>
-              <td>{{cart.price}}</td>
+              <td>{{convertRupiah(cart.price)}}</td>
               <td><input type="number" v-model:value="cart.qty" v-bind:id="'qty'+index" v-on:keyup="calculatePrice(cart._id)"></td>
               <td><input type="text" disabled v-model:value="cart.totalPrice"></td>
             </tr>
