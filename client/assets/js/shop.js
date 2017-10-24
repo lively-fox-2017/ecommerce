@@ -3,15 +3,18 @@ new Vue({
   data: {
     products: [],
     carts:[],
-    hargaTotal:0
+    hargaTotal:0,
   },
   methods: {
     getAllProducts() {
-      axios.get('http://localhost:3000/api/product').then((response) => {
-        console.log(response)
-        this.products = response.data;
-      }).catch((err) => {
-        console.error(err)
+      return new Promise((resolve, reject)=>{
+        axios.get('http://localhost:3000/api/product').then((response) => {
+          this.products = response.data;
+          resolve();
+        }).catch((err) => {
+          console.error(err)
+          reject(err)
+        })
       })
     },
     toggleSmall (id) {
@@ -50,14 +53,31 @@ new Vue({
       }
     },
     doSearch() {
-      var search = $('#search').val();
-      var hasilSearch = [];
-      this.products.forEach(product=>{
-        if(product.name.toLowerCase().indexOf(search.toLowerCase()) > -1){
-          hasilSearch.push(product)
-        }
+      this.getAllProducts().then(()=>{
+        var search = $('#search').val();
+        var hasilSearch = [];
+        this.products.forEach(product=>{
+          if(product.name.toLowerCase().indexOf(search.toLowerCase()) > -1){
+            hasilSearch.push(product)
+          }
+        })
+        this.products = hasilSearch;
+      }).catch((err)=>{
+        console.log(err);
       })
-      this.products = hasilSearch;
+    },
+    category(category) {
+      this.getAllProducts().then(()=>{
+        var hasilSearch = [];
+        this.products.forEach(product=>{
+          if(product.category.toLowerCase().indexOf(category.toLowerCase()) > -1){
+            hasilSearch.push(product)
+          }
+        })
+        this.products = hasilSearch;
+      }).catch((err)=>{
+        console.log(err);
+      })
     },
     doLogin() {
       var email = $('#email').val();

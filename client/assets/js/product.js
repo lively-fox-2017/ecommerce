@@ -8,7 +8,8 @@ new Vue({
       name: '',
       price: '',
       description: '',
-      imageUrl: ''
+      imageUrl: '',
+      category: '',
     }
   },
   methods: {
