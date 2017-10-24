@@ -9,7 +9,7 @@ a{
 }
 
 .flex-container{
-  width: 60%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -25,7 +25,7 @@ a{
 }
 
 .flex-item{
-  width: 100%;
+  width: 60%;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,7 @@ nav{
   flex-wrap: wrap;
 }
 
-nav .home, nav .product, nav .contact{
+nav .home, nav .product, nav .contact, nav .login{
   color: #f4d100;
   padding: 30px;
   font-weight: bold;
@@ -70,7 +70,7 @@ nav .home, nav .product, nav .contact{
   /*box-sizing: border-box;*/
 }
 
-nav .home:hover, nav .product:hover, nav .contact:hover{
+nav .home:hover, nav .product:hover, nav .contact:hover, nav .login{
   border-bottom: 1px solid #ffe700;
   /*box-sizing: border-box;*/
 }
@@ -154,9 +154,11 @@ nav ul li{
 }
 
 .content{
+  width: 100%;
   background-color: white;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 /*.content #slider{
@@ -204,9 +206,6 @@ nav ul li{
 
 .itemlist figure:hover{
   box-shadow: 1px 1px 10px 5px rgba(255,231,0,0.5);
-  -webkit-box-shadow: 1px 1px 10px 5px rgba(255,231,0,0.5);
-  -moz-box-shadow: 1px 1px 10px 5px rgba(255,231,0,0.5);
-  -o-box-shadow: 1px 1px 10px 5px rgba(255,231,0,0.5);
   border-radius: 10px;
   transition: all 1s ease;
   -webkit-transition: all 1s ease;
@@ -251,6 +250,13 @@ nav ul li{
   z-index: 10;
 }
 
+.itemlist figure ul li h5{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ffe700;
+}
+
 .itemlist figure:hover ul li{
   display: inline;
 }
@@ -269,29 +275,50 @@ nav ul li{
 }
 
 footer{
-  width: 100%;
+  width: 60%;
   text-align: center;
   color: white;
   font-weight: bold;
   background-color: #ffe700;
   padding: 20px;
+  box-sizing: content-box;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 .loginform{
   width: 30%;
-  margin-top: 15%;
+  margin-top: 5%;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px 5px #ffe700;
-  display: flex;
+  display: none;
   flex-direction: column;
   box-sizing: content-box;
+  background-color: white;
+}
+
+.loginform div{
+  display: flex;
 }
 
 .loginform h1{
+  width: 90%;
+  background-color: white;
   margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.loginform .modal_close{
+  width: 6%;
+  border-radius: 100%;
+  background-color: red;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+.loginform .modal_close:hover{
+  box-shadow: 1px 1px 2px 5px red;
 }
 
 .loginform label{
@@ -300,6 +327,7 @@ footer{
   padding: 10px;
   color: #f4d100;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .loginform input[type="text"], .loginform input[type="password"]{
@@ -307,12 +335,13 @@ footer{
   background-color: white;
   padding: 10px;
   border: 1px solid #ffe700;
+  margin-bottom: 10px;
   color: #f4d100;
   text-align: center;
 }
 
-.loginform input[type="submit"]{
-  width: 100%;
+.loginform input[type="submit"], .loginform button[type="button"]{
+  width: 49%;
   margin-top: 20px;
   border: 0px;
   padding: 10px;

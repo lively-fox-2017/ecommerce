@@ -16,6 +16,7 @@
     </script>
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.leanModal.min.js"></script>
   </head>
   <body>
     <div class="flex-container">
@@ -25,11 +26,21 @@
           <img src="assets/images/icons/icon.jpg" alt="my web icon">
           <h1>Beli Topi Kuy</h1>
         </div>
-        <nav id="home">
+        <nav>
           <a class="home" href="#home">Home</a>
           <a class="product" href="#someitem">Product</a>
           <a class="contact" href="#">Contact</a>
-          <a class="contact" href="#">Login</a>
+          <a class="login" id="popup" href=".loginform">Login</a>
+          <form class="loginform" v-on:submit.prevent method="post">
+            <div>
+              <h1>Login</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
+            </div>
+            <label>Username</label>
+            <input type="text" name="username">
+            <label>Password</label>
+            <input type="password" name="" value="">
+            <input type="submit" value="Submit"> <button type="button" name="button">Register</button>
+          </form>
           <ul>
             <img id="cart" src="assets/images/icons/shoppingcart.png" alt="cart">
             <li class="cart">
@@ -38,8 +49,8 @@
                 <table>
                   <tr v-for="(value, index) in cart">
                     <td><img class="imgcart" v-bind:src="value.url" v-bind:alt="value.name"></td>
-                    <td><input type="number" name="quantity" min="1" placeholder="Qty"></td>
-                    <td>{{value.rupiah}}</td>
+                    <td><input v-bind:id="'quantity'+index" v-on:change="quantityChange(index)" type="number" name="quantity" min="1" placeholder="Qty" required></td>
+                    <td>{{value.formatHarga}}</td>
                     <td v-on:click="removeItem(index)"><img class="removeCart" src="assets/images/icons/false.png" alt=""></td>
                   </tr>
                 </table>
@@ -49,7 +60,7 @@
           </ul>
         </nav>
       </header>
-      <div class="flex-item content">
+      <div class="content">
         <div id="slider">
           <div id="mask">
             <ul>
@@ -75,25 +86,26 @@
         <div class="someitem" id="someitem">
           <h2>Products</h2>
           <div class="itemlist">
-            <figure v-for="(value, index) in items">
+            <figure v-for="(item, index) in items">
               <ul>
-                <img v-bind:src="value.url" v-bind:alt="value.name">
+                <img v-bind:src="item.url" v-bind:alt="item.name">
                 <p>
-                  <h4>{{value.name}}</h4>
+                  <h4>{{item.name}}</h4>
                 </p>
                 <li v-on:click="addItem(index)">
-                    <div class="titledetail">Price</div>
-                    <p class='detail'>
-                      {{value.rupiah}}
-                    </p>
-                    <div class="titledetail">Stock</div>
-                    <p class='detail'>
-                      {{value.stock}} pieces
-                    </p>
-                    <div class="titledetail">Product Info</div>
-                    <p class='detail'>
-                      {{value.info}}
-                    </p>
+                  <h5>Click to add to Shopping Chart</h5>
+                  <div class="titledetail">Price</div>
+                  <p class='detail'>
+                    {{item.rupiah}}
+                  </p>
+                  <div class="titledetail">Stock</div>
+                  <p class='detail'>
+                    {{item.stock}} pieces
+                  </p>
+                  <div class="titledetail">Product Info</div>
+                  <p class='detail'>
+                    {{item.info}}
+                  </p>
                 </li>
               </ul>
             </figure>
@@ -106,27 +118,29 @@
     </div>
     <script type="text/javascript" src="assets/js/cart.js"></script>
     <script type="text/javascript">
-        $('#cart').on('click', function(){
-          $('.cart').toggle(200)
-        })
+      $("#popup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
-        $('.home').on('click', function(){
-          $(this).addClass('active');
-          $('.contact').removeClass('active');
-          $('.product').removeClass('active');
-        })
+      $('#cart').on('click', function(){
+        $('.cart').fadeToggle(300)
+      })
 
-        $('.contact').on('click', function(){
-          $(this).addClass('active');
-          $('.home').removeClass('active');
-          $('.product').removeClass('active');
-        })
+      $('.home').on('click', function(){
+        $(this).addClass('active');
+        $('.contact').removeClass('active');
+        $('.product').removeClass('active');
+      })
 
-        $('.product').on('click', function(){
-          $(this).addClass('active');
-          $('.home').removeClass('active');
-          $('.contact').removeClass('active');
-        })
+      $('.contact').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.product').removeClass('active');
+      })
+
+      $('.product').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+      })
     </script>
   </body>
 </html>
