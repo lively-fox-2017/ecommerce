@@ -5,7 +5,8 @@ const itemSchema = new Schema({
     "itemname" : String,
     "price" : Number,
     "category" : String,
-    "stock" : Number
+    "stock" : Number,
+    "imageUrl": URL
 })
 
 const Item = mongoose.model('Items', itemSchema)
@@ -39,6 +40,7 @@ class ItemCRUD {
                 item.price = body.price || item.price;
                 item.category = body.category || item.category;
                 item.stock = body.stock || item.stock;
+                item.imageUrl = body.imageUrl || item.imageUrl;
                 item.save()
                     .then(item => {
                         cb(item)
