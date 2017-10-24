@@ -97,6 +97,7 @@ class Model {
       }).catch((err) => {
         reject(err)
       })
+    })
   }
   static register(insert) {
     const secret = process.env.SALT_KEY;

@@ -64,7 +64,7 @@ class Model {
   }
   static update(update){
     return new Promise((resolve, reject) => {
-      Product.findOneAndUpdate({"_id":update._id}{
+      Product.findOneAndUpdate({"_id":update._id},{
         name: update.name,
         price: update.price,
         description: update.description,
