@@ -8,7 +8,7 @@ new Vue({
       name: '',
       price: '',
       description: '',
-      imgUrl: ''
+      imageUrl: ''
     }
   },
   methods: {
@@ -35,8 +35,38 @@ new Vue({
       this.formData = this.products[index]
       this.formData.isUpdate = true;
     },
-    deleteData() {
-
+    deleteData(id) {
+      axios.delete('http://localhost:3000/api/product/'+id).then((response) => {
+        var index = this.products.findIndex((product)=>{
+          if(product._id == response.data.data._id){
+            return product;
+          }
+        })
+        this.products.splice(index, 1);
+      }).catch((err) => {
+        console.error(err)
+      })
+    },
+    saveData() {
+      if(this.formData.isUpdate){
+        axios.put('http://localhost:3000/api/product/'+this.formData._id, this.formData).then((response) => {
+          var index = this.products.findIndex((product)=>{
+            if(product._id == response.data.data._id){
+              return product;
+            }
+          })
+          this.products[index] = response.data.data;
+        }).catch((err) => {
+          console.error(err)
+        })
+      }
+      else {
+        axios.post('http://localhost:3000/api/product', this.formData).then((response) => {
+          this.products.unshift(response.data.data);
+        }).catch((err) => {
+          console.error(err)
+        })
+      }
     }
   },
   created() {
