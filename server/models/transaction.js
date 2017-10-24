@@ -13,7 +13,7 @@ var transactionSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true
-  }]
+  }],
   totalHarga: {
     type: String,
     required: true
@@ -26,7 +26,7 @@ var transactionSchema = new Schema({
 
 transactionSchema.plugin(idvalidator)
 
-var Transaction = mongoose.model('Product', transactionSchema);
+var Transaction = mongoose.model('Transaction', transactionSchema);
 
 class Model {
   static readAll() {
