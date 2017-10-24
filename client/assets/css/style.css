@@ -1,0 +1,79 @@
+.image-logo {
+  display: inline-block;
+  max-height: 38px;
+  padding-top:3px;
+}
+
+#nav-mobile li a{
+  color:white!important;
+}
+
+.product {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+  color:black!important;
+  padding: 6px 12px !important;
+  font-size: 16px!important;
+  letter-spacing: 1.2px;
+  font-weight: bold!important;
+}
+
+#nav-mobile li a {
+  color: black;
+}
+#search-bar {
+  display:none;
+}
+
+.carousel {
+  max-height: 25vh;
+  margin-bottom: 50px;
+}
+
+.carousel-item {
+  background-color: black;
+}
+
+input[id="search"] {
+height: 45px !important;
+  margin-top: 10px;
+   border-radius: 5px;
+}
+
+.search-input{
+      background-color: #82b1ff ;
+  height: 45px !important;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+nav .input-field label.active {
+    top: -10px;
+    left: 15px;
+}
+
+nav .input-field label {
+    top: -20px;
+    left: 0;
+}
+
+.input-field input[type=date]:focus + label,
+.input-field input[type=text]:focus + label,
+.input-field input[type=email]:focus + label,
+.input-field input[type=password]:focus + label {
+  color: #e91e63;
+}
+
+.input-field input[type=date]:focus,
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus {
+  border-bottom: 2px solid #e91e63;
+  box-shadow: none;
+}
+
+.input-field label:not(.label-icon).active {
+  -webkit-transform: none!important;
+     transform: none!important;
+    -webkit-transform-origin: unset!important;
+    transform-origin: unset!important;
+}

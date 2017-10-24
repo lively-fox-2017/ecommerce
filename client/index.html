@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="E-Commerce Materialize" />
+  <meta name="author" content="lokiloko" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commaterialize</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+  <header>
+    <!-- nav start -->
+    <div class="navbar-fixed">
+      <nav class="light-blue" role="navigation">
+        <div class="nav-wrapper">
+          <div class="row">
+            <div class="col l2 m4">
+              <ul class="left">
+                <li>
+                  <img src="assets/img/logo.png" class="image-logo"></img>
+                </li>
+              </ul>
+            </div>
+            <div class="col l7 m4">
+              <form class="search-input">
+                <div class="input-field">
+                  <input id="search" type="search" />
+                  <label for="search"><i class="material-icons">search</i></label>
+                </div>
+              </form>
+            </div>
+            <div class="col l3 m4">
+              <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Shop</a></li>
+                <li><a href="#modal2" data-target="modal2" class="modal-trigger"><i class="material-icons left">airline_seat_legroom_reduced</i>Login</a></li>
+                <li><a href="#modal1" data-target="modal1" class="modal-trigger"><i class="material-icons left">shopping_cart</i>Cart</a></li>
+              </ul>
+            </div>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="side-nav" id="mobile-demo">
+              <li><a href="#">Shop</a></li>
+              <li><a href="#"><i class="material-icons left">airline_seat_legroom_reduced</i>Profile</a></li>
+              <li><a href="#"><i class="material-icons left">shopping_cart</i>Cart</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- nav end -->
+    <!--
+    <div class="row" id="search-bar">
+      <div class="col s12">
+        <form>
+          <div class="input-field">
+            <i class="material-icons">search</i>
+            <input id="search" type="search" required>
+            <i class="material-icons">close</i>
+          </div>
+        </form>
+      </div>
+    </div> -->
+  </header>
+  <div id="carousel">
+    <div class="carousel carousel-slider center" data-indicators="true">
+      <div class="carousel-fixed-item center">
+
+      </div>
+      <div class="carousel-item red white-text" href="#one!">
+        <h2>First Panel</h2>
+        <p class="white-text">This is your first panel</p>
+      </div>
+      <div class="carousel-item amber white-text" href="#two!">
+        <h2>Second Panel</h2>
+        <p class="white-text">This is your second panel</p>
+      </div>
+      <div class="carousel-item green white-text" href="#three!">
+        <h2>Third Panel</h2>
+        <p class="white-text">This is your third panel</p>
+      </div>
+      <div class="carousel-item blue white-text" href="#four!">
+        <h2>Fourth Panel</h2>
+        <p class="white-text">This is your fourth panel</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col l9 m8 s12">
+        <section>
+          <div class="row">
+            <div class="col l4 m6 s12">
+              <div class="card small" id="product1">
+                <div class="card-image">
+                  <img src="assets/img/image1.jpg">
+                  <span class="card-title product">Product 1</span>
+                </div>
+                <div class="card-content">
+                  <h6>
+                    Rp. 100.000,00
+                  </h6>
+                  <p>
+                    This is a sample of product 1
+                  </p>
+                </div>
+                <div class="card-action center-align">
+                  <a href="#" class="btn-floating"><i class="material-icons left">add_shopping_cart</i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col l4 m6 s12">
+              <div class="card small" id="product2">
+                <div class="card-image">
+                  <img src="assets/img/image2.jpg">
+                  <span class="card-title product">Product 2</span>
+                </div>
+                <div class="card-content">
+                  <h6>
+                    Rp. 200.000,00
+                  </h6>
+                  <p>
+                    This is a sample of product 2
+                  </p>
+                </div>
+                <div class="card-action center-align">
+                  <a href="#" class="btn-floating"><i class="material-icons left">add_shopping_cart</i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col l4 m6 s12">
+              <div class="card small" id="product3">
+                <div class="card-image">
+                  <img src="assets/img/image3.jpg">
+                  <span class="card-title product">Product 3</span>
+                </div>
+                <div class="card-content">
+                  <h6>
+                    Rp. 300.000,00
+                  </h6>
+                  <p>
+                    This is a sample of product 3
+                  </p>
+                </div>
+                <div class="card-action center-align">
+                  <a href="#" class="btn-floating"><i class="material-icons left">add_shopping_cart</i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col l4 m6 s12">
+              <div class="card small" id="product4">
+                <div class="card-image">
+                  <img src="assets/img/image4.jpeg">
+                  <span class="card-title product">Product 4</span>
+                </div>
+                <div class="card-content">
+                  <h6>
+                    Rp. 400.000,00
+                  </h6>
+                  <p>
+                    This is a sample of product 4
+                  </p>
+                </div>
+                <div class="card-action center-align">
+                  <a href="#" class="btn-floating"><i class="material-icons left">add_shopping_cart</i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col l4 m6 s12">
+              <div class="card small" id="product5">
+                <div class="card-image">
+                  <img src="assets/img/image5.jpg">
+                  <span class="card-title product">Product 5</span>
+                </div>
+                <div class="card-content">
+                  <h6>
+                    Rp. 500.000,00
+                  </h6>
+                  <p>
+                    This is a sample of product 5
+                  </p>
+                </div>
+                <div class="card-action center-align">
+                  <a href="#" class="btn-floating"><i class="material-icons left">add_shopping_cart</i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col l4 m6 s12">
+              <div class="card small" id="product6">
+                <div class="card-image">
+                  <img src="assets/img/image6.jpg">
+                  <span class="card-title product">Product 6</span>
+                </div>
+                <div class="card-content">
+                  <h6>
+                    Rp. 600.000,00
+                  </h6>
+                  <p>
+                    This is a sample of product 6
+                  </p>
+                </div>
+                <div class="card-action center-align">
+                  <a href="#" class="btn-floating"><i class="material-icons left">add_shopping_cart</i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col l3 m4 s12">
+        <div class="flex-container" style="height:100vh">
+          <aside style="width:100%">
+            <div class="row">
+              <div class="col s12">
+                <div class="card blue-grey darken-1">
+                  <div class="card-content white-text">
+                    <span class="card-title">Category</span>
+                    <ul class="collection">
+                      <li class="collection-item"><a href="#">T-Shirt</a></li>
+                      <li class="collection-item"><a href="#">Clothes</a></li>
+                      <li class="collection-item"><a href="#">Sweater</a></li>
+                      <li class="collection-item"><a href="#">Jacket</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet">
+      <div class="modal-content">
+        <h4>Cart</h4>
+        <table class="responsive-table bordered">
+          <tr>
+            <th colspan="3">Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+          <tr>
+            <td><a href="">x</a></td>
+            <td><img src="assets/img/image1.jpg" class="image-logo"></img>
+            </td>
+            <td>Product 1</td>
+            <td>Rp. 100.000,00</td>
+            <td><input type="number" value="1"></td>
+            <td>Rp. 100.000,00</td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a href="checkout.html" class="modal-action modal-close waves-effect waves-green btn-flat green">Checkout</a>
+      </div>
+    </div>
+    <div id="modal2" class="modal center-align">
+      <div class="modal-content login-container">
+        <div class="login-main">
+          <h5 class="indigo-text">Please, login into your account</h5>
+          <div class="section"></div>
+
+          <div class="container">
+            <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+              <form class="col s12" method="post">
+                <div class='row'>
+                  <div class='col s12'>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='input-field col s12'>
+                    <input class='validate' type='email' name='email' id='email' />
+                    <label for='email'>Enter your email</label>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='input-field col s12'>
+                    <input class='validate' type='password' name='password' id='password' />
+                    <label for='password'>Enter your password</label>
+                  </div>
+                  <label style='float: right;'>
+    								<a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+    							</label>
+                </div>
+
+                <br />
+                <center>
+                  <div class='row'>
+                    <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                  </div>
+                  <div class='row'>
+                    <a href="#">Sign In with FB</a>
+                  </div>
+                </center>
+              </form>
+            </div>
+          </div>
+          <a href="#!">Create account</a>
+          </center>
+        </div>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+</body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $('#product1').click(function(e) {
+    $('#product1').toggleClass('small', 200);
+  })
+  $('#product2').click(function(e) {
+    $('#product2').toggleClass('small', 200);
+  })
+  $('#product3').click(function(e) {
+    $('#product3').toggleClass('small', 200);
+  })
+  $('#product4').click(function(e) {
+    $('#product4').toggleClass('small', 200);
+  })
+  $('#product5').click(function(e) {
+    $('#product5').toggleClass('small', 200);
+  })
+  $('#product6').click(function(e) {
+    $('#product6').toggleClass('small', 200);
+  })
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      fullWidth: true,
+    });
+    $(".button-collapse").sideNav();
+  });
+  $(document).ready(function() {
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+</script>
+
+</html>
