@@ -83,11 +83,11 @@ class CustomerController {
         } else {
 
           const newCustomerInfo = {
-            name: req.body.name || customer.name,
-            username: req.body.username || customer.username,
-            address: req.body.address || customer.address,
-            zipcode: req.body.zipcode || customer.zipcode,
-            phone: req.body.phone || customer.phone
+            name: req.body.name,
+            username: req.body.username,
+            address: req.body.address,
+            zipcode: req.body.zipcode,
+            phone: req.body.phone
           };
 
           const updateQuery = Customer.where({ _id: customer.id }).update(newCustomerInfo);
