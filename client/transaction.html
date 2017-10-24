@@ -73,12 +73,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <!-- <tr v-for="transaction in transactions">
-                      <td>{{transaction.name}}</td>
-                      <td>{{transaction.email}}</td>
-                      <td>{{transaction.password}}</td>
-                      <td>{{transaction.role}}</td>
-                    </tr> -->
+                    <tr v-for="transaction in transactions">
+                      <td>{{transaction.customer.name}}</td>
+                      <td>{{transaction.productlist}}</td>
+                      <td>{{transaction.transaction_date}}</td>
+                      <td>{{transaction.totalHarga}}</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -96,7 +96,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="assets/js/customer.js"></script>
+<script type="text/javascript" src="assets/js/transaction.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
@@ -104,7 +104,6 @@
   });
   $(document).ready(function() {
     $('#example').DataTable({
-      "scrollX": true
     });
     $('select').material_select();
   });
