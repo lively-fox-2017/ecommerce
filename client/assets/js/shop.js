@@ -49,6 +49,16 @@ new Vue({
         this.hargaTotal += this.carts[i].totalPrice;
       }
     },
+    doSearch() {
+      var search = $('#search').val();
+      var hasilSearch = [];
+      this.products.forEach(product=>{
+        if(product.name.toLowerCase().indexOf(search.toLowerCase()) > -1){
+          hasilSearch.push(product)
+        }
+      })
+      this.products = hasilSearch;
+    },
     doLogin() {
       var email = $('#email').val();
       var password = $('#password').val();
@@ -79,6 +89,19 @@ new Vue({
     logout() {
       localStorage.removeItem('accessToken')
       location.reload()
+    },
+    checkout() {
+      var totalHarga = this.hargaTotal;
+      var customer_id = localStorage.getItem('accessToken');
+      var productlist = [];
+      this.carts.forEach((cart)=>{
+        productlist.push(cart._id);
+      })
+      axios.post('http://localhost:3000/api/transaction', {customer_id:customer_id, productlist:productlist, totalHarga:totalHarga}).then((response)=>{
+        console.log(response)
+      }).catch((err)=>{
+        console.error(err);
+      })
     }
   },
   created() {

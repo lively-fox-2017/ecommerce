@@ -1,6 +1,8 @@
 var idvalidator = require('mongoose-id-validator');
+var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/commaterialize');
 // mongoose.Promise = global.Promise;
 var transactionSchema = new Schema({
@@ -50,19 +52,28 @@ class Model {
     })
   }
   static create(insert) {
+    // verify a token symmetric
+    jwt.verify(insert.customer_id, process.env.JWT_KEY, function(err, decoded) {
+      insert.customer_id = decoded._id
+    });
     return new Promise((resolve, reject) => {
+      console.log(insert.totalHarga)
+      console.log(insert)
       Transaction.create({
-        customer:insert.customer_id,
-        productlist:insert.productlist,
-        totalHarga:insert.totalHarga,
-        transaction_date:Date.now()
+        customer: insert.customer_id,
+        productlist: insert.productlist,
+        totalHarga: insert.totalHarga,
+        transaction_date: Date.now()
       }).then((data) => {
+        console.log('data')
         var obj = {
           message: 'Insert Success',
           data: data
         }
         resolve(obj)
       }).catch((err) => {
+        console.log('ada error')
+        console.log(err);
         reject(err)
       })
     })

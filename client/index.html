@@ -34,9 +34,9 @@
                 </ul>
               </div>
               <div class="col l7 m4">
-                <form class="search-input">
+                <form class="search-input" v-on:submit.prevent="doSearch">
                   <div class="input-field">
-                    <input id="search" type="search" />
+                    <input id="search" type="search" v-on:keyup.enter="doSearch">
                     <label for="search"><i class="material-icons">search</i></label>
                   </div>
                 </form>
@@ -272,7 +272,7 @@
         </div>
         <div class="modal-footer">
           <p>{{hargaTotal}}</p>
-          <a href="checkout.html" class="modal-action modal-close waves-effect waves-green btn-flat green">Checkout</a>
+          <button v-on:click="checkout" class="modal-action modal-close waves-effect waves-green btn-flat green">Checkout</button>
         </div>
       </div>
       <div id="modal2" class="modal center-align">
