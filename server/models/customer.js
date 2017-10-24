@@ -67,10 +67,36 @@ class Model {
     })
   }
   static update(update){
-
+    const secret = process.env.SALT_KEY;
+    update.password = crypto.createHmac('sha256', secret).update(insert.password).digest('hex');
+    return new Promise((resolve, reject) => {
+      Customer.findOneAndUpdate({"_id":update._id},{
+        name: update.name,
+        email: update.email,
+        password: update.password,
+        role: update.role
+      }).then((data) => {
+        var obj = {
+          message: 'Update Success',
+          data: data
+        }
+        resolve(obj)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
   }
   static delete(id){
-    
+    return new Promise((resolve, reject) => {
+      Customer.findOneAndRemove({"_id":id}).then((data) => {
+        var obj = {
+          message: 'Delete Success',
+          data: data
+        }
+        resolve(obj)
+      }).catch((err) => {
+        reject(err)
+      })
   }
   static register(insert) {
     const secret = process.env.SALT_KEY;

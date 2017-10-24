@@ -63,10 +63,37 @@ class Model {
     })
   }
   static update(update){
-
+    return new Promise((resolve, reject) => {
+      Product.findOneAndUpdate({"_id":update._id}{
+        name: update.name,
+        price: update.price,
+        description: update.description,
+        imageUrl: update.imageUrl
+      }).then((data) => {
+        var obj = {
+          message: 'Update Success',
+          data: data
+        }
+        resolve(obj)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
   }
   static delete(id){
-
+    return new Promise((resolve, reject) => {
+      Product.findOneAndRemove({
+        "_id":id
+      }).then((data) => {
+        var obj = {
+          message: 'Delete Success',
+          data: data
+        }
+        resolve(obj)
+      }).catch((err) => {
+        reject(err)
+      })
+    })
   }
 }
 

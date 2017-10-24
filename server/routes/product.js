@@ -6,7 +6,7 @@ var ProductCtrl = require('../controllers/product')
 router.get('/', ProductCtrl.readAll)
 router.get('/:id', ProductCtrl.readOne)
 router.post('/', ProductCtrl.create)
-// router.put('/:id', ProductCtrl.update)
-// router.delete('/:id', ProductCtrl.delete)
+router.put('/:id', ProductCtrl.update)
+router.delete('/:id', ProductCtrl.delete)
 
 module.exports = router;

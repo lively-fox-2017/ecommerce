@@ -22,6 +22,20 @@ class CustomerCtrl {
       res.status(500).send(err);
     })
   }
+  static update(req, res, next){
+    model.Customer.update(req.body).then((data)=>{
+      res.status(200).send(data);
+    }).catch((err)=>{
+      res.status(500).send(err);
+    })
+  }
+  static delete(req, res, next){
+    model.Customer.update(req.params.id).then((data)=>{
+      res.status(200).send(data);
+    }).catch((err)=>{
+      res.status(500).send(err);
+    })
+  }
   static register(req, res, next){
     model.Customer.register(req.body).then((data)=>{
       res.status(200).send(data);

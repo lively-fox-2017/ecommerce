@@ -6,7 +6,7 @@ var CustomerCtrl = require('../controllers/customer')
 router.get('/', CustomerCtrl.readAll)
 router.get('/:id', CustomerCtrl.readOne)
 router.post('/', CustomerCtrl.create)
-// router.put('/:id', CustomerCtrl.update)
-// router.delete('/:id', CustomerCtrl.delete)
+router.put('/:id', CustomerCtrl.update)
+router.delete('/:id', CustomerCtrl.delete)
 
 module.exports = router;
