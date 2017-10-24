@@ -18,6 +18,10 @@ var productSchema = new Schema({
   imageUrl: {
     type: String,
     required: true
+  },
+  category: {
+    type: String,
+    required: true
   }
 });
 
@@ -50,7 +54,8 @@ class Model {
         name: insert.name,
         price: insert.price,
         description: insert.description,
-        imageUrl: insert.imageUrl
+        imageUrl: insert.imageUrl,
+        category:insert.category
       }).then((data) => {
         var obj = {
           message: 'Insert Success',
@@ -68,7 +73,8 @@ class Model {
         name: update.name,
         price: update.price,
         description: update.description,
-        imageUrl: update.imageUrl
+        imageUrl: update.imageUrl,
+        category: update.category
       }).then((data) => {
         var obj = {
           message: 'Update Success',
