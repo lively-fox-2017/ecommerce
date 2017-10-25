@@ -12,9 +12,6 @@ router.get('/signin', controllers.User.signin);
 router.post('/signup', controllers.User.signup);
 
 // save user transaction -- create new transaction record
-router.post('/checkout', controllers.User.recordTransaction);
-
-// delete one user by id
-router.delete('/:id', controllers.User.delete);
+router.post('/checkout', controllers.Transaction.create);
 
 module.exports = router;
