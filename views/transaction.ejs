@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Member Name</th>
+            <th>Days</th>
+            <th>Out Date</th>
+            <th>Due Date</th>
+            <th>In Date</th>
+            <th>Fine</th>
+            <th>Booklist</th>
+        </tr>
+        <%transaction.forEach(d => {%>
+            <tr>
+                <td><%=d.id%></td>
+                <td><%=d.member.name%></td>
+                <td><%=d.days%></td>
+                <td><%=d.out_date%></td>
+                <td><%=d.due_date%></td>
+                <td><%=d.in_date%></td>
+                <td><%=d.fine%></td>
+                <td>
+                    <ul>
+                        <%d.booklist.forEach(b => {%>
+                        <li><%=b.title%></li>        
+                        <%})%>
+                    </ul>
+                </td>
+                <td><a href='/collections/edit/<%=d.id%>'>Edit</a></td>
+                <td>
+                    <form action='/collections/<%=d.id%>' method='post'>
+                        <input type="hidden" name="_method" value="delete">
+                        <button type='submit'>Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <%})%>
+    </table>
+    <form action='/collections' method='post'>
+        <select name='member'>
+            <%members.forEach(m => {%>
+                <option value='<%=m.id%>'><%=m.name%></option>
+            <%})%>
+        </select>
+        <input type='number' name='days' placeholder='Days'>
+        <input type='date' name='outDate' placeholder='Out Date'>
+        <input type='date' name='dueDate' placeholder='Due Date'>
+        <input type='date' name='inDate' placeholder='In Date'>
+        <input type='number' name='fine' placeholder='Fine'>
+        <select name='booklist' multiple>
+            <%books.forEach(b => {%>
+                <option value='<%=b.id%>'><%=b.title%></option>
+            <%})%>
+        </select>
+        <button type='submit'>Submit</button>
+    </form>
+    <a href='/customers'>Customers</a>
+    <a href='/books'>Books</a>
+    <a href='/collections'>Transactions</a>
+    <a href='/'>Home</a>
+  </body>
+</html>

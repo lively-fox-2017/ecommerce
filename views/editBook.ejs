@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form action='/books/<%=book.id%>' method='POST'>
+        <input type="hidden" name="_method" value="PUT">        
+        <input type='text' name='isbn' placeholder='<%=book.isbn%>'>
+        <input type='text' name='title' placeholder='<%=book.title%>'>
+        <input type='text' name='author' placeholder='<%=book.author%>'>
+        <input type='text' name='category' placeholder='<%=book.category%>'>
+        <input type='number' name='stock' placeholder='<%=book.stock%>'>
+        <button type='submit'>Submit</button>
+    </form>
+    <a href='/customers'>Customers</a>
+    <a href='/books'>Books</a>
+    <a href='/collections'>Transactions</a>
+    <a href='/'>Home</a>
+  </body>
+</html>
