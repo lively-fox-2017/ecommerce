@@ -1,6 +1,7 @@
 'use strict'
 
+const User = require('./user');
 const Item = require('./item');
 const Transaction = require('./transaction');
 
-module.exports = {Item, Transaction};
+module.exports = {User, Item, Transaction};
