@@ -139,7 +139,7 @@
                   <button class="pull-right btn btn-danger">&times;</button>
                   <div class="row">
                     <div class="col-xs-4">
-                      <input v-on:change="changeQty(shoppingCartItem._id)" type="number" class="form-control" v-bind:value="shoppingCartItem.qty" v-bind:id="'qty-' + shoppingCartItem._id"><br>
+                      <input v-model="shoppingCartItem.qty" type="number" class="form-control" v-bind:id="'qty-' + shoppingCartItem._id"><br>
                       <span>Price: <strong>{{ shoppingCartItem.price }}</strong></span>
                     </div>
                   </div>

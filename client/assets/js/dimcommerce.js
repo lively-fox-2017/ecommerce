@@ -50,7 +50,9 @@ new Vue({
 
     addToCart (item) {
 
-      if (this.findItemIndex(item._id) !== -1) {
+      const itemIndex = this.findItemIndex(item._id);
+
+      if (itemIndex !== -1) {
 
         this.shoppingCartItems[itemIndex].qty += 1;
 
