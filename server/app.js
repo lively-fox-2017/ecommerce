@@ -28,4 +28,4 @@ app.use('/admin', isUser, isAdmin, admin);
 // 404 handler
 app.use('/', error404);
 
-app.listen(3000, console.log('ecommerce server listening on port 3000'));
+app.listen(process.env.PORT || 3000, console.log('ecommerce server listening on port 3000'));
