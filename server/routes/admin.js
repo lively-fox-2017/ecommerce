@@ -9,13 +9,13 @@ const router = express.Router();
 router.get('/transactions', controllers.Transaction.findAll);
 
 // read all users
-router.get('/getusers', controllers.User.findAll);
+router.get('/users', controllers.User.findAll);
 
 // create user
-router.post('/createuser', controllers.User.create);
+router.post('/user', controllers.User.create);
 
 // delete one user by id
-router.delete('/deleteuser/:id', controllers.User.delete);
+router.delete('/user/:id', controllers.User.delete);
 
 // get one item by id
 router.get('/item/:id', controllers.Item.findOne);
