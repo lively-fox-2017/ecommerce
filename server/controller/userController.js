@@ -2,6 +2,31 @@ const User = require('../model/users')
 const helper = require('../helper/helper')
 
 module.exports = {
+  login: (req, res) => {
+    User.findOne({username: req.body.username}).then((result) => {
+      if (result) {
+        let secret = helper.secretGenerate()
+        let password = helper.secretHash(secret, req.body.password)
+
+        if(result.password === password) {
+          let token = helper.authentication(result)
+          res.json({
+            message: "Berhasil Login",
+            data: token
+          })
+        } else {
+          res.json({
+            message: "Sorry, wrong password"
+          })
+        }
+      } else {
+        res.json({
+          message: "Sorry, wrong username"
+        })
+      }
+    })
+  },
+
   findAll: (req, res) => {
     User.find().sort('username').then((rowsUser) => {
       res.json({

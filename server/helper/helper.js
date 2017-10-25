@@ -37,12 +37,10 @@ module.exports = {
 
   dataTransaction: (reqBody) => {
     let Obj = {
-      member: reqBody.member,
-      days: reqBody.days,
-      out_date: new Date(),
-      in_date: null,
-      fine: 0,
-      booklist: reqBody.booklist
+      user: reqBody.member,
+      product: reqBody.days,
+      checkout_date: new Date(),
+      totalprice: reqBody.booklist
     }
 
     Obj.due_date = moment(new Date(Obj.out_date)).add(Obj.days, 'days')
@@ -64,6 +62,16 @@ module.exports = {
     const hash = crypto.createHmac('md5', key).update(password).digest('hex');
 
     return hash;
+  },
+
+  authentication: (input) => {
+    let token = jwt.sign({
+      id: input._id,
+      username: input.username,
+      role: input.role
+    }, 'hacktiv8');
+
+    return token
   }
 
   // countFine: (in_date, due_date) => {

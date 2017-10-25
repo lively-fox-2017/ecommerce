@@ -4,6 +4,8 @@ const user = require('../controller/userController')
 
 router.get('/', user.findAll);
 
+router.post('/login', user.login)
+
 router.get('/:id', user.findOne);
 
 router.post('/insert', user.insert);
