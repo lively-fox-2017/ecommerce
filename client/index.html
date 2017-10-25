@@ -203,10 +203,12 @@
             background-color: #000000;
         }
     </style>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body class="pushable">
-
+    
     <!-- Sidebar Menu -->
     <div class="ui vertical inverted sidebar menu right" id="shoppingbasket">
         <a class="active item">Your Shopping Items</a>
@@ -222,7 +224,6 @@
         <!-- Di sini nanti bikin si jason buat ngelist item dan harga -->
         <a class="item" href="#">Checkout</a>
     </div>
-
     <!-- Following Menu -->
     <div class="ui large top fixed menu transition hidden">
 
@@ -240,11 +241,11 @@
                     <a class="ui button" id="shoppingcart">Shopping Cart</a>
                 </div>
             </div>
-
     </div>
 
     <!-- Page Contents -->
     <div class="pusher">
+
         <div class="ui inverted vertical masthead center aligned segment">
 
             <div class="ui container">
@@ -276,127 +277,32 @@
             </div>
         </div>
         <div id="iliketosteal">
-            <div class="ui vertical stripe segment">
-                <div class="ui middle aligned stackable grid container">
-                    <div class="ui container">
-                        <br>
-                        <br>
-                        <br><br>
-                        <h3 class="ui attached header">
-                            Attached
-                        </h3>
-                        <div class="ui grid">
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/piratecloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$13.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
+            <div id="app">
+                <h1 class="ui header">{{message}}</h1>
+                    <div class="ui vertical stripe segment">
+                        <div class="ui middle aligned stackable grid container">
+                            <div class="ui container">
+                                <div class="ui grid">
+                                <todo-item v-for="todo in items" v-bind:todo="todo" v-bind:key="todo._id">
+                                </todo-item>
                                 </div>
                             </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/piratecloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 13.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/piratecloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 13.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/piratecloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 13.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/wizardcloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 15.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/wizardcloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 15.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/wizardcloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 15.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="four wide column">
-                                <div class="ui card">
-                                    <div class="image">
-                                        <img src="./img/wizardcloak.jpeg">
-                                    </div>
-                                    <div class="ui vertical animated button" tabindex="0">
-                                        <div class="hidden content" id="shopnow">$ 15.00</div>
-                                        <div class="visible content">
-                                            <i class="shop icon"></i>
-                                        </div>
-                                    </div>
+                            <div class="row">
+                                <div class="center aligned column">
+                                    <a class="ui huge button">Check Your Stolen Things</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="center aligned column">
-                            <a class="ui huge button">Check Your Stolen Things</a>
-                        </div>
-                    </div>
+                </div>
+            </div>
+    </div>
+    <script src="script.js"></script>
+    <div class="ui black inverted vertical footer segment">
+        <div class="ui center aligned container">
+            <div class="ui stackable inverted grid">
+                <div class="eight wide column">
+                    <h4 class="ui inverted header">Support US</h4>
                 </div>
             </div>
         </div>
