@@ -1,6 +1,6 @@
 # Server API of Commaterialize
 
-List of auth routes
+### List of auth routes
 
 | Routes       | Method | Description | Required Param |
 |--------------|--------|-------------|----------------|
@@ -8,7 +8,7 @@ List of auth routes
 |/api/register/   |POST    |Register new customer      |<ul><li>[x] name (string) </li><li>[x] email (string)</li><li>[x] password (string)</li></ul>           |
 |/api/isAdmin/   |POST    |Check if token role is admin      |<ul><li>[x] token (string) </li> </ul>               |
 
-List of customer routes
+### List of customer routes
 
 | Routes       | Method | Description | Required Param |
 |--------------|--------|-------------|----------------|
@@ -18,7 +18,7 @@ List of customer routes
 |/api/customer/:id  |PUT     |Update one customer data        |<ul><li>[x] id (string) </li> </ul> <ul><li>[ ] name (string) </li><li>[ ] email (string) </li><li>[ ] password (string) </li><li>[ ] role (string) </li><li>[x] category (string) </li></ul>                 |
 |/api/customer/:id  |DELETE     |Delete one customer data        |<ul><li>[x] id (string) </li> </ul>                  |
 
-List of product routes
+### List of product routes
 
 | Routes       | Method | Description | Required Param |
 |--------------|--------|-------------|----------------|
@@ -28,7 +28,7 @@ List of product routes
 |/api/product/:id  |PUT     |Update one product data        |<ul><li>[x] id (string) </li> </ul> <ul><li>[ ] name (string) </li><li>[ ] price (string) </li><li>[ ] description (string) </li><li>[ ] imageUrl (string) </li><li>[ ] category (string) </li></ul>                 |
 |/api/product/:id  |DELETE     |Delete one product data        |<ul><li>[x] id (string) </li> </ul>                  |
 
-List of transaction routes
+### List of transaction routes
 
 | Routes       | Method | Description | Required Param |
 |--------------|--------|-------------|----------------|
