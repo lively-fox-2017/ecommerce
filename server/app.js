@@ -11,7 +11,7 @@ const isAdmin = require('./helpers/is-admin');
 const error404 = require('./helpers/error-404');
 
 const admin = require('./routes/admin');
-const item = require('./routes/item');
+const index = require('./routes/index');
 const user = require('./routes/user');
 
 const app = express();
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/item', item);
+app.use('/', index);
 app.use('/user', isUser, user);
 app.use('/admin', isUser, isAdmin, admin);
 
