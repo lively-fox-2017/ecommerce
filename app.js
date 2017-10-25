@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-var db = 'mongodb://localhost/mongoose-ecommerce'
+var db = 'mongodb://jason:123@lively-ecommerce-shard-00-00-jmypf.mongodb.net:27017,lively-ecommerce-shard-00-01-jmypf.mongodb.net:27017,lively-ecommerce-shard-00-02-jmypf.mongodb.net:27017/test?ssl=true&replicaSet=lively-ecommerce-shard-0&authSource=admin'
 
 mongoose.connect(db);
 
@@ -35,7 +35,7 @@ app.use('/', index);
 // app.use('/users', users);
 app.use('/products', product);
 app.use('/customers', customer);
-app.use('/collections',  collection);
+app.use('/transactions',  collection);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

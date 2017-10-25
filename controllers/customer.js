@@ -1,4 +1,5 @@
 var Customer = require('../models/customer')
+var jwt = require('jsonwebtoken');
 
 class customerCtrl{
 
@@ -64,7 +65,15 @@ class customerCtrl{
                     return res.send(false)
                 }
                 if(user.password == req.body.password) {
-                    return res.send(user)
+                    var token = jwt.sign({
+                                    _id: user._id,
+                                    name: user.name,
+                                    email: user.email
+                                }, 'secret');
+                    console.log(token)
+                    // var opentoken = jwt.verify(token, 'secret');      
+                    // console.log(opentoken)      
+                    return res.send(token)
                 }
                 res.send(false)
             })
