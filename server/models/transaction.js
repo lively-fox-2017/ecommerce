@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://admin:admin@ds231205.mlab.com:31205/commaterialize');
+mongoose.connect('mongodb://admin:admin@cluster0-shard-00-00-jlkah.mongodb.net:27017,cluster0-shard-00-01-jlkah.mongodb.net:27017,cluster0-shard-00-02-jlkah.mongodb.net:27017/commaterialize?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin');
 // mongoose.Promise = global.Promise;
 var transactionSchema = new Schema({
   customer: {
