@@ -6,27 +6,15 @@ var jwt = require('jsonwebtoken');
 
 class collectionCtrl{
     static get(req,res) {
-        Transaction.find({})
+        console.log(req.query.token)
+        var opentoken = jwt.verify(req.query.token, 'secret')
+        console.log(opentoken)
+        Transaction.findOne({member:opentoken._id})
+        .populate('items')
         .populate('member')
-        .populate('booklist')
         .then((collection,err) => {
-            Customer.find({})
-            .then((customer,err) => {
-                Book.find({})
-                .then((book, err) => {
-                    if(err) {
-                        res.send(err)
-                    }
-                    res.send(collection)
-                    // res.render('transaction', {title: 'Transaction', transaction: collection, members: customer, books:book})
-                })
-                .catch(err => {
-                    res.send(err)
-                })
-            })
-            .catch(err => {
-                res.send(err)
-            })
+            console.log(collection)
+            res.send(collection)
         })
         .catch(err => {
             res.send(err)
@@ -81,6 +69,15 @@ class collectionCtrl{
                     member: opentoken._id,
                     total: total,
                     items: items
+                })
+                transaction.save()
+                .then((result, err) => {
+                    if(err) return res.send(err)
+
+                    res.send({
+                        result: result,
+                        message: 'transaksi berhasil disimpan'
+                    })
                 })
                 console.log(transaction)
             } else {
