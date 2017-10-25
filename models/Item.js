@@ -9,7 +9,9 @@ mongoose.Promise = global.Promise;
 var newSchema = new Schema({
   'nama_barang' : {type: String, index:{unique:true}},
   'harga' : {type : Number},
-  'category': {type : String},
+  'category': {type : String, index:true},
+  'img_url' : String,
+  'description' : String,
   'createdAt': { type: Date, default: Date.now },
   'updatedAt': { type: Date, default: Date.now }
 });

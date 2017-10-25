@@ -4,6 +4,7 @@ if (mongoose.connection.readyState === 0) {
   mongoose.connect(require('./connection-string'));
 }
 
+mongoose.Promise = global.Promise;
 
 var newSchema = new Schema({
   'user' : { type: Schema.Types.ObjectId, ref: 'User'},

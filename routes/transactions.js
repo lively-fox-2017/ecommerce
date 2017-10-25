@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const mongoose = require('mongoose');
-const Models = require('../models/all-models');
 
+const ControllersTransaction = require('../controllers/transactions');
 
-//router.post('/new', )
+router.post('/new', ControllersTransaction.new)
+router.get('/all', ControllersTransaction.getAll)
 
 module.exports = router;
