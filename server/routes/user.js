@@ -6,7 +6,7 @@ const controllers = require('./../controllers');
 const router = express.Router();
 
 // verify user, send token if verified
-router.get('/signin', controllers.User.signin);
+router.post('/signin', controllers.User.signin);
 
 // register new user
 router.post('/signup', controllers.User.signup);
