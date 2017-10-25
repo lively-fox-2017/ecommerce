@@ -1,3 +1,5 @@
 'use strict'
 
-module.exports = {};
+const Item = require('./item');
+
+module.exports = {Item};
