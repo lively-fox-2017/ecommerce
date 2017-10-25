@@ -3,7 +3,7 @@
 const generateResponse = require('./../helpers/generate-response');
 
 module.exports = (req, res, next) => {
-	if (req.headers.hasOwnPropery('user')) {
+	if (req.headers.user) {
 		if (req.headers.user.role === 'admin') {
 			next();
 		} else {

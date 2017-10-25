@@ -7,7 +7,7 @@ const generateResponse = require('./../helpers/generate-response');
 // for easier authentication and authorization, 
 // decoded data will be passed with request headers
 module.exports = (req, res, next) => {
-	if (req.headers.hasOwnPropery('jwtoken')) {
+	if (req.headers.jwtoken) {
 		jwt.verify(req.headers.jwtoken, process.env.JWT_SECRET_KEY, (err, user) => {
 			if (err && err.name === 'TokenExpiredError') {
 				const response = generateResponse(401, 'token expired', null, err);
