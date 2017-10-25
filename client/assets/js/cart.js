@@ -151,6 +151,31 @@ new Vue({
       })
     },
 
+    register(){
+      let data = {
+        username: $('input[name=signusername]').val(),
+        password: $('input[name=signpassword]').val(),
+        email: $('input[name=email]').val(),
+        phone: $('input[name=phone]').val()
+      }
+
+      axios.post("http://localhost:3000/users/register", data).then((response) => {
+        // alert(response.data.message)
+        if (!response.data.data) {
+          // console.log(response);
+          alert(response.data.message.errmsg);
+        } else {
+          alert(response.data.message)
+          localStorage.setItem('token', response.data.data)
+          localStorage.setItem('role', response.data.role)
+          console.log(response);
+          window.location.reload()
+        }
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
     logout(){
       localStorage.removeItem('token')
       localStorage.removeItem('role')

@@ -32,6 +32,23 @@ module.exports = {
     })
   },
 
+  register: (req, res) => {
+    let secret = helper.secretGenerate()
+    let password = helper.secretHash(secret, req.body.password)
+    User(helper.dataUser(req.body, password, secret)).save().then((rowUserInserted) => {
+      let token = helper.authentication(rowUserInserted)
+      res.json({
+        message: "Berhasil Memasukan Data",
+        data: token,
+        role: rowUserInserted.role
+      })
+    }).catch((reason) => {
+      res.json({
+        message: reason
+      })
+    })
+  },
+
   findAll: (req, res) => {
     User.find().sort('username').then((rowsUser) => {
       res.json({

@@ -28,7 +28,7 @@
           <h1 class="title">Beli Topi Kuy</h1>
         </div>
         <nav>
-          <a class="home" href="#home">Home</a>
+          <a class="home" href="#">Home</a>
           <a class="product" href="#someitem">Product</a>
           <a class="user" href="#">User</a>
           <a class="transaction" href="#">Transaction</a>
@@ -36,16 +36,34 @@
           <a class="login" id="popup" href=".loginform">Login</a>
           <a class="logout" v-on:click="logout()" href="#">Logout</a>
           <form class="loginform" v-on:submit.prevent="login()" method="post">
-            <div>
-              <h1>Login</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
+            <div class="sub">
+              <h1>Sign in</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
             </div>
-            <label>Username</label>
+            <label>Username</label><br><br>
             <input type="text" name="username" required>
-            <label>Password</label>
+            <label>Password</label><br><br>
             <input type="password" name="password" required>
-            <input type="submit" value="Submit"> <button type="button" name="button">Register</button>
+            <div class="sub">
+              <input type="submit" value="Login"> <a id="regpopup" href=".registerform" name="register">Register</a>
+            </div>
           </form>
 
+          <form class="registerform" v-on:submit.prevent="register()" method="post">
+            <div class="sub">
+              <h1>Sign up</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
+            </div>
+            <label>Username</label><br><br>
+            <input type="text" name="signusername" required><br><br>
+            <label>Password</label><br><br>
+            <input type="password" name="signpassword" required><br><br>
+            <label>Email</label><br><br>
+            <input type="email" name="email" required><br><br>
+            <label>Phone</label><br><br>
+            <input type="number" name="phone" min="0" required>
+            <div class="sub">
+              <input type="submit" value="Register"> <a id="logpopup" name="back">Back</a>
+            </div>
+          </form>
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ini Cart~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
           <ul>
             <img id="cart" src="assets/images/icons/shoppingcart.png" alt="cart">
@@ -149,6 +167,9 @@
         </div>
 
         <div class="admintransaction">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here">
+          </div>
           <table class="order-table table" cellspacing="0">
             <thead>
               <th>No.</th>
@@ -256,6 +277,7 @@
         $('.transaction').show(200)
         $('#slider').hide(200)
         $('#someitem').hide(200)
+        $('#cart').hide(200)
 
         $('.user').on('click', function(){
           $('.adminuser').toggle(200);
@@ -279,9 +301,15 @@
       } else {
         $('.login').show(200)
         $('.logout').hide(200)
+        $('.user').hide(200)
+        $('.transaction').hide(200)
       }
 
       $("#popup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+      $("#regpopup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+      $("#logpopup").on('click', function(){
+        $('.registerform').hide(200)
+      })
 
       $('#cart').on('click', function(){
         $('.cart').fadeToggle(300)
@@ -291,18 +319,60 @@
         $(this).addClass('active');
         $('.contact').removeClass('active');
         $('.product').removeClass('active');
+        $('.user').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
       })
 
       $('.contact').on('click', function(){
         $(this).addClass('active');
         $('.home').removeClass('active');
         $('.product').removeClass('active');
+        $('.user').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
       })
 
       $('.product').on('click', function(){
         $(this).addClass('active');
         $('.home').removeClass('active');
         $('.contact').removeClass('active');
+        $('.user').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.user').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.product').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.transaction').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.user').removeClass('active');
+        $('.product').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.login').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.user').removeClass('active');
+        $('.product').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.logout').removeClass('active');
       })
     </script>
   </body>

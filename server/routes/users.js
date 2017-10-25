@@ -6,6 +6,8 @@ router.get('/', user.findAll);
 
 router.post('/login', user.login)
 
+router.post('/register', user.register)
+
 router.get('/:id', user.findOne);
 
 router.post('/insert', user.insert);

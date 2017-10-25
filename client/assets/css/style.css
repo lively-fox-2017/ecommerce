@@ -62,7 +62,7 @@ nav{
   flex-wrap: wrap;
 }
 
-nav .home, nav .product, nav .contact, nav .login{
+nav .home, nav .product, nav .contact, nav .login, nav .user, nav .transaction{
   color: #f4d100;
   padding: 30px;
   font-weight: bold;
@@ -70,7 +70,7 @@ nav .home, nav .product, nav .contact, nav .login{
   /*box-sizing: border-box;*/
 }
 
-nav .home:hover, nav .product:hover, nav .contact:hover, nav .login{
+nav .home:hover, nav .product:hover, nav .contact:hover, nav .login:hover, nav .user:hover, nav .transaction:hover{
   border-bottom: 1px solid #ffe700;
   /*box-sizing: border-box;*/
 }
@@ -286,9 +286,9 @@ footer{
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-.loginform{
-  width: 30%;
-  margin-top: 5%;
+.loginform, .registerform{
+  width: 40%;
+  margin-top: 3%;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 1px 1px 10px 5px #ffe700;
@@ -298,30 +298,31 @@ footer{
   background-color: white;
 }
 
-.loginform div{
+.loginform div, .registerform div{
   display: flex;
 }
 
-.loginform h1{
+.loginform h1, .registerform h1{
   width: 90%;
   background-color: white;
   margin-bottom: 20px;
   align-self: flex-start;
 }
 
-.loginform .modal_close{
+.loginform .modal_close, .registerform .modal_close{
   width: 6%;
+  height: 30px;
   border-radius: 100%;
   background-color: red;
   margin-top: 0px;
   cursor: pointer;
 }
 
-.loginform .modal_close:hover{
+.loginform .modal_close:hover, .registerform .modal_close:hover{
   box-shadow: 1px 1px 2px 5px red;
 }
 
-.loginform label{
+.loginform label, .registerform label{
   width: 96%;
   background-color: white;
   padding: 10px;
@@ -330,7 +331,7 @@ footer{
   margin-bottom: 10px;
 }
 
-.loginform input[type="text"], .loginform input[type="password"]{
+.loginform input[type="text"], .loginform input[type="password"], .registerform input[type="text"], .registerform input[type="password"], .registerform input[type="email"], .registerform input[type="number"]{
   width: 96%;
   background-color: white;
   padding: 10px;
@@ -340,13 +341,33 @@ footer{
   text-align: center;
 }
 
-.loginform input[type="submit"], .loginform button[type="button"]{
-  width: 49%;
+.loginform .sub, .registerform .sub{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.loginform input[type="submit"], .registerform input[type="submit"]{
+  width: 52%;
   margin-top: 20px;
   border: 0px;
   padding: 10px;
   background-color: #ffe700;
+  text-align: center;
   cursor: pointer;
+  color: white;
+}
+
+.loginform a, .registerform a{
+  width: 42%;
+  margin-top: 20px;
+  border: 0px;
+  padding: 10px;
+  background-color: #ffe700;
+  text-align: center;
+  cursor: pointer;
+  color: white;
 }
 
 /*~~~~~~~~~~~~~~~~~~Content~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
