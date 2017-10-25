@@ -6,6 +6,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const isUser = require('./helpers/is-user');
+const isAdmin = require('./helpers/is-admin');
+const error404 = require('./helpers/error-404');
+
 const admin = require('./routes/admin');
 const item = require('./routes/item');
 const user = require('./routes/user');
@@ -17,9 +21,11 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/admin', admin);
 app.use('/item', item);
-app.use('/user', user);
+app.use('/user', isUser, user);
+app.use('/admin', isUser, isAdmin, admin);
 
+// 404 handler
+app.use('/', error404);
 
 app.listen(3000, console.log('ecommerce server listening on port 3000'));
