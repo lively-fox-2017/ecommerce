@@ -6,7 +6,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const decodeToken = require('./helpers/decode-token');
+const isUser = require('./helpers/is-user');
+const isAdmin = require('./helpers/is-admin');
 const error404 = require('./helpers/error-404');
 
 const admin = require('./routes/admin');
@@ -20,13 +21,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// after this middleware runs,
-// access user information in req.headers.user
-app.use(decodeToken);
-
-app.use('/admin', admin);
 app.use('/item', item);
-app.use('/user', user);
+app.use('/user', isUser, user);
+app.use('/admin', isUser, isAdmin, admin);
 
 // 404 handler
 app.use('/', error404);
