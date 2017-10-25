@@ -34,7 +34,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#" id="show-login">Login</a></li>
-            <li><a href="#" id="show-shopping-cart"><span class="fa fa-shopping-cart"></span> Shopping Cart <span class="badge badge-danger">{{ shoppingCart.length }}</span></a></li>
+            <li><a href="#" id="show-shopping-cart"><span class="fa fa-shopping-cart"></span> Shopping Cart <span class="badge badge-danger">{{ shoppingCartLength }}</span></a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span> <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -86,7 +86,7 @@
 
             <div class="col-sm-4" v-for="item in items">
               <div class="thumbnail">
-                <img v-bind:src="item.imageURL" v-bind:title="item.name">
+                <img v-bind:src="item.imageURL" v-bind:alt="item.name">
                 <div class="caption">
                   <h4 v-bind:title="item.name">{{ item.name }}</h4>
                   <p class="text-muted description" v-bind:title="item.description">
@@ -95,7 +95,7 @@
                     Price: <strong><span class="numeric">{{ item.price }} </span></strong>
                   </p>
                   <p>
-                    <a href="#" class="btn btn-sm btn-primary" role="button"><span class="fa fa-shopping-cart"></span> Add to Cart</a>
+                    <button v-on:click="addToCart(item)" class="btn btn-sm btn-primary" role="button"><span class="fa fa-shopping-cart"></span> Add to Cart</button>
                     <a href="#" class="btn btn-sm btn-default" role="button">Details</a>
                   </p>
                 </div>
@@ -116,13 +116,54 @@
       </div>
     </footer>
 
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="shopping-cart-modal" tabindex="-1" role="dialog" aria-labelledby="shopping-cart-label">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="shopping-cart-label"><span class="fa fa-shopping-cart"></span> Shopping Cart</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="row" v-for="shoppingCartItem in shoppingCartItems">
+
+              <div class="col-md-2">
+                <img v-bind:src="shoppingCartItem.imageURL" v-bind:alt="shoppingCartItem.name" class="img-responsive">
+              </div>
+
+              <div class="col-md-10">
+                <p>
+                  <strong>{{ shoppingCartItem.name }}</strong>
+                  <button class="pull-right btn btn-danger">&times;</button>
+                  <div class="row">
+                    <div class="col-xs-4">
+                      <input v-on:change="changeQty(shoppingCartItem._id)" type="number" class="form-control" v-bind:value="shoppingCartItem.qty" v-bind:id="'qty-' + shoppingCartItem._id"><br>
+                      <span>Price: <strong>{{ shoppingCartItem.price }}</strong></span>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <h4 class="pull-left" v-if="shoppingCartItems.length">Total: <strong>{{ total }}</strong></h4>
+            <button type="button" class="btn btn-success" v-if="shoppingCartItems.length"><span class="fa fa-cart-arrow-down"></span> Checkout</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div> <!-- /#app -->
 
   <script src="assets/js/axios.min.js"></script>
   <script src="assets/js/vue.js"></script>
   <script src="assets/js/jquery-3.2.1.min.js"></script>
   <script src="assets/js/bootstrap.min.js"></script>
-  <script src="assets/js/bootstrap-number-input.js"></script>
 
   <script src="assets/js/dimcommerce.js"></script>
 </body>

@@ -4,7 +4,10 @@ new Vue({
 
   data: {
 
-    items: []
+    items: [],
+    shoppingCartLength: 0,
+    shoppingCartItems: [],
+    total: 0
 
   },
 
@@ -21,6 +24,57 @@ new Vue({
         .catch((err) => {
           console.error(err);
         });
+    }, // eo fetchItems
+
+    findItemIndex (id) {
+
+      const itemIndex = this.shoppingCartItems.findIndex((element) => {
+
+        return element._id === id;
+
+      });
+
+      return itemIndex;
+
+    }, // eo findItemIndex
+
+    updateTotalPrice () {
+
+      this.total = 0;
+
+      this.shoppingCartItems.forEach((item) => {
+        this.total += (item.price * item.qty);
+      });
+
+    }, // eo updateTotalPrice
+
+    addToCart (item) {
+
+      if (this.findItemIndex(item._id) !== -1) {
+
+        this.shoppingCartItems[itemIndex].qty += 1;
+
+      } else {
+
+        item.qty = 1;
+        this.shoppingCartItems.push(item);
+        this.shoppingCartLength += 1;
+
+      }
+
+      this.updateTotalPrice();
+
+    }, // eo addToCart
+
+    changeQty (id) {
+
+      const itemIndex = this.findItemIndex(id);
+      const newQty = $('#qty-' + id).val();
+
+      this.shoppingCartItems[itemIndex].qty = newQty;
+
+      this.updateTotalPrice();
+
     }
 
   },
@@ -55,9 +109,4 @@ $('#register-modal').on('hidden.bs.modal', function (event) {
 
   $('#login-modal').modal('show');
 
-});
-
-$('.quantity-field').bootstrapNumber({
-  upClass: 'primary',
-  downClass: 'primary'
 });
