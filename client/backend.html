@@ -68,5 +68,19 @@
 <script src="semantic/dist/semantic.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.semanticui.min.js"></script>
+$('.category').on('click', function() {
+  $("#list-product").empty();
+  $("#list-product").append(productContent);
+  $('html, body').animate({
+    scrollTop: $("#list-product").offset().top
+  }, 1000);
+  $(document).mouseup(function(e) {
+    var container = $("#list-product");
 
+    // if the target of the click isn't the container nor a descendant of the container
+    if (!container.is(e.target) && container.has(e.target).length === 0) {
+      container.empty();
+    }
+  });
+})
 </html>

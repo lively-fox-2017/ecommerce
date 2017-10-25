@@ -9,6 +9,7 @@ class AuthCtrl {
       .then((user) => {
         if (req.body.password === decryptAES256CTR(user.password)) {
           let token = jwt.sign({
+            id: user._id,
             username: user.username,
             fullname: user.fullname,
             role: user.role

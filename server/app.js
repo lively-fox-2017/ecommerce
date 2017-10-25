@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const authRoute = require('./routes/authRoute');
 const productRoute = require('./routes/productRoute');
+const transactionRoute = require('./routes/transactionRoute');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 app.use('/auth', authRoute);
 app.use('/products', productRoute);
+app.use('/transaction', transactionRoute);
 
 // set the view engine to ejs
 app.use(express.static(__dirname + '/public'));

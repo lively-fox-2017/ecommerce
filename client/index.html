@@ -14,14 +14,14 @@
       <i class="close icon"></i>
       <div class="header">
         <div class="ui tablet stackable fluid steps">
-          <a class="active step cart">
+          <a class="step cart" :class="{active: isShowCart, disabled: !isShowCart}">
             <i class="in cart icon"></i>
             <div class="content">
               <div class="title">Chart List</div>
               <div class="description">List of your cart</div>
             </div>
           </a>
-          <a class="step complete disabled">
+          <a class="step complete" :class="{active: !isShowCart, disabled: isShowCart}">
             <i class="check circle icon"></i>
             <div class="content">
               <div class="title">Complete</div>
@@ -31,12 +31,15 @@
         </div>
       </div>
       <div class="content">
+        <h3 v-if="!isShowCart">Checkout Item:</h3>
         <div class="ui three stackable cards">
-          <cart-component v-for="product in carts" :key="product._id" :item="product">
+          <cart-component v-if="isShowCart" @add-cart-qty="addCartQty" v-for="(product,index) in carts_detail" :key="product._id" :item="product" :item-id="index">
           </cart-component>
+          <checkout-component v-if="!isShowCart" v-for="(product,index) in carts_detail" :key="product._id" :item="product" :qty="carts[index].qty">
+          </checkout-component>
         </div>
       </div>
-      <div class="actions">
+      <div class="actions" @click="checkout">
         <div class="ui positive right labeled icon button">
           Yep, Continue to complete
           <i class="checkmark icon"></i>
@@ -63,15 +66,6 @@
       </div>
       <a class="active item">
         Home
-      </a>
-      <a class="item">
-        Men
-      </a>
-      <a class="item">
-        Woman
-      </a>
-      <a class="item">
-        Best Seller
       </a>
       <div class="right menu">
         <div class="item">
@@ -100,7 +94,7 @@
     <div class="ui two column grid container">
       <div class="stretched row">
         <div class="column">
-          <div class="ui segment category" v-on:click="getProducts('new')">;
+          <div class="ui segment category" v-on:click="getProducts('new')">
             <h4 class="ui header">New Arrival</h4>
             <img src="https://ae01.alicdn.com/kf/HTB1gPXydE3IL1JjSZFMq6yjrFXaC/New-Arrival-Spring-Men-s-Jackets-Solid-Fashion-Coats-Male-Casual-Slim-Stand-Collar-Bomber-Jacket.jpg_640x640.jpg" class="ui fluid image" alt="New Arival">
           </div>
@@ -110,13 +104,13 @@
             <div class="row">
               <div class="ui equal width grid">
                 <div class="column">
-                  <div class="ui segment category">
+                  <div class="ui segment category" v-on:click="getProducts('shirt')">
                     <h4 class="ui header">Shirt</h4>
                     <img src="https://freethumbs.dreamstime.com/500/big/free_5009525.jpg" alt="Shirt" class="ui fluid image">
                   </div>
                 </div>
                 <div class="column">
-                  <div class="ui segment category">
+                  <div class="ui segment category" v-on:click="getProducts('t-shirt')">
                     <h4 class="ui header">T-Shirt</h4>
                     <img src="http://images.freeimages.com/images/large-previews/f04/shirt-1-1561628.jpg" alt="T-Shirt" class="ui fluid image">
                   </div>
@@ -126,19 +120,19 @@
             <div class="row">
               <div class="ui equal width grid">
                 <div class="column">
-                  <div class="ui segment category">
+                  <div class="ui segment category" v-on:click="getProducts('pants')">
                     <h4 class="ui header">Pants</h4>
                     <img src="https://images.asos-media.com/products/asos-farleigh-high-waist-slim-mom-jeans-in-blossom-darkwash/7948162-1-blossomdarkwash?$XL$" alt="Pants" class="ui fluid image">
                   </div>
                 </div>
                 <div class="column">
-                  <div class="ui segment category">
+                  <div class="ui segment category" v-on:click="getProducts('bag')">
                     <h4 class="ui header">Bag</h4>
                     <img src="http://images.freeimages.com/images/large-previews/8bc/leather-bag-1487953.jpg" alt="Bag" class="ui fluid image">
                   </div>
                 </div>
                 <div class="column">
-                  <div class="ui segment category">
+                  <div class="ui segment category" v-on:click="getProducts('footwear')">
                     <h4 class="ui header">Footwear</h4>
                     <img src="http://images.freeimages.com/images/large-previews/b78/nice-shoes-1418807.jpg" alt="Footwear" class="ui fluid image">
                   </div>
@@ -152,8 +146,19 @@
     <div class="ui container grid">
       <div class="sixteen wide column">
         <div class="ui link three stackable cards">
-          <list-product @add-to-cart="addToCart" v-if="isShowList" v-for="product in products" :key="product._id" :item="product">
-          </list-product>
+          <transition name="fade">
+            <div v-if="show" class="ui icon message">
+              <i class="notched circle loading icon"></i>
+              <div class="content">
+                <div class="header">
+                  Product Added
+                </div>
+                <p>product is added to your cart.</p>
+              </div>
+            </div>
+          </transition>
+          <list-product v-if="isLogin" @add-to-cart="addToCart" v-if="isShowList" v-for="product in products" :key="product._id" :item="product" :item-id="product._id" />
+          <!-- </list-product> -->
         </div>
       </div>
     </div>
@@ -196,48 +201,48 @@
 <script src="assets/js/modal-content.js"></script>
 <script src="assets/js/product-content.js"></script>
 <script type="text/javascript">
-  $("#cart-button").click(function() {
-    $("#cart-modal>.content").remove()
-    $("#cart-modal>.actions").remove()
-    $("#cart-modal").append(chartModal)
-    $('#cart-modal').modal('show');
-
-    $('.step').on('click', function() {
-      $('.step').removeClass('active')
-      if ($(this).hasClass('complete')) {
-        $('.complete').removeClass('disabled');
-        $('.complete').addClass('active');
-        $('.step').removeClass('active')
-        $('.complete').addClass('active');
-        $("#cart-modal>.content").remove()
-        $("#cart-modal>.actions").remove()
-        $("#cart-modal").append(shippingModal)
-      } else if ($(this).hasClass('chart')) {
-        $('.chart').addClass('active');
-        $('.complete').addClass('disabled');
-        $('.complete').removeClass('active')
-        $("#cart-modal>.content").remove()
-        $("#cart-modal>.actions").remove()
-        $("#cart-modal").append(chartModal)
-      }
-      $('.actions').on('click', function() {
-        $('.complete').removeClass('disabled');
-        $('.step').removeClass('active')
-        $('.complete').addClass('active');
-        $("#cart-modal>.content").remove()
-        $("#cart-modal>.actions").remove()
-        $("#cart-modal").append(shippingModal)
-      })
-    })
-    $('.actions').on('click', function() {
-      $('.complete').removeClass('disabled');
-      $('.step').removeClass('active')
-      $('.complete').addClass('active');
-      $("#cart-modal>.content").remove()
-      $("#cart-modal>.actions").remove()
-      $("#cart-modal").append(shippingModal)
-    })
-  })
+  // $("#cart-button").click(function() {
+  //   $("#cart-modal>.content").remove()
+  //   $("#cart-modal>.actions").remove()
+  //   $("#cart-modal").append(chartModal)
+  //   $('#cart-modal').modal('show');
+  //
+  //   $('.step').on('click', function() {
+  //     $('.step').removeClass('active')
+  //     if ($(this).hasClass('complete')) {
+  //       $('.complete').removeClass('disabled');
+  //       $('.complete').addClass('active');
+  //       $('.step').removeClass('active')
+  //       $('.complete').addClass('active');
+  //       $("#cart-modal>.content").remove()
+  //       $("#cart-modal>.actions").remove()
+  //       $("#cart-modal").append(shippingModal)
+  //     } else if ($(this).hasClass('chart')) {
+  //       $('.chart').addClass('active');
+  //       $('.complete').addClass('disabled');
+  //       $('.complete').removeClass('active')
+  //       $("#cart-modal>.content").remove()
+  //       $("#cart-modal>.actions").remove()
+  //       $("#cart-modal").append(chartModal)
+  //     }
+  //     $('.actions').on('click', function() {
+  //       $('.complete').removeClass('disabled');
+  //       $('.step').removeClass('active')
+  //       $('.complete').addClass('active');
+  //       $("#cart-modal>.content").remove()
+  //       $("#cart-modal>.actions").remove()
+  //       $("#cart-modal").append(shippingModal)
+  //     })
+  //   })
+  //   $('.actions').on('click', function() {
+  //     $('.complete').removeClass('disabled');
+  //     $('.step').removeClass('active')
+  //     $('.complete').addClass('active');
+  //     $("#cart-modal>.content").remove()
+  //     $("#cart-modal>.actions").remove()
+  //     $("#cart-modal").append(shippingModal)
+  //   })
+  // })
   $('.category').dimmer({
     on: 'hover'
   });

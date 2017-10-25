@@ -1,5 +1,5 @@
-Vue.component('cart-component', {
-  props: ['item'],
+Vue.component('checkout-component', {
+  props: ['item', 'qty'],
   template: `
   <div class="card">
     <div class="content">
@@ -13,7 +13,51 @@ Vue.component('cart-component', {
       <div class="description">
         Qty:
         <div class="ui input">
-          <input placeholder="qty" type="number" min="1" value="1">
+          {{ qty }}
+        </div>
+      </div>
+      <div class="description">
+        {{item.description}}
+      </div>
+    </div>
+  </div>
+  `
+})
+Vue.component('cart-component', {
+  data() {
+    return {
+      qty: 1,
+    };
+  },
+  methods: {
+    changeQty() {
+      this.$emit('add-cart-qty', this.itemId, this.qty);
+    },
+    cancelThis() {
+      this.display = "none";
+      console.log('aseolole', this.display);
+    }
+  },
+  watch: {
+    qty(newQty) {
+      this.changeQty()
+    }
+  },
+  props: ['item', 'itemId', 'display'],
+  template: `
+  <div class="card" :style="display">
+    <div class="content">
+      <img class="right floated mini ui image" :src="item.image">
+      <div class="header">
+        {{item.name}}
+      </div>
+      <div class="meta">
+        {{item.price}}
+      </div>
+      <div class="description">
+        Qty:
+        <div class="ui input">
+          <input v-model="qty" placeholder="qty" type="number" min="1" value="1">
         </div>
       </div>
       <div class="description">
@@ -21,18 +65,19 @@ Vue.component('cart-component', {
       </div>
     </div>
     <div class="extra content">
-      <div class="ui red button">Cancel</div>
+      <div class="ui red button" @click="cancelThis">Cancel</div>
     </div>
   </div>
   `
 })
+
 Vue.component('list-product', {
   methods: {
     addToCart(item) {
       this.$emit('add-to-cart', item);
     }
   },
-  props: ['item'],
+  props: ['item', 'itemId'],
   template: `
   <div class="card">
     <div class="image">
@@ -162,10 +207,15 @@ new Vue({
     isLogin: false,
     isShowList: false,
     products: [],
-    carts: []
+    carts: [],
+    carts_detail: [],
+    qty: [],
+    isShowCart: true,
+    show: false,
   },
   methods: {
     setLoginStatus() {
+      this.isShowList = false;
       this.isLogin = !this.isLogin;
       if (!this.isLogin)
         localStorage.removeItem(['token', 'role']);
@@ -187,10 +237,41 @@ new Vue({
         })
     },
     showCart() {
-      $('#cart-modal').modal('show');
+      $('#cart-modal')
+        .modal({
+          onApprove: function() {
+            return false;
+          }
+        })
+        .modal('show');
     },
     addToCart(item) {
-      this.carts.push(item);
+      this.show = true;
+      var self = this;
+      setTimeout(function() {
+        self.show = false;
+      }, 1000);
+      this.carts.push({
+        productId: item._id,
+        qty: 1,
+      });
+      this.carts_detail.push(item);
+    },
+    addCartQty(index, qty) {
+      this.carts[index].qty = qty;
+    },
+    checkout() {
+      axios.post('http://localhost:3000/transaction/add', {
+          token: localStorage.getItem('token'),
+          orders: this.carts,
+        })
+        .then((value) => {
+          this.isShowCart = false
+          console.log(value);
+        })
+        .catch((err) => {
+          console.error(err);
+        })
     }
   },
   created() {
