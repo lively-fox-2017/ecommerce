@@ -103,18 +103,6 @@ Vue.component('list-product', {
   </div>
   `
 })
-Vue.component('datatable', {
-  template: `
-  <tr>
-    <td>Tiger Nixon</td>
-    <td>System Architect</td>
-    <td>Edinburgh</td>
-    <td>61</td>
-    <td>2011/04/25</td>
-    <td>$320,800</td>
-  </tr>
-  `
-})
 Vue.component('signup-content', {
   data() {
     return {
@@ -125,7 +113,7 @@ Vue.component('signup-content', {
   },
   methods: {
     signup() {
-      axios.post('http://localhost:3000/auth/signup', {
+      axios.post('http://api-ecommerce/auth/signup', {
           username: this.username,
           password: this.password,
           fullname: this.fullname
@@ -168,7 +156,7 @@ Vue.component('login-content', {
   },
   methods: {
     login() {
-      axios.post('http://localhost:3000/auth/login', {
+      axios.post('http://api-ecommerce/auth/login', {
           username: this.username,
           password: this.password,
         })
@@ -227,7 +215,7 @@ new Vue({
       $('#signup-modal').modal('show');
     },
     getProducts(category) {
-      axios.get('http://localhost:3000/products/' + category)
+      axios.get('http://api-ecommerce/products/' + category)
         .then((products) => {
           this.products = products.data;
           this.isShowList = true;
@@ -261,7 +249,7 @@ new Vue({
       this.carts[index].qty = qty;
     },
     checkout() {
-      axios.post('http://localhost:3000/transaction/add', {
+      axios.post('http://api-ecommerce/transaction/add', {
           token: localStorage.getItem('token'),
           orders: this.carts,
         })
