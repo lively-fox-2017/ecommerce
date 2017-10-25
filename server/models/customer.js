@@ -2,7 +2,7 @@ const crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost/commaterialize');
+mongoose.connect('mongodb://admin:admin@ds231205.mlab.com:31205/commaterialize');
 // mongoose.Promise = global.Promise;
 var customerSchema = new Schema({
   name: {

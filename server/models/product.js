@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
-mongoose.connect('mongodb://localhost/commaterialize');
+mongoose.connect('mongodb://admin:admin@ds231205.mlab.com:31205/commaterialize');
 // mongoose.Promise = global.Promise;
 var productSchema = new Schema({
   name: {

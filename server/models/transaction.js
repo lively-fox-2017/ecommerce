@@ -3,7 +3,7 @@ var jwt = require('jsonwebtoken');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/commaterialize');
+mongoose.connect('mongodb://admin:admin@ds231205.mlab.com:31205/commaterialize');
 // mongoose.Promise = global.Promise;
 var transactionSchema = new Schema({
   customer: {
