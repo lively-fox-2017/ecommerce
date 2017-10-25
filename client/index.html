@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery.leanModal.min.js"></script>
+    <script src="assets/js/filter.js"></script>
   </head>
   <body>
     <div class="flex-container">
@@ -24,23 +25,28 @@
       <header class="flex-item header">
         <div class="header-logo">
           <img src="assets/images/icons/icon.jpg" alt="my web icon">
-          <h1>Beli Topi Kuy</h1>
+          <h1 class="title">Beli Topi Kuy</h1>
         </div>
         <nav>
           <a class="home" href="#home">Home</a>
           <a class="product" href="#someitem">Product</a>
+          <a class="user" href="#">User</a>
+          <a class="transaction" href="#">Transaction</a>
           <a class="contact" href="#">Contact</a>
           <a class="login" id="popup" href=".loginform">Login</a>
-          <form class="loginform" v-on:submit.prevent method="post">
+          <a class="logout" v-on:click="logout()" href="#">Logout</a>
+          <form class="loginform" v-on:submit.prevent="login()" method="post">
             <div>
               <h1>Login</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
             </div>
             <label>Username</label>
-            <input type="text" name="username">
+            <input type="text" name="username" required>
             <label>Password</label>
-            <input type="password" name="" value="">
+            <input type="password" name="password" required>
             <input type="submit" value="Submit"> <button type="button" name="button">Register</button>
           </form>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ini Cart~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
           <ul>
             <img id="cart" src="assets/images/icons/shoppingcart.png" alt="cart">
             <li class="cart">
@@ -54,13 +60,131 @@
                     <td v-on:click="removeItem(index)"><img class="removeCart" src="assets/images/icons/false.png" alt=""></td>
                   </tr>
                 </table>
-                <input type="submit" value="Checkout"> <span>{{totalPriceRupiah}}</span>
+                <input type="submit" v-on:click="saveItems()" value="Checkout"> <span>{{totalPriceRupiah}}</span>
               </form>
             </li>
           </ul>
         </nav>
       </header>
       <div class="content">
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="adminproduct">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button type="button" name="add">Add</button>
+          </div>
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td>001</td>
+                <td>Topi Babe 1</td>
+                <td>Rp. 1.000.000</td>
+                <td>10</td>
+                <td>
+                  <button name="edit">Edit</button>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>002</td>
+                <td>Topi Babe 2</td>
+                <td>Rp. 1.000.000</td>
+                <td>15</td>
+                <td>
+                  <button name="edit">Edit</button>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="adminuser">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button type="button" name="add">Add</button>
+          </div>
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td>001</td>
+                <td>Topi Babe 1</td>
+                <td>Rp. 1.000.000</td>
+                <td>10</td>
+                <td>
+                  <button name="edit">Edit</button>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>002</td>
+                <td>Topi Babe 2</td>
+                <td>Rp. 1.000.000</td>
+                <td>15</td>
+                <td>
+                  <button name="edit">Edit</button>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="admintransaction">
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Product Id</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td>001</td>
+                <td>Topi Babe 1</td>
+                <td>Rp. 1.000.000</td>
+                <td>10</td>
+                <td>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>002</td>
+                <td>Topi Babe 2</td>
+                <td>Rp. 1.000.000</td>
+                <td>15</td>
+                <td>
+                  <button name="delete">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~User~~~~~~~~~~~~~~~~~~~~~~~ -->
+
         <div id="slider">
           <div id="mask">
             <ul>
@@ -118,6 +242,45 @@
     </div>
     <script type="text/javascript" src="assets/js/cart.js"></script>
     <script type="text/javascript">
+      if (localStorage.getItem('token') && localStorage.getItem('role') === "user") {
+        $('.login').hide(200)
+        $('.logout').show(200)
+        $('.user').hide(200)
+        $('.transaction').hide(200)
+      } else if (localStorage.getItem('token') && localStorage.getItem('role') === "admin"){
+        $('.login').hide(200)
+        $('.logout').show(200)
+        $('.home').hide(200)
+        $('.contact').hide(200)
+        $('.user').show(200)
+        $('.transaction').show(200)
+        $('#slider').hide(200)
+        $('#someitem').hide(200)
+
+        $('.user').on('click', function(){
+          $('.adminuser').toggle(200);
+          $('.adminproduct').hide(200);
+          $('.admintransaction').hide(200);
+        })
+
+        $('.product').on('click', function(){
+          $('.adminproduct').toggle(200);
+          $('.adminuser').hide(200);
+          $('.admintransaction').hide(200);
+        })
+
+        $('.transaction').on('click', function(){
+          $('.admintransaction').toggle(200);
+          $('.adminuser').hide(200);
+          $('.adminproduct').hide(200);
+        })
+
+        $('.title').text("Admin Site")
+      } else {
+        $('.login').show(200)
+        $('.logout').hide(200)
+      }
+
       $("#popup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
       $('#cart').on('click', function(){

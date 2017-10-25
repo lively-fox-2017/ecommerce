@@ -3,7 +3,8 @@ new Vue({
   data: {
     items: [],
     cart: [],
-    quantity: 0,
+    productObjectId: [],
+    quantity: [],
     totalPrice: 0,
     totalPriceRupiah: 'Rp 0'
   },
@@ -70,6 +71,8 @@ new Vue({
         }
 
         this.cart.push(arrObj)
+        this.productObjectId.push(this.items[index].id)
+        this.quantity.push(0)
         // console.log(JSON.stringify(this.cart[this.cart.length-1]));
       } else {
         alert("You must login to Add Item")
@@ -78,6 +81,8 @@ new Vue({
 
     removeItem(index) {
       this.cart.splice(index, 1)
+      this.productObjectId.splice(index, 1)
+      this.quantity.splice(index, 1)
       this.totalPrice = 0;
 
       for (let i = 0; i < this.cart.length; i++) {
@@ -87,9 +92,37 @@ new Vue({
       this.totalPriceRupiah = this.formatRupiah(this.totalPrice)
     },
 
+    saveItems(){
+      if (this.quantity.indexOf(0) !== -1) {
+        alert("Quantity Cannot Zero, please remove the item if you dont want to buy it")
+      } else {
+        let dataCart = {
+          user: localStorage.getItem('token'),
+          product: this.productObjectId,
+          quantity: this.quantity,
+          checkout_date: new Date(),
+          totalprice: this.totalPrice
+        }
+
+        axios.post("http://localhost:3000/transactions/insert", dataCart).then((response) => {
+          // console.log(response);
+          alert(response.data.message)
+        }).catch((reason) => {
+          console.log(reason);
+        })
+
+        this.cart = []
+        this.productObjectId = []
+        this.quantity = []
+        this.totalPrice = 0
+        this.totalPriceRupiah = 'Rp 0'
+      }
+    },
+
     quantityChange(index){
       this.cart[index].totalHarga = this.cart[index].price * $('#quantity'+index).val()
       this.cart[index].formatHarga = this.formatRupiah(this.cart[index].totalHarga)
+      this.quantity[index] = Number($('#quantity'+index).val())
       this.totalPrice = 0;
 
       for (let i = 0; i < this.cart.length; i++) {
@@ -97,6 +130,31 @@ new Vue({
       }
 
       this.totalPriceRupiah = this.formatRupiah(this.totalPrice)
+    },
+
+    login(){
+      let data = {
+        username: $('input[name=username]').val(),
+        password: $('input[name=password]').val()
+      }
+
+      axios.post("http://localhost:3000/users/login", data).then((response) => {
+        if (!response.data.data) {
+          alert(response.data.message)
+        } else {
+          localStorage.setItem('token', response.data.data)
+          localStorage.setItem('role', response.data.role)
+          window.location.reload()
+        }
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    logout(){
+      localStorage.removeItem('token')
+      localStorage.removeItem('role')
+      window.location.reload()
     }
   },
 

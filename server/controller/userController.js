@@ -5,14 +5,15 @@ module.exports = {
   login: (req, res) => {
     User.findOne({username: req.body.username}).then((result) => {
       if (result) {
-        let secret = helper.secretGenerate()
+        let secret = result.secret
         let password = helper.secretHash(secret, req.body.password)
 
         if(result.password === password) {
           let token = helper.authentication(result)
           res.json({
             message: "Berhasil Login",
-            data: token
+            data: token,
+            role: result.role
           })
         } else {
           res.json({
@@ -24,6 +25,10 @@ module.exports = {
           message: "Sorry, wrong username"
         })
       }
+    }).catch((reason) => {
+      res.json({
+        message: reason
+      })
     })
   },
 
@@ -62,7 +67,7 @@ module.exports = {
   insert: (req, res) => {
     let secret = helper.secretGenerate()
     let password = helper.secretHash(secret, req.body.password)
-    User(helper.dataUser(req.body, password)).save().then((rowUserInserted) => {
+    User(helper.dataUser(req.body, password, secret)).save().then((rowUserInserted) => {
       res.json({
         message: "Berhasil Memasukan Data",
         data: rowUserInserted
@@ -75,23 +80,25 @@ module.exports = {
   },
 
   update: (req, res) => {
-    let secret = helper.secretGenerate()
-    let password = helper.secretHash(secret, req.body.password)
-    User.update({_id: req.params.id}, {$set: helper.dataUser(req.body, password)}).then((rowUpdateUser) => {
-      // console.log(rowUpdateCustomer);
-      if (rowUpdateUser.n != 0) {
+    User.findOne({_id: req.params.id}).then((result) => {
+      let secret = result.secret
+      let password = helper.secretHash(secret, req.body.password)
+      User.update({_id: req.params.id}, {$set: helper.dataUser(req.body, password, secret)}).then((rowUpdateUser) => {
+        // console.log(rowUpdateCustomer);
+        if (rowUpdateUser.n != 0) {
+          res.json({
+            message: "Berhasil Update",
+            data: rowUpdateUser
+          })
+        } else {
+          res.json({
+            message: "Data tidak ditemukan"
+          })
+        }
+      }).catch((reason) => {
         res.json({
-          message: "Berhasil Update",
-          data: rowUpdateUser
+          message: reason
         })
-      } else {
-        res.json({
-          message: "Data tidak ditemukan"
-        })
-      }
-    }).catch((reason) => {
-      res.json({
-        message: reason
       })
     })
   },

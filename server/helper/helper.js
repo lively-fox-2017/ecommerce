@@ -11,7 +11,7 @@ module.exports = {
     }
   },
 
-  dataProduct: (reqBody) => {
+  dataProduct: (reqBody, quantity = 0) => {
     let Obj = {
       name: reqBody.name,
       url: reqBody.url,
@@ -23,11 +23,12 @@ module.exports = {
     return Obj
   },
 
-  dataUser: (reqBody, password) => {
+  dataUser: (reqBody, password, secret) => {
     let Obj = {
       username: reqBody.username,
       password: password,
       role: "user",
+      secret: secret,
       email: reqBody.email,
       phone: reqBody.phone
     }
@@ -35,15 +36,14 @@ module.exports = {
     return Obj
   },
 
-  dataTransaction: (reqBody) => {
+  dataTransaction: (reqBody, user) => {
     let Obj = {
-      user: reqBody.member,
-      product: reqBody.days,
+      user: user,
+      product: reqBody.product,
+      quantity: reqBody.quantity,
       checkout_date: new Date(),
-      totalprice: reqBody.booklist
+      totalprice: reqBody.totalprice
     }
-
-    Obj.due_date = moment(new Date(Obj.out_date)).add(Obj.days, 'days')
 
     return Obj
   },
@@ -67,11 +67,18 @@ module.exports = {
   authentication: (input) => {
     let token = jwt.sign({
       id: input._id,
-      username: input.username,
-      role: input.role
+      username: input.username
     }, 'hacktiv8');
 
     return token
+  },
+
+  getUserId: (input) => {
+    let decode = jwtDecode(input)
+
+    decode = decode.id
+
+    return decode
   }
 
   // countFine: (in_date, due_date) => {

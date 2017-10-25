@@ -14,6 +14,10 @@ const schema = new mongoose.Schema({
     required: true,
     ref: 'Product'
   }],
+  quantity: {
+    type: Array,
+    required: true
+  },
   checkout_date: Date,
   totalprice: Number
 })
