@@ -2,7 +2,7 @@
 
 const jwt = require('jsonwebtoken');
 
-module.exports = (user) => {
+module.exports = user => {
 	const data = {
 		id: user._id,
 		username: user.username,
