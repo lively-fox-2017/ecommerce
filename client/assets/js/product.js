@@ -14,7 +14,7 @@ new Vue({
   },
   methods: {
     getAllProducts() {
-      axios.get('http://localhost:3000/api/product').then((response) => {
+      axios.get('http://commaterialize-api.lokilokostudio.tk/api/product').then((response) => {
         console.log(response)
         this.products = response.data;
       }).catch((err) => {
@@ -37,7 +37,7 @@ new Vue({
       this.formData.isUpdate = true;
     },
     deleteData(id) {
-      axios.delete('http://localhost:3000/api/product/'+id).then((response) => {
+      axios.delete('http://commaterialize-api.lokilokostudio.tk/api/product/'+id).then((response) => {
         var index = this.products.findIndex((product)=>{
           if(product._id == response.data.data._id){
             return product;
@@ -50,7 +50,7 @@ new Vue({
     },
     saveData() {
       if(this.formData.isUpdate){
-        axios.put('http://localhost:3000/api/product/'+this.formData._id, this.formData).then((response) => {
+        axios.put('http://commaterialize-api.lokilokostudio.tk/api/product/'+this.formData._id, this.formData).then((response) => {
           var index = this.products.findIndex((product)=>{
             if(product._id == response.data.data._id){
               return product;
@@ -62,7 +62,7 @@ new Vue({
         })
       }
       else {
-        axios.post('http://localhost:3000/api/product', this.formData).then((response) => {
+        axios.post('http://commaterialize-api.lokilokostudio.tk/api/product', this.formData).then((response) => {
           this.products.unshift(response.data.data);
         }).catch((err) => {
           console.error(err)
@@ -71,7 +71,7 @@ new Vue({
     }
   },
   created() {
-    axios.post('http://localhost:3000/api/auth/isAdmin', {token:localStorage.getItem('accessToken')}).then((response) => {
+    axios.post('http://commaterialize-api.lokilokostudio.tk/api/auth/isAdmin', {token:localStorage.getItem('accessToken')}).then((response) => {
       console.log(response);
       this.getAllProducts();
     }).catch((err) => {

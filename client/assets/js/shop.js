@@ -8,7 +8,7 @@ new Vue({
   methods: {
     getAllProducts() {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:3000/api/product').then((response) => {
+        axios.get('http://commaterialize-api.lokilokostudio.tk/api/product').then((response) => {
           this.products = response.data;
           resolve();
         }).catch((err) => {
@@ -94,7 +94,7 @@ new Vue({
     doLogin() {
       var email = $('#email').val();
       var password = $('#password').val();
-      axios.post('http://localhost:3000/api/auth/login', {
+      axios.post('http://commaterialize-api.lokilokostudio.tk/api/auth/login', {
         email: email,
         password: password
       }).then((response) => {
@@ -108,7 +108,7 @@ new Vue({
       var email = $('#email').val();
       var password = $('#password').val();
       var name = $('#name').val();
-      axios.post('http://localhost:3000/api/auth/register', {
+      axios.post('http://commaterialize-api.lokilokostudio.tk/api/auth/register', {
         email: email,
         password: password,
         name: name
@@ -136,7 +136,7 @@ new Vue({
       this.carts.forEach((cart) => {
         productlist.push(cart._id);
       })
-      axios.post('http://localhost:3000/api/transaction', {
+      axios.post('http://commaterialize-api.lokilokostudio.tk/api/transaction', {
         customer_id: customer_id,
         productlist: productlist,
         totalHarga: totalHarga
