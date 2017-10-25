@@ -12,7 +12,7 @@ router.get('/transactions', controllers.Transaction.findAll);
 router.get('/getusers', controllers.User.findAll);
 
 // create user
-router.post('/createuser', controller.User.create);
+router.post('/createuser', controllers.User.create);
 
 // delete one user by id
 router.delete('/deleteuser/:id', controllers.User.delete);
