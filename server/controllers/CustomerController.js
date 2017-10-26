@@ -47,7 +47,7 @@ class CustomerController {
       name: req.body.name,
       username: req.body.username,
       password: req.body.password,
-      address: req.body.password,
+      address: req.body.address,
       zipcode: req.body.zipcode,
       phone: req.body.phone
     };
@@ -90,7 +90,7 @@ class CustomerController {
             phone: req.body.phone
           };
 
-          const updateQuery = Customer.where({ _id: customer.id }).update(newCustomerInfo);
+          const updateQuery = Customer.update({ _id: customer.id }, newCustomerInfo, { runValidators: true });
 
           updateQuery
             .then((status) => {
