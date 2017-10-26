@@ -52,7 +52,7 @@ class CustomerController {
       phone: req.body.phone
     };
 
-    const execQuery = Customer.insertMany(newCustomer);
+    const execQuery = Customer.create(newCustomer);
 
     execQuery
       .then((customer) => {
