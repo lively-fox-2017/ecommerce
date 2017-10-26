@@ -86,29 +86,7 @@ class collectionCtrl{
         }) 
         .catch(err => {
             console.log(err)
-        })   
-        // if(req.body.member && req.body.days && req.body.fine && req.body.booklist && req.body.inDate && req.body.dueDate && req.body.outDate !== '') {
-        //     var collection = new Collection({
-        //         member: req.body.member,
-        //         days: req.body.days,
-        //         out_date: req.body.outDate,
-        //         due_date: req.body.dueDate,
-        //         in_date: req.body.inDate,
-        //         fine: req.body.fine,
-        //         booklist: req.body.booklist
-        //     })
-        //     // res.send(collection)
-        //       Transaction.save()
-        //       .then((result, err) => {
-        //         if(err) {
-        //           res.send(err)
-        //         }
-        //         res.send({
-        //             message: 'Collection has been added',
-        //             added: result
-        //         })
-        //       })
-        // }
+        })
     }
 
     static update(req,res) {
@@ -133,11 +111,16 @@ class collectionCtrl{
     }
 
     static delete(req,res) {
-        Transaction.findOneAndRemove({_id: req.params.id})
-        .then((transaction,err) => {
-            if(err) return res.send(err)
-
-            res.redirect('/collections')
+        Transaction.findOneAndRemove({_id: req.query.id})
+        .then(response => {
+            console.log(response)
+            res.send({
+                message: 'Checked out items success',
+                data: response
+            })
+        })
+        .catch(err => {
+            res.send(err)
         })
     }
 }
