@@ -24,6 +24,6 @@ router.get('/edit/:id', transactionCtrl.getEditPage)
 
 router.put('/:id', transactionCtrl.update)
 
-router.delete('/:id',transactionCtrl.delete)
+router.delete('/',transactionCtrl.delete)
 
 module.exports = router;
