@@ -15,7 +15,7 @@ class Controller{
           res.send(result)
         }
     })
-    res.redirect('localhost:8080/login')
+    
         //res.send('respond with a resource');
     }
 

@@ -6,7 +6,7 @@
 
 var url = require('url')
 
-var uri = 'mongodb://127.0.0.1:27017/ecommerce';
+var uri = 'mongodb://admin:admin@ds229435.mlab.com:29435/ecommerce';
 if (!uri) {
   throw new Error(
     '\033[31mYou need to provide the connection string. ' +

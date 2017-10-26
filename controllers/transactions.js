@@ -42,6 +42,32 @@ class Controller{
       res.send(err)
     })
   }
+
+  static getCostumerTransaction(req, res, next){
+    let result = {message:'gagal', data:{}}
+    let usrId = '';
+    try {
+      let token = jwt.verify(req.body.JWTtoken, process.env.JWTtoken);
+      console.log(token);
+      usrId=token.id
+      //res.send(token)
+    } catch (e) {
+      console.log(e);
+      result.data=e
+      res.send(result)
+    }
+
+    Models.Transaction.find({user:mongoose.mongo.ObjectId(usrId)})
+    .then(response=>{
+      result.message="Berhasil"
+      result.data = response
+      res.send(result)
+    })
+    .catch(err=>{
+      result.data = err
+      res.send(result)
+    })
+  }
 }
 
 module.exports = Controller;
