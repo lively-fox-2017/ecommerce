@@ -117,7 +117,7 @@ Vue.component('add-content', {
   methods: {
     addProduct() {
       console.log(this.itemVal);
-      axios.post(`http://localhost:3000/products/add_product/`, {
+      axios.post(`http://api-ecommerce.mepawz.com/products/add_product/`, {
           name: this.itemVal.name,
           description: this.itemVal.description,
           category: this.itemVal.category,
@@ -184,7 +184,7 @@ Vue.component('update-content', {
   props: ['item'],
   methods: {
     updateProduct(id) {
-      axios.put(`http://localhost:3000/products/update_product/${id}`, this.itemVal)
+      axios.put(`http://api-ecommerce.mepawz.com/products/update_product/${id}`, this.itemVal)
         .then((value) => {
           this.show = true;
           var self = this;
@@ -257,7 +257,7 @@ Vue.component('signup-content', {
   },
   methods: {
     signup() {
-      axios.post('http://localhost:3000/auth/signup', {
+      axios.post('http://api-ecommerce.mepawz.com/auth/signup', {
           username: this.username,
           password: this.password,
           fullname: this.fullname
@@ -300,7 +300,7 @@ Vue.component('login-content', {
   },
   methods: {
     login() {
-      axios.post('http://localhost:3000/auth/login', {
+      axios.post('http://api-ecommerce.mepawz.com/auth/login', {
           username: this.username,
           password: this.password,
         })
@@ -361,7 +361,7 @@ Vue.component('admin-component', {
       $("#update-modal").modal('show');
     },
     deleteProduct(item, index) {
-      axios.delete(`http://localhost:3000/products/delete_product/${item}`)
+      axios.delete(`http://api-ecommerce.mepawz.com/products/delete_product/${item}`)
         .then((value) => {
           // this.products = [].concat(this.products.slice(0, index), this.products.slice(index + 1));
           this.products.splice(index, 1);
@@ -408,7 +408,7 @@ Vue.component('admin-component', {
     </div>
   `,
   created() {
-    axios.get('http://localhost:3000/products/')
+    axios.get('http://api-ecommerce.mepawz.com/products/')
       .then((products) => {
         this.products = products.data;
       })
@@ -526,7 +526,7 @@ new Vue({
       this.isShowAdmin = !this.isShowAdmin;
     },
     getProducts(category) {
-      axios.get('http://localhost:3000/products/' + category)
+      axios.get('http://api-ecommerce.mepawz.com/products/' + category)
         .then((products) => {
           this.products = products.data;
           this.isShowList = true;
@@ -563,7 +563,7 @@ new Vue({
       this.carts[index].qty = qty;
     },
     checkout() {
-      axios.post('http://localhost:3000/transaction/add', {
+      axios.post('http://api-ecommerce.mepawz.com/transaction/add', {
           token: localStorage.getItem('token'),
           orders: this.carts,
         })
