@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="node_modules/semantic-ui/dist/semantic.min.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="node_modules/semantic-ui/dist/semantic.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="ui header">
+        <div class="ui attached stackable menu">
+          <div class="ui item">
+            <img class="ui small circular image" src="http://thepittshop.com/SiteImages/178-SchoolImages/178-shopImages/178-logo_shop.png">
+          </div>
+          <a class="item">
+            <i class="sign in icon"></i> Sign in
+          </a>
+          <a class="item">
+            <i class="address book icon"></i> Sign up
+          </a>
+          <div class="ui container">
+          </div>
+          <div class="ui action left icon input">
+            <i class="search icon"></i>
+            <input placeholder="Search..." type="text">
+            <div class="ui teal button">Search</div>
+          </div>
+          <a class="item" id="inCart"><i class="in cart icon"></i> <p>{{ carts.qty }} Carts </p></a>
+        </div>
+      </div>
+      <div class="ui grid">
+        <div class="three wide column">
+          <div class="ui container">
+            <div class="ui left vertical menu">
+              <div class="item">
+                <div class="header">Categories Product</div>
+                <div class="menu">
+                  <div class="ui simple dropdown item">
+                    Handphone and Tablet
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                      <a class="item"><i class="globe icon"></i> Choose Language</a>
+                      <a class="item"><i class="settings icon"></i> Account Settings</a>
+                    </div>
+                  </div>
+                  <div class="ui simple dropdown item">
+                    Computer PC and Laptop
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                      <a class="item"><i class="globe icon"></i> Choose Language</a>
+                      <a class="item"><i class="settings icon"></i> Account Settings</a>
+                    </div>
+                  </div>
+                  <div class="ui simple dropdown item">
+                    Fashion and Beauty
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                      <a class="item"><i class="globe icon"></i> Choose Language</a>
+                      <a class="item"><i class="settings icon"></i> Account Settings</a>
+                    </div>
+                  </div>
+                  <div class="ui simple dropdown item">
+                    Health and Medical
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                      <a class="item"><i class="globe icon"></i> Choose Language</a>
+                      <a class="item"><i class="settings icon"></i> Account Settings</a>
+                    </div>
+                  </div>
+                  <div class="ui simple dropdown item">
+                    Sports and Entertainment
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
+                      <a class="item"><i class="globe icon"></i> Choose Language</a>
+                      <a class="item"><i class="settings icon"></i> Account Settings</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="header">CMS Solutions</div>
+                <div class="menu">
+                  <a class="item">Rails</a>
+                  <a class="item">Python</a>
+                  <a class="item">PHP</a>
+                </div>
+              </div>
+              <div class="item">
+                <div class="header">Hosting</div>
+                <div class="menu">
+                  <a class="item">Shared</a>
+                  <a class="item">Dedicated</a>
+                </div>
+              </div>
+              <div class="item">
+                <div class="header">Support</div>
+                <div class="menu">
+                  <a class="item">E-mail Support</a>
+                  <a class="item">FAQs</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          </div>
+          <div class="ten wide column">
+            <div class="ui grid">
+              <!-- product -->
+              <div class="four wide column" v-for="item in items">
+                <br>
+                <div class="ui segment">
+                  <img class="ui medium image" v-bind:src="item.img">
+                </div>
+
+                <div class="ui primary button" v-on:click="addCart">
+                  <i class="shop icon"></i> Add to Cart
+                </div>
+                <div class="ui animated fade button" tabindex="0">
+                  <div class="visible content">{{ item.nama }}</div>
+                    <div class="hidden content">
+                      <p>{{ item.cost }}</p>
+                    </div>
+                </div>
+
+              </div>
+
+          <!-- / product -->
+            </div>
+          </div>
+          <div class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+              Your Item List :
+            </div>
+            <div class="image content"  v-for="item in items">
+              <div class="ui medium image">
+                <img v-bind:src="item.img">
+              </div>
+              <div class="description">
+                <div class="ui header">We've auto-chosen a profile image for you.</div>
+                <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+                <p>Is it okay to use this photo?</p>
+              </div>
+            </div>
+            <div class="actions">
+              <div class="ui black deny button">
+                Nope
+              </div>
+              <div class="ui positive right labeled icon button">
+                Yep, that's me
+                <i class="checkmark icon"></i>
+              </div>
+            </div>
+          </div>
+          <br><br>
+          <br>
+          <div class="ui attached stackable menu">
+            <div class="ui container">
+              <a class="item">
+                <i class="home icon"></i> About Us
+              </a>
+              <a class="item">
+                <i class="tasks icon"></i> Career
+              </a>
+              <a class="item">
+                <i class="mail icon"></i> Messages
+              </a>
+              <div class="ui simple dropdown item">
+                More
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <a class="item"><i class="edit icon"></i> Affiliate</a>
+                  <a class="item"><i class="globe icon"></i> Choose Language</a>
+                  <a class="item"><i class="settings icon"></i> Account Settings</a>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        <div class="ui raised very padded text container segment">
+          <h2 class="ui header">We are ready to serve you on: </h2>
+          <p>Monday - Friday, 09:00-18:00 Wib</p>
+          <p>Saturday - Sunday, 09:00-14:00</p>
+          <button class="ui facebook button">
+            <i class="facebook icon"></i>
+            Facebook
+          </button>
+          <button class="ui twitter button">
+            <i class="twitter icon"></i>
+            Twitter
+          </button>
+          <button class="ui instagram button">
+            <i class="instagram icon"></i>
+            Instagram
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </body>
+  <script src="script.js"></script>
+  <script type="text/javascript">
+    $('.ui.rating')
+      .rating()
+    ;
+
+    $('#inCart').click(function() {
+      $('.ui.modal')
+        .modal('show')
+      ;
+    })
+
+
+  </script>
+
+
+
+</html>
