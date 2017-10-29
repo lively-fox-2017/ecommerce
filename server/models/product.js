@@ -34,6 +34,7 @@ let productSchema = new Schema({
 
 productSchema.pre('save', function(next) {
   this.createdAt = Date.now();
+  next();
 })
 
 productSchema.pre('update', function(next) {

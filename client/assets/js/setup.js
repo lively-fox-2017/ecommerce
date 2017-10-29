@@ -102,6 +102,72 @@ Vue.component('list-product', {
   </div>
   `
 })
+Vue.component('add-content', {
+  data() {
+    return {
+      itemVal: {
+        name: null,
+        description: null,
+        category: null,
+        price: null,
+        image: null,
+      }
+    };
+  },
+  methods: {
+    addProduct() {
+      console.log(this.itemVal);
+      axios.post(`http://localhost:3000/products/add_product/`, {
+          name: this.itemVal.name,
+          description: this.itemVal.description,
+          category: this.itemVal.category,
+          price: this.itemVal.price,
+          image: this.itemVal.image,
+        })
+        .then((value) => {
+          this.$emit('addSuccess', value.data)
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    }
+  },
+  template: `
+  <div class="content">
+    <form class="ui form" name="update-product-form">
+      <div class="field">
+        <label>Name</label>
+        <input v-model="itemVal.name" name="name" placeholder="Name" type="text" required>
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <input v-model="itemVal.description" name="description" placeholder="Description" type="text" required>
+      </div>
+      <div class="field">
+        <label>Category</label>
+        <select v-model="itemVal.category" required>
+          <option disabled value="">Please select one</option>
+          <option value="new">New Arrival</option>
+          <option value="shirt">Shirt</option>
+          <option value="t-shirt">T-Shirt</option>
+          <option value="pants">Pants</option>
+          <option value="bag">Bag</option>
+          <option value="footwear">Footwear</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Price</label>
+        <input v-model="itemVal.price" name="price" placeholder="Price" type="text" required>
+      </div>
+      <div class="field">
+        <label>Image URL</label>
+        <input v-model="itemVal.image" name="image" placeholder="Image URL" type="text" required>
+      </div>
+      <button class="ui button" type="submit" v-on:click.prevent="addProduct">Submit</button>
+    </form>
+  </div>
+  `
+})
 Vue.component('update-content', {
   data() {
     return {
@@ -133,6 +199,7 @@ Vue.component('update-content', {
         })
     }
   },
+  // Update data when prop change [Needed because item is rendered when prop is null]
   watch: {
     item: function(newItem) {
       if (newItem) {
@@ -157,7 +224,15 @@ Vue.component('update-content', {
       </div>
       <div class="field">
         <label>Category</label>
-        <input v-model="itemVal.category" name="category" placeholder="Category" type="text" required>
+        <select v-model="itemVal.category" required>
+          <option disabled value="">Please select one</option>
+          <option value="new">New Arrival</option>
+          <option value="shirt">Shirt</option>
+          <option value="t-shirt">T-Shirt</option>
+          <option value="pants">Pants</option>
+          <option value="bag">Bag</option>
+          <option value="footwear">Footwear</option>
+        </select>
       </div>
       <div class="field">
         <label>Price</label>
@@ -188,7 +263,6 @@ Vue.component('signup-content', {
           fullname: this.fullname
         })
         .then((response) => {
-          console.log(response);
           $('#signup-modal').modal('hide');
         })
         .catch((err) => {
@@ -291,7 +365,6 @@ Vue.component('admin-component', {
         .then((value) => {
           // this.products = [].concat(this.products.slice(0, index), this.products.slice(index + 1));
           this.products.splice(index, 1);
-          console.log(this.products);
         })
         .catch((err) => {
           console.error(err);
@@ -302,7 +375,11 @@ Vue.component('admin-component', {
       $("#update-modal").modal('hide');
     },
     addProduct() {
-
+      $("#add-modal").modal('show');
+    },
+    addSuccess(item) {
+      this.products.push(item);
+      location.reload();
     }
   },
   template: `
@@ -313,6 +390,13 @@ Vue.component('admin-component', {
           <h2>Edit Product</h2>
         </div>
         <update-content @updateSuccess="updateSuccess" :item="item"></update-content>
+      </div>
+      <div class="ui modal" id="add-modal">
+        <i class="close icon"></i>
+        <div class="header">
+          <h2>Add Product</h2>
+        </div>
+        <add-content @addSuccess="addSuccess" ></add-content>
       </div>
       <div class="sixteen wide column">
         <div class="ui one buttons">

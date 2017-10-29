@@ -27,10 +27,11 @@ class ProductCtrl {
   }
 
   static addProduct(req, res, next) {
+    console.log('here', req.body);
     let newProduct = new Product(req.body);
     newProduct.save()
       .then((inserted) => {
-        res.status(201).json(inserted);
+        res.status(200).json(inserted);
       })
       .catch((err) => {
         console.error(err);
