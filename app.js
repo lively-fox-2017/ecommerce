@@ -14,6 +14,7 @@ var books = require('./routes/books')
 var transactions = require('./routes/transactions')
 var customers = require('./routes/customers')
 var items = require('./routes/items')
+var carts = require('./routes/carts')
 var app = express();
 app.use(cors())
 // view engine setup
@@ -34,5 +35,6 @@ app.use('/books', books)
 app.use('/transactions', transactions)
 app.use('/customers', customers)
 app.use('/items', items)
+app.use('/carts', carts)
 
 module.exports = app;
