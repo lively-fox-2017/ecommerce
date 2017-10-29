@@ -7,6 +7,12 @@ class AuthCtrl {
         username: req.body.username
       })
       .then((user) => {
+        if (!user) {
+          res.status(400).json({
+            err: 'not found'
+          });
+        }
+
         if (req.body.password === decryptAES256CTR(user.password)) {
           let token = jwt.sign({
             id: user._id,
