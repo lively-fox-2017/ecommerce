@@ -3,13 +3,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema,
       ObjectId = Schema.ObjectId;
 
-var itemSchema =  new Schema({
+var cartSchema =  new Schema({
               nama_item: String,
-              category: String,
               harga: String,
-              jumlah: String,
+              jumlah: Number,
               img: String
              })
 
-var Item = mongoose.model('Item', itemSchema);
-module.exports = Item
+var Cart = mongoose.model('Cart', cartSchema);
+module.exports = Cart

@@ -47,5 +47,12 @@
 
 .gallery_product
 {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 10px;
+    padding:3px
+}
+
+.row-fluid{
+    margin-top: -20px
 }

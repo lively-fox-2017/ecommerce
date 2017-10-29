@@ -1,9 +1,9 @@
-const Item = require('../models/items')
+const Cart = require('../models/carts')
 
-class Itemx {
+class Cartx {
 
-  static findItems(req,res){
-    Item.find({})
+  static findCarts(req,res){
+    Cart.find({})
     .then(data=>{
       res.send(data)
     })
@@ -12,24 +12,22 @@ class Itemx {
     })
   }
 
-  static createItems(req,res){
-    let newItems = Item({
+  static createCarts(req,res){
+    let newCarts = Cart({
       "nama_item": req.body.nama_item,
-      "category":req.body.category,
       "harga":req.body.harga,
       "jumlah":req.body.jumlah,
-      "img": req.body.img,
+      "img": req.body.img
     })
-    newItems.save()
+    newCarts.save()
     .then(data=>{
       console.log('sebelum dikirim ', data)
       res.send({
         "Message": "Data Berhasil di Tambah",
         "nama_item": req.body.nama_item,
-        "category":req.body.category,
         "harga":req.body.harga,
         "jumlah":req.body.jumlah,
-        "img": req.body.img,
+        "img": req.body.img
        });
     })
     .catch(err=>{
@@ -37,8 +35,8 @@ class Itemx {
     })
   }
 
-  static deleteItems(req,res){
-    Item.findOneAndRemove({_id: req.params.id})
+  static deleteCarts(req,res){
+    Cart.findOneAndRemove({_id: req.params.id})
     .then(data=>{
       res.send({
         "message": "Data Berhasil di Delete!",
@@ -50,11 +48,11 @@ class Itemx {
     })
   }
 
-  static findItemsById(req,res){
-    Item.findOne({_id: req.params.id})
+  static findCartsById(req,res){
+    Cart.findOne({_id: req.params.id})
     .then(data=>{
       res.send({
-        "Message": "Data Items Ketemu !",
+        "Message": "Data Carts Ketemu !",
         data: data
       })
     })
@@ -63,10 +61,9 @@ class Itemx {
     })
   }
 
-  static updateItems(req,res){
-    Item.findByIdAndUpdate({_id: req.params.id}, {
+  static updateCarts(req,res){
+    Cart.findByIdAndUpdate({_id: req.params.id}, {
       "nama_item": req.body.nama_item,
-      "category":req.body.category,
       "harga":req.body.harga,
       "jumlah":req.body.jumlah,
       "img": req.body.img
@@ -75,9 +72,7 @@ class Itemx {
       res.send({
         "message": "Data Berhasil di Update!",
         "nama_item": req.body.nama_item,
-        "category":req.body.category,
         "harga":req.body.harga,
-        "jumlah":req.body.jumlah,
         "img": req.body.img
       })
     })
@@ -90,4 +85,4 @@ class Itemx {
 
 
 
-module.exports = Itemx
+module.exports = Cartx

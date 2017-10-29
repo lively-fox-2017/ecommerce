@@ -8,5 +8,5 @@ router.get('/', Items.findItems)
 router.post('/', Items.createItems)
 router.delete('/:id', Items.deleteItems)
 router.put('/:id', Items.updateItems)
-
+router.get('/:id', Items.findItemsById)
 module.exports = router;
