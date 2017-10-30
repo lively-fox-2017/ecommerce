@@ -1,0 +1,29 @@
+.badge-notify{
+  background:red;
+  position:relative;
+  top: -10px;
+  right: 10px;
+}
+.my-cart-icon-affix {
+  position: fixed;
+  z-index: 999;
+}
+
+
+/* Footer */
+
+footer{
+   background-color: #424558;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 35px;
+    text-align: center;
+    color: #CCC;
+}
+
+footer p {
+    padding: 10.5px;
+    margin: 0px;
+    line-height: 100%;
+}
