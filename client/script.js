@@ -15,7 +15,7 @@ var app = new Vue({
   },
   methods:{
     getAllItem(){
-      axios.get("http://localhost:3000/items")
+      axios.get("http://35.198.214.53/items")
       .then(response=>{
         this.items=response.data.data;
 
