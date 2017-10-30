@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DimCommerce</title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/dimcommerce.css">
+</head>
+<body>
+
+  <div id="app">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">DimCommerce</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Sale</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#" id="show-login">Login</a></li>
+            <li><a href="#" id="show-shopping-cart"><span class="fa fa-shopping-cart"></span> Shopping Cart <span class="badge badge-danger">{{ shoppingCartLength }}</span></a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-user"></span> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <p class="navbar-text">Signed in as <strong>Dimitri</strong></p>
+                <li><a href="#"><span class="fa fa-user"></span> My Account</a></li>
+                <li><a href="#"><span class="fa fa-power-off"></span> Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+
+      <div class="jumbotron">
+        <h1>Slider goes here</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui accusantium inventore, delectus, necessitatibus quasi neque facere libero, optio velit ipsa eum quam soluta ducimus quis odit nulla, quisquam perferendis eligendi.
+        </p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-3">
+
+          <div class="list-group">
+            <a href="#" class="list-group-item">All</a>
+            <a href="#" class="list-group-item active">Nesoberies</a>
+            <a href="#" class="list-group-item">Nendoroids</a>
+            <a href="#" class="list-group-item">T-Shirts</a>
+            <a href="#" class="list-group-item">Jackets</a>
+            <a href="#" class="list-group-item">Shoes</a>
+            <a href="#" class="list-group-item">Accessories</a>
+            <a href="#" class="list-group-item">Blu-ray & DVD</a>
+          </div>
+
+        </div>
+
+        <div class="col-md-9">
+
+          <div class="input-group">
+            <input type="text" class="form-control" name="search" placeholder="Search..." autocomplete="off" aria-describedby="search-addon">
+            <span class="input-group-addon" id="search-addon"><span class="fa fa-search fa-fw"></span></span>
+          </div>
+          <hr>
+
+          <div class="row">
+
+            <div class="col-sm-4" v-for="item in items">
+              <div class="thumbnail">
+                <img v-bind:src="item.imageURL" v-bind:alt="item.name">
+                <div class="caption">
+                  <h4 v-bind:title="item.name">{{ item.name }}</h4>
+                  <p class="text-muted description" v-bind:title="item.description">
+                    {{ item.description }}
+                    <hr>
+                    Price: <strong><span class="numeric">{{ item.price }} </span></strong>
+                  </p>
+                  <p>
+                    <button v-on:click="addToCart(item)" class="btn btn-sm btn-primary" role="button"><span class="fa fa-shopping-cart"></span> Add to Cart</button>
+                    <a href="#" class="btn btn-sm btn-default" role="button">Details</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div> <!-- /.row -->
+
+    </div> <!-- /.container -->
+
+    <footer class="footer">
+      <div class="container">
+        <p class="text-center text-muted">Copyright &copy; Dimitri Wahyudiputra</p>
+      </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="shopping-cart-modal" tabindex="-1" role="dialog" aria-labelledby="shopping-cart-label">
+
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="shopping-cart-label"><span class="fa fa-shopping-cart"></span> Shopping Cart</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="row" v-for="shoppingCartItem in shoppingCartItems">
+
+              <div class="col-md-2">
+                <img v-bind:src="shoppingCartItem.imageURL" v-bind:alt="shoppingCartItem.name" class="img-responsive">
+              </div>
+
+              <div class="col-md-10">
+                <p>
+                  <strong>{{ shoppingCartItem.name }}</strong>
+                  <button class="pull-right btn btn-danger">&times;</button>
+                  <div class="row">
+                    <div class="col-xs-4">
+                      <input v-model="shoppingCartItem.qty" type="number" class="form-control" v-bind:id="'qty-' + shoppingCartItem._id"><br>
+                      <span>Price: <strong>{{ shoppingCartItem.price }}</strong></span>
+                    </div>
+                  </div>
+                </p>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <h4 class="pull-left" v-if="shoppingCartItems.length">Total: <strong>{{ total }}</strong></h4>
+            <button type="button" class="btn btn-success" v-if="shoppingCartItems.length"><span class="fa fa-cart-arrow-down"></span> Checkout</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div> <!-- /#app -->
+
+  <script src="assets/js/axios.min.js"></script>
+  <script src="assets/js/vue.js"></script>
+  <script src="assets/js/jquery-3.2.1.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/dimcommerce.js"></script>
+</body>
+
+</html>
