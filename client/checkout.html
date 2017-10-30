@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Ghassa Shop</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/animate.css/3.5.1/animate.min.css">
+    <link rel="stylesheet" href="/css/slider.css">
+    <link rel="stylesheet" href="/css/extended.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script type='text/javascript' src="/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <h1 align="center">Check Out</h1>
+    <div class="" align="center">
+      <a href="index.html">Return to Home</a>
+    </div>
+    <div id="checkout">
+      <div class="modal fade" id="detilTransaction" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Transaction Successfull</h4>
+            </div>
+            <div class="modal-body">
+              Id Transaction : {{idTransaction}}<br>
+              Name : {{customer.cName}}<br>
+              Address : {{customer.cAddres}}<br>
+              Phone : {{customer.cPhone}}<br>
+              Email : {{customer.cName}}<br>
+              <table class="table table-responsive-sm" >
+                <thead>
+                  <th></th>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th>Qty</th>
+                  <th>Disc</th>
+                  <th>Amount</th>
+                </thead>
+                <tbody>
+                  <tr v-for="item in allCart">
+                    <td><img v-bind:src="item.imageUrl" alt="" style="width:50px"></td>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.discount}}</td>
+                    <td>{{item.amount}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="5">Total</td>
+                    <td>{{total}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+              <a @click="done" href="#"><button type="button" class="btn btn-primary" ref="btnCheckout">Done</button></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container" style="width:40%">
+        <form class="form">
+          Name <br>
+          <input class="form-control" v-model="customer.cName" type="text" placeholder="ex:andi" required><br>
+          Address <br>
+          <input class="form-control" v-model="customer.cAddres" type="text" placeholder="ex:jl. Sudirman no 50" required><br>
+          Phone <br>
+          <input class="form-control" v-model="customer.cPhone" type="text" placeholder="ex:02123434" required><br>
+          Email <br>
+          <input class="form-control" v-model="customer.cEmail" type="email" placeholder="ex:andi@gmail.com" required><br>
+          <button v-on:click="addTransaction(customer,allCart)" type="button" name="button" class="btn btn-primary" data-toggle="modal" data-target="#detilTransaction">Submit</button>
+        </form><br>
+        </div>
+        <div class="container" style="width:80%">
+          <table class="table table-responsive-sm" >
+            <thead>
+              <th></th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Disc</th>
+              <th>Amount</th>
+            </thead>
+            <tbody>
+              <tr v-for="item in allCart">
+                <td><img v-bind:src="item.imageUrl" alt="" style="width:50px"></td>
+                <td>{{item.productName}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.discount}}</td>
+                <td>{{item.amount}}</td>
+              </tr>
+              <tr>
+                <td colspan="5">Total</td>
+                <td>{{total}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <script type="text/javascript" src="checkOut.js">
+  </body>
+</html>
