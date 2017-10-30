@@ -1,6 +1,7 @@
 <template lang="html">
   <form class="form-style-login" @submit.prevent="login(formAdmin)">
     <h1> LOGIN </h1>
+    <p style="color:red"><b>{{ message }}</b></p>
     <div class="form-group">
       <label class="control-label" for="focusedInput">Username</label>
       <input class="form-control" id="focusedInput" type="text" placeholder="Username" v-model="formAdmin.username">
@@ -24,7 +25,8 @@ export default {
       formAdmin: {
         username: '',
         password: ''
-      }
+      },
+      message: ''
     }
   },
   methods: {
@@ -36,13 +38,12 @@ export default {
       // console.log('masuk action login', dataLogin)
       .then(({ data }) => {
         // commit(data)
-        console.log('ini data login', data)
+        console.log('---->', data)
         localStorage.setItem('token', data)
-        if (data !== null) {
+        if (data !== 'akun anda belum terdaftar') {
           this.$router.push('/admin')
         } else {
-          console.log('jika tidak di temukan')
-          this.$router.push('/daftar-admin')
+          this.message = 'akun belum terdaftar'
         }
       })
       .catch((err) => console.error('kalo error', err))

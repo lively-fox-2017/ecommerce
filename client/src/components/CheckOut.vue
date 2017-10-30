@@ -37,6 +37,7 @@
             </div>
           </div>
           <!-- / daftar makanan yang di pilih -->
+          <button type="button" name="button" @click="lanjutkanBelanja" class="btn btn-primary"> Kembali Belanja</button>
           <button type="button" name="button" class="btn btn-success" @click="kembaliHome"> Selesai</button>
         </div>
       </div>
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+// import sweetalert from 'sweetalert'
 import Navbar from '@/components/Navbar'
 import { mapState, mapActions } from 'vuex'
 export default {
@@ -61,8 +63,12 @@ export default {
       'getAddCart'
     ]),
     kembaliHome () {
-      // this.$router.push('/')
+      // sweetalert('Sedang di proses')
+      this.$router.push('/')
       this.barangJualan = []
+    },
+    lanjutkanBelanja () {
+      this.$router.push('/')
     }
   }
 }

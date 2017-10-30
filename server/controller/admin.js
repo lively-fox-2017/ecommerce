@@ -31,12 +31,17 @@ module.exports = {
         console.log(err)
       }
       else {
-        var token = jwt.sign({
-          id: dataAdmin._id,
-          username: dataAdmin.username,
-          role: dataAdmin.role
-        }, process.env.SECRET)
-        res.send(token)
+        console.log('data admin yang masuk --->', dataAdmin)
+        if (dataAdmin === null) {
+          res.send('akun anda belum terdaftar')
+        } else {
+          var token = jwt.sign({
+            id: dataAdmin._id,
+            username: dataAdmin.username,
+            role: dataAdmin.role
+          }, process.env.SECRET)
+            res.send(token)
+        }
       }
     })
   }
