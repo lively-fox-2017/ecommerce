@@ -17,7 +17,7 @@ var customer = require('./routes/customer')
 var app = express();
 app.use(cors())
 
-mongoose.connect('mongodb://localhost/ecommerce-warung-online', (err) => {
+mongoose.connect(`mongodb://jainal:pakuhaji@cluster0-shard-00-00-9k2a6.mongodb.net:27017,cluster0-shard-00-01-9k2a6.mongodb.net:27017,cluster0-shard-00-02-9k2a6.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin`, (err) => {
   if(err){
     console.log('database belum connect')
   } else {
