@@ -1,0 +1,14 @@
+.category-products .panel-default .panel-heading {
+    background-color: #444444;
+    border: 0 none;
+    color: #FFFFFF;
+    padding: 5px 20px;
+}
+
+.category-products .panel-default .panel-heading .panel-title a {
+    color: #FFFFFF;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
