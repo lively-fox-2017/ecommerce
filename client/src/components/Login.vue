@@ -45,7 +45,7 @@ export default {
           this.$router.push('/daftar-admin')
         }
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.error('kalo error', err))
     }
   }
 }

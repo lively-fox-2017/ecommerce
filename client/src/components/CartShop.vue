@@ -43,7 +43,7 @@
             <!-- / daftar makanan yang di pilih -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" @click="keChekOut"> checkout</button>
           </div>
         </div>
 
@@ -72,7 +72,10 @@ export default {
   methods: {
     ...mapActions([
       'removeToCart'
-    ])
+    ]),
+    keChekOut () {
+      this.$router.push('/checkout')
+    }
   },
   created () {
     localStorage.getItem('dataAnyar')

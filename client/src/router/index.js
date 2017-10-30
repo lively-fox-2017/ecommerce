@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Admin from '@/components/Admin'
 import DaftarAdmin from '@/components/DaftarAdmin'
+import CheckOut from '@/components/CheckOut'
 
 Vue.use(Router)
 
@@ -21,6 +22,10 @@ export default new Router({
     {
       path: '/daftar-admin',
       component: DaftarAdmin
+    },
+    {
+      path: '/checkout',
+      component: CheckOut
     }
   ]
 })
