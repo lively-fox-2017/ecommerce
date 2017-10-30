@@ -1,35 +1,35 @@
-# mongoose-crud
-selasa siang, gunakan npm 'mongoose'
+# E-Commerce ~ olshop.belitopikuy.xyz
+website e-commerce seerhana (on progress)
 
 ## Routes
-#### list of books routes :
+#### list of products routes :
 
-|Routes                                         |HTTP        |Description                |
-|-----------------------------------------------|:----------:|--------------------------:|
-|<div style="color:cyan">/books</div>           |** GET **   |Show All books             |
-|<div style="color:cyan">/books/:id</div>       |** GET **   |Show 1 book based on ID    |
-|<div style="color:cyan">/books/insert</div>    |** POST **  |Insert data into Collection|
-|<div style="color:cyan">/books/update/:id</div>|** PUT **   |Update data based on ID    |
-|<div style="color:cyan">/books/delete/:id</div>|** DELETE **|Delete data based on ID    |
+|Routes                                            |HTTP        |Description                                                         |
+|--------------------------------------------------|:----------:|-------------------------------------------------------------------:|
+|<div style="color:cyan">/products</div>           |** GET **   |Show All products                                                   |
+|<div style="color:cyan">/products/:id</div>       |** GET **   |Show 1 product based on ID                                          |
+|<div style="color:cyan">/products/insert</div>    |** POST **  |Insert data into Collection and upload image to google cloud storage|
+|<div style="color:cyan">/products/update/:id</div>|** PUT **   |Update data based on ID                                             |
+|<div style="color:cyan">/products/delete/:id</div>|** DELETE **|Delete data based on ID and delete file on google storage(still bug)|
 
-#### list of customers routes :
+#### list of users routes :
 
-|Routes                                             |HTTP        |Description                |
-|---------------------------------------------------|:----------:|--------------------------:|
-|<div style="color:cyan">/customers</div>           |** GET **   |Show All customers         |
-|<div style="color:cyan">/customers/:id</div>       |** GET **   |Show 1 customer based on ID|
-|<div style="color:cyan">/customers/insert</div>    |** POST **  |Insert data into Collection|
-|<div style="color:cyan">/customers/update/:id</div>|** PUT **   |Update data based on ID    |
-|<div style="color:cyan">/customers/delete/:id</div>|** DELETE **|Delete data based on ID    |
+|Routes                                         |HTTP        |Description                                            |
+|-----------------------------------------------|:----------:|------------------------------------------------------:|
+|<div style="color:cyan">/users</div>           |** GET **   |Show All users                                         |
+|<div style="color:cyan">/users/login</div>     |** POST **  |User login authentications                             |
+|<div style="color:cyan">/users/register</div>  |** POST **  |Insert data to Collection (auto Login after regis)     |
+|<div style="color:cyan">/users/:id</div>       |** GET **   |Show 1 user based on ID                                |
+|<div style="color:cyan">/users/insert</div>    |** POST **  |Insert data user into Collection                       |
+|<div style="color:cyan">/users/update/:id</div>|** PUT **   |Update data based on ID                                |
+|<div style="color:cyan">/users/delete/:id</div>|** DELETE **|Delete data based on ID                                |
 
 #### list of transactions routes :
 
 |Routes                                                |HTTP        |Description                   |
 |------------------------------------------------------|:----------:|-----------------------------:|
 |<div style="color:cyan">/transactions</div>           |** GET **   |Show All transactions         |
-|<div style="color:cyan">/transactions/:id</div>       |** GET **   |Show 1 transaction based on ID|
 |<div style="color:cyan">/transactions/insert</div>    |** POST **  |Insert data into Collection   |
-|<div style="color:cyan">/transactions/update/:id</div>|** PUT **   |Update data based on ID       |
 |<div style="color:cyan">/transactions/delete/:id</div>|** DELETE **|Delete data based on ID       |
 
-## NB : My mongoDB is autenthicated by admin on admin collection, auth object is in helper
+## NB : there's still no authorization on server routes
