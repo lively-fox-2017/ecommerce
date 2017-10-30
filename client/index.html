@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet"  href="style.css">
+    <!-- <link rel="stylesheet"  href="/assets/css/bootstrap.css"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue"></script>
+    <title>Yoyoi</title>
+  </head>
+  <body>
+  <div id="app">
+    <div class="container-fluid">
+      <div class="row header " >
+        <div class="col-md-12" >
+          <img class="bounce-top" src="/images/headeryoyo.jpeg" alt="">
+        </div>
+      </div>
+      <div class="row search">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="input-group">
+            <input type="text" v-model="searchstr" v-on:keyup="getsearchItem" class="form-control" placeholder="Search for...">
+            <span class="input-group-btn">
+              <button class="btn btn-default" v-on:click="getsearchItem" type="button">Go!</button>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row mainbody">
+        <div class="col-md-2 sidemenu ">
+          <h4>Hi..John</h4>
+          <div class="list-group">
+            <a href="#" class="list-group-item" v-on:click="totalCart" data-toggle="modal" data-target="#modalCart"><span class="glyphicon glyphicon-shopping-cart" ></span>
+            <span v-if="cart.length!=0" class="badge">{{cart.length}}</span>Shop Chart</a>
+            <a href="#" class="list-group-item"><span class="glyphicon glyphicon-road"></span> Order Status</a>
+            <a href="#" class="list-group-item"  data-toggle="modal" data-target="#modalLoginUser" ><span class="glyphicon glyphicon-user"></span> Profile</a>
+          </div>
+
+          <div class="divider"></div>
+          <h4>Brand</h4>
+          <div class="list-group">
+            <a href="#" class="list-group-item">Yoyo Factory</a>
+            <a href="#" class="list-group-item">Yoyo Jams</a>
+            <a href="#" class="list-group-item">Magic Yoyo</a>
+          </div>
+
+        </div>
+        <div class="col-md-10 listitem">
+          <div class="row">
+            <!-- ini daftar isi -->
+            <div class="col-md-3" v-for="(item,index) in items" v-if="item.show" >
+              <div class="item">
+                <div class="itemdetail"><h4>{{item.brand}}</h4></div>
+                <div class="itemdetail">{{item.name}} <br> {{item.price}}</div>
+                <div class="itemdetail"><img v-bind:src=item.imgUrl v-bind:alt=item.name></div>
+                <div class="itemdetail"><button v-on:click="itemIdx=index" type="button" class="btn btn-info btn-sm" name="button " data-toggle="modal" data-target="#modalItemDetail">
+                  <span class="glyphicon glyphicon-search"></span> view details</button>
+                </div>
+                <div class="itemdetail"><button type="button" v-on:click="itemIdx=index" class="btn btn-primary btn-sm" name="button" data-toggle="modal" data-target="#modalItemBuy">
+                  <span class="glyphicon glyphicon-shopping-cart"></span> add to cart</button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <!-- Login info -->
+          <div class="modal fade" id="modalLoginUser" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h3 class="modal-title" id="myModalLabel">Login</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                    <div class="col-md-2 col-md-offset-3">
+                      <p>Username</p><input type="text" name="" value="" placeholder="username">
+                       <p>Password</p> <input type="text" name="" value="" placeholder="password">
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" >Login</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Modal info -->
+          <div class="modal fade" id="modalItemDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h3 class="modal-title" id="myModalLabel">{{items[itemIdx].name}}</h3>
+                </div>
+                <div class="modal-body">
+                  <img v-bind:src=items[itemIdx].imgUrl alt="">
+                  <p>{{items[itemIdx].info}}</p>
+                  <p>{{items[itemIdx].price}}</p>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#modalItemBuy">Buy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Modal cart -->
+          <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h3 class="modal-title" id="myModalLabel">My Cart</h3>
+                </div>
+                <div class="modal-body">
+                  <div class="row"  v-for="(item,index) in cart">
+                      <div class="col-md-6">
+                        <img v-bind:src=item.item.imgUrl alt="">
+                        <p>{{item.total}} x {{item.item.price}}</p>
+                      </div>
+                      <div class="col-md-6" id="carttotal">
+                        <p>{{item.total * item.item.price }}</p>
+                      </div>
+                      <div class="col-md-6">
+                        <button type="button" v-on:click="removeCart(index)" class="btn btn-warning">Remove from Cart</button>
+                      </div>
+                  </div>
+
+                  <div class="modal-footer">
+                      <div class="col-md-6">
+                        <p>Total</p>
+                      </div>
+                      <div class="col-md-5" id="carttotalpay">
+                        <p>{{cartprice}}</p>
+                      </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" data-dismiss="modal" class="btn btn-primary">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Modal Buy -->
+          <div class="modal fade" id="modalItemBuy" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h3 class="modal-title" id="myModalLabel">Buy</h3>
+                </div>
+                <div class="modal-body">
+                  <img v-bind:src=items[itemIdx].imgUrl alt="">
+                  <p>Please check again</p>
+                  <input type="number" min="1" step="1" v-model="itemquant">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" v-on:click="addCart" data-dismiss="modal" class="btn btn-primary">add to Cart</button>
+                  <!-- <button type="button" v-if="checkCart=false" data-dismiss="modal" class="btn btn-primary">already on your Cart</button> -->
+                  <!-- <button type="button" v-if="checkCart=true" v-on:click="addCart" data-dismiss="modal" class="btn btn-primary">add to Cart</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="row footer">
+        <div class="col-md-12">
+          <p>Let's...keep spinning the world</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  </body>
+
+  <script src="script.js"></script>
+
+</html>
