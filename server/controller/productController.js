@@ -1,5 +1,6 @@
 const Product = require('../model/products')
 const helper = require('../helper/helper')
+const image = require('../helper/images')
 
 module.exports = {
   findAll: (req, res) => {
@@ -35,7 +36,7 @@ module.exports = {
   },
 
   insert: (req, res) => {
-    Product(helper.dataProduct(req.body)).save().then((rowProductInserted) => {
+    Product(helper.dataProduct(req.body, req.file)).save().then((rowProductInserted) => {
       res.json({
         message: "Berhasil Memasukan Data",
         data: rowProductInserted
@@ -67,8 +68,10 @@ module.exports = {
   },
 
   delete: (req, res) => {
+    // console.log(req.body.imgName);
     Product.remove({_id: req.params.id}).then((rowDeleteProduct) => {
       if (rowDeleteProduct.result.n != 0) {
+        image.deleteFile(req.body.imgName)
         res.json({
           message: "Berhasil Hapus",
           data: rowDeleteProduct

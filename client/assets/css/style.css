@@ -70,8 +70,22 @@ nav .home, nav .product, nav .contact, nav .login, nav .user, nav .transaction{
   /*box-sizing: border-box;*/
 }
 
+nav .logout{
+  color: #f4d100;
+  padding: 30px;
+  font-weight: bold;
+  /*border-bottom: 1px solid white;*/
+  /*box-sizing: border-box;*/
+}
+
 nav .home:hover, nav .product:hover, nav .contact:hover, nav .login:hover, nav .user:hover, nav .transaction:hover{
   border-bottom: 1px solid #ffe700;
+  /*box-sizing: border-box;*/
+}
+
+nav .logout:hover{
+  border-bottom: 1px solid red;
+  color: red;
   /*box-sizing: border-box;*/
 }
 
@@ -286,7 +300,7 @@ footer{
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-.loginform, .registerform{
+.loginform, .registerform, .edituserform, .adduserform, .addproductform{
   width: 40%;
   margin-top: 3%;
   padding: 30px;
@@ -302,7 +316,7 @@ footer{
   display: flex;
 }
 
-.loginform h1, .registerform h1{
+.loginform h1, .registerform h1, .edituserform h2, .adduserform h2, .addproductform h2{
   width: 90%;
   background-color: white;
   margin-bottom: 20px;
@@ -322,7 +336,7 @@ footer{
   box-shadow: 1px 1px 2px 5px red;
 }
 
-.loginform label, .registerform label{
+.loginform label, .registerform label, .edituserform label, .adduserform label, .addproductform label{
   width: 96%;
   background-color: white;
   padding: 10px;
@@ -331,7 +345,11 @@ footer{
   margin-bottom: 10px;
 }
 
-.loginform input[type="text"], .loginform input[type="password"], .registerform input[type="text"], .registerform input[type="password"], .registerform input[type="email"], .registerform input[type="number"]{
+.loginform input[type="text"], .loginform input[type="password"],
+.registerform input[type="text"], .registerform input[type="password"], .registerform input[type="email"], .registerform input[type="number"],
+.edituserform input[type="text"], .edituserform input[type="email"], .edituserform input[type="number"],
+.adduserform input[type="text"], .adduserform input[type="password"], .adduserform input[type="email"], .adduserform input[type="number"],
+.addproductform input[type="text"], .addproductform input[type="number"], .addproductform input[type="file"], .addproductform textarea{
   width: 96%;
   background-color: white;
   padding: 10px;
@@ -348,7 +366,11 @@ footer{
   flex-wrap: wrap;
 }
 
-.loginform input[type="submit"], .registerform input[type="submit"]{
+.loginform input[type="submit"],
+.registerform input[type="submit"],
+.edituserform input[type="submit"],
+.adduserform input[type="submit"],
+.addproductform input[type="submit"]{
   width: 52%;
   margin-top: 20px;
   border: 0px;
@@ -371,20 +393,6 @@ footer{
 }
 
 /*~~~~~~~~~~~~~~~~~~Content~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-nav .logout{
-  color: #f4d100;
-  padding: 30px;
-  font-weight: bold;
-  /*border-bottom: 1px solid white;*/
-  /*box-sizing: border-box;*/
-}
-
-nav .logout:hover{
-  border-bottom: 1px solid red;
-  color: red;
-  /*box-sizing: border-box;*/
-}
 
 .adminproduct, .adminuser, .admintransaction{
   display: none;
@@ -433,6 +441,10 @@ nav .logout:hover{
   border: none;
   text-align: center;
   box-sizing: content-box;
+}
+
+.adminproduct table .adminProductImg{
+  width: 50px;
 }
 
 .adminproduct tr:nth-child(even), .adminuser tr:nth-child(even), .admintransaction tr:nth-child(even){

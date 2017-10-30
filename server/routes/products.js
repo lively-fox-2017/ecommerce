@@ -1,12 +1,13 @@
 const express = require('express')
 const router = express.Router()
 const product = require('../controller/productController')
+const helper = require('../helper/images')
 
 router.get('/', product.findAll);
 
 router.get('/:id', product.findOne);
 
-router.post('/insert', product.insert);
+router.post('/insert', helper.multer.single('image'), helper.uploadFile, product.insert);
 
 router.put('/update/:id', product.update);
 

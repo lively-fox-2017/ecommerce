@@ -28,13 +28,14 @@
           <h1 class="title">Beli Topi Kuy</h1>
         </div>
         <nav>
+          <a class="logout" v-on:click="logout()" href="#">Logout</a>
           <a class="home" href="#">Home</a>
           <a class="product" href="#someitem">Product</a>
           <a class="user" href="#">User</a>
           <a class="transaction" href="#">Transaction</a>
           <a class="contact" href="#">Contact</a>
           <a class="login" id="popup" href=".loginform">Login</a>
-          <a class="logout" v-on:click="logout()" href="#">Logout</a>
+
           <form class="loginform" v-on:submit.prevent="login()" method="post">
             <div class="sub">
               <h1>Sign in</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
@@ -57,9 +58,9 @@
             <label>Password</label><br><br>
             <input type="password" name="signpassword" required><br><br>
             <label>Email</label><br><br>
-            <input type="email" name="email" required><br><br>
+            <input class="email" type="email" name="email" required><br><br>
             <label>Phone</label><br><br>
-            <input type="number" name="phone" min="0" required>
+            +62<input type="number" name="phone" min="0" required>
             <div class="sub">
               <input type="submit" value="Register"> <a id="logpopup" name="back">Back</a>
             </div>
@@ -72,7 +73,7 @@
               <form action="#" method="post" v-on:submit.prevent>
                 <table>
                   <tr v-for="(value, index) in cart">
-                    <td><img class="imgcart" v-bind:src="value.url" v-bind:alt="value.name"></td>
+                    <td><img class="imgcart" v-bind:src="value.imUrl" v-bind:alt="value.imgName"></td>
                     <td><input v-bind:id="'quantity'+index" v-on:change="quantityChange(index)" type="number" name="quantity" min="1" placeholder="Qty" required></td>
                     <td>{{value.formatHarga}}</td>
                     <td v-on:click="removeItem(index)"><img class="removeCart" src="assets/images/icons/false.png" alt=""></td>
@@ -88,83 +89,100 @@
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <div class="adminproduct">
           <div class="search">
-            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button type="button" name="add">Add</button>
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button class='addProduct' type="button" name="add">Add</button>
           </div>
           <table class="order-table table" cellspacing="0">
             <thead>
               <th>No.</th>
               <th>Product Id</th>
+              <th>Photo</th>
               <th>Product Name</th>
               <th>Price</th>
               <th>Stock</th>
               <th>Actions</th>
             </thead>
             <tbody>
-              <tr>
-                <td>1.</td>
-                <td>001</td>
-                <td>Topi Babe 1</td>
-                <td>Rp. 1.000.000</td>
-                <td>10</td>
+              <tr v-for="(value, index) in items">
+                <td>{{ index + 1 }}</td>
+                <td>{{ value._id }}</td>
+                <td><img class='adminProductImg' v-bind:src="value.imgUrl" v-bind:alt="value.imgName"></td>
+                <td>{{ value.name }}</td>
+                <td>{{ value.rupiah }}</td>
+                <td>{{ value.stock }}</td>
                 <td>
                   <button name="edit">Edit</button>
-                  <button name="delete">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>002</td>
-                <td>Topi Babe 2</td>
-                <td>Rp. 1.000.000</td>
-                <td>15</td>
-                <td>
-                  <button name="edit">Edit</button>
-                  <button name="delete">Delete</button>
+                  <button name="delete" v-on:click="deleteProduct(index)">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+        <form name="addproductform" id="addproductform" class="addproductform" v-on:submit.prevent="insertProduct" method="post" enctype="multipart/form-data">
+          <h2>Add Product</h2>
+          <label>Name</label><br><br>
+          <input type="text" name="addname" required><br><br>
+          <label>Price</label><br><br>
+          <input type="number" name="addprice" min="0" required><br><br>
+          <label>Stock</label><br><br>
+          <input type="number" name="addstock" min="0" required><br><br>
+          <label>Info</label><br><br>
+          <textarea name="addinfo" rows="8"></textarea><br><br>
+          <label>Image</label><br><br>
+          <input id="file" type="file" name="addimage" v-on:change="fileChange" required><br><br>
+          <input type="submit" value="Add">
+        </form>
 
         <div class="adminuser">
           <div class="search">
-            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button type="button" name="add">Add</button>
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button id="addUser" type="button" name="add">Add</button>
           </div>
           <table class="order-table table" cellspacing="0">
             <thead>
               <th>No.</th>
-              <th>Product Id</th>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Stock</th>
+              <th>User Id</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Phone</th>
               <th>Actions</th>
             </thead>
             <tbody>
-              <tr>
-                <td>1.</td>
-                <td>001</td>
-                <td>Topi Babe 1</td>
-                <td>Rp. 1.000.000</td>
-                <td>10</td>
+              <tr v-for="(value, index) in users">
+                <td>{{ index+1 }}</td>
+                <td>{{ value._id }}</td>
+                <td>{{ value.username }}</td>
+                <td>{{ value.email }}</td>
+                <td>+62{{ value.phone }}</td>
                 <td>
-                  <button name="edit">Edit</button>
-                  <button name="delete">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>002</td>
-                <td>Topi Babe 2</td>
-                <td>Rp. 1.000.000</td>
-                <td>15</td>
-                <td>
-                  <button name="edit">Edit</button>
-                  <button name="delete">Delete</button>
+                  <button name="edit" v-on:click="editUser(index)">Edit</button>
+                  <button name="delete" v-on:click="deleteUser(index)">Delete</button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
+        <form class="adduserform" v-on:submit.prevent="insertUser()" method="post">
+          <h2>Add User</h2>
+          <label>Username</label><br><br>
+          <input type="text" name="addusername" required><br><br>
+          <label>Password</label><br><br>
+          <input type="password" name="addpassword" required><br><br>
+          <label>Email</label><br><br>
+          <input class="email" type="email" name="addemail" required><br><br>
+          <label>Phone</label><br><br>
+          +62<input type="number" name="addphone" min="0" required><br><br>
+          <input type="submit" value="Add">
+        </form>
+
+        <form class="edituserform" v-on:submit.prevent="updateUser(user.index)" method="post">
+          <h2>Edit User</h2>
+          <label>Username</label><br><br>
+          <input type="text" name="editusername" v-bind:value="user.username" required><br><br>
+          <label>Email</label><br><br>
+          <input class="email" type="email" name="editemail" v-bind:value="user.email" required><br><br>
+          <label>Phone</label><br><br>
+          +62<input type="number" name="editphone" min="0" v-bind:value="user.phone" required><br><br>
+          <input type="submit" value="Edit">
+        </form>
 
         <div class="admintransaction">
           <div class="search">
@@ -186,16 +204,6 @@
                 <td>Topi Babe 1</td>
                 <td>Rp. 1.000.000</td>
                 <td>10</td>
-                <td>
-                  <button name="delete">Delete</button>
-                </td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>002</td>
-                <td>Topi Babe 2</td>
-                <td>Rp. 1.000.000</td>
-                <td>15</td>
                 <td>
                   <button name="delete">Delete</button>
                 </td>
@@ -233,7 +241,7 @@
           <div class="itemlist">
             <figure v-for="(item, index) in items">
               <ul>
-                <img v-bind:src="item.url" v-bind:alt="item.name">
+                <img v-bind:src="item.imgUrl" v-bind:alt="item.imgName">
                 <p>
                   <h4>{{item.name}}</h4>
                 </p>
@@ -283,18 +291,37 @@
           $('.adminuser').toggle(200);
           $('.adminproduct').hide(200);
           $('.admintransaction').hide(200);
+          $('.edituserform').hide(200)
+          $('.adduserform').hide(200)
+          $('.addproductform').hide(200)
+        })
+
+        $('#addUser').on('click', function() {
+          $('.adduserform').show(200)
+          $('.adminuser').hide(200)
         })
 
         $('.product').on('click', function(){
           $('.adminproduct').toggle(200);
           $('.adminuser').hide(200);
           $('.admintransaction').hide(200);
+          $('.edituserform').hide(200)
+          $('.adduserform').hide(200)
+          $('.addproductform').hide(200)
+        })
+
+        $('.addProduct').on('click', function() {
+          $('.addproductform').show(200)
+          $('.adminproduct').hide(200)
         })
 
         $('.transaction').on('click', function(){
           $('.admintransaction').toggle(200);
           $('.adminuser').hide(200);
           $('.adminproduct').hide(200);
+          $('.edituserform').hide(200)
+          $('.adduserform').hide(200)
+          $('.addproductform').hide(200)
         })
 
         $('.title').text("Admin Site")
@@ -304,6 +331,15 @@
         $('.user').hide(200)
         $('.transaction').hide(200)
       }
+
+      $('.email').on('keypress', function(){
+        let pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (!pattern.test(this.value)) {
+          $(".email").css({"border":"2px solid red","padding":"10px"})
+        } else {
+          $(".email").css({"border":"2px solid green","padding":"10px"})
+        }
+      })
 
       $("#popup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
       $("#regpopup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });

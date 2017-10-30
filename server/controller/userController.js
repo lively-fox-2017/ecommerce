@@ -50,7 +50,7 @@ module.exports = {
   },
 
   findAll: (req, res) => {
-    User.find().sort('username').then((rowsUser) => {
+    User.find({role: 'user'}).sort('username').then((rowsUser) => {
       res.json({
         message: "Tampil Semua Data User",
         data: rowsUser
@@ -99,7 +99,7 @@ module.exports = {
   update: (req, res) => {
     User.findOne({_id: req.params.id}).then((result) => {
       let secret = result.secret
-      let password = helper.secretHash(secret, req.body.password)
+      let password = result.password
       User.update({_id: req.params.id}, {$set: helper.dataUser(req.body, password, secret)}).then((rowUpdateUser) => {
         // console.log(rowUpdateCustomer);
         if (rowUpdateUser.n != 0) {

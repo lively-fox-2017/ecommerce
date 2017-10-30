@@ -2,6 +2,11 @@ new Vue({
   el: ".flex-container",
   data: {
     items: [],
+    users: [],
+    user: {},
+    transactions: [],
+    // image: '',
+    uploadedFile: '',
     cart: [],
     productObjectId: [],
     quantity: [],
@@ -28,15 +33,16 @@ new Vue({
       return rupiah;
     },
 
-    findAll() {
+    findAllProduct() {
       axios.get("http://localhost:3000/products").then((response) => {
         // console.log(response.data.data);
         response.data.data.forEach((row) => {
 
           let Items = {
-            id: row._id,
+            _id: row._id,
             name: row.name,
-            url: row.url,
+            imgName: row.imgName,
+            imgUrl: row.imgUrl,
             price: row.price,
             rupiah: this.formatRupiah(row.price),
             stock: row.stock,
@@ -44,7 +50,162 @@ new Vue({
           }
 
           this.items.push(Items)
+          // console.log(this.items.imgUrl);
         })
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    findAllUser() {
+      axios.get("http://localhost:3000/users")
+      .then((response) => {
+        // console.log(response.data.data);
+        this.users = response.data.data
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    findAllTransaction() {
+      axios.get('http://localhost:3000/transactions')
+      .then((response) => {
+        this.transactions = response.data.data
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    fileChange(e){
+      let files = e.target.files || e.dataTransfer.files;
+
+      if (!files.length) {
+        return
+      }
+
+      // console.log(files[0]);
+      this.uploadedFile = files[0];
+      // console.log(this.uploadedFile);
+    },
+
+    insertProduct(file) {
+      // let image = $('input[name=addimage]').val()
+      let name = $('input[name=addname]').val()
+      let price = $('input[name=addprice]').val()
+      let stock = $('input[name=addstock]').val()
+      let info = $('textarea[name=addinfo]').val()
+
+      const formData = new FormData();
+      formData.append('image', this.uploadedFile);
+      formData.append('name', name);
+      formData.append('price', price);
+      formData.append('stock', stock);
+      formData.append('info', info);
+
+      // console.log(imageFile.files[0]);
+      axios.post('http://localhost:3000/products/insert', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then((response) => {
+        // console.log(response);
+        response.data.data.rupiah = this.formatRupiah(response.data.data.price)
+        this.items.push(response.data.data)
+        this.uploadedFile = ''
+        $('.adminproduct').show(200)
+        $('.addproductform').hide(200)
+
+        document.getElementById("addproductform").reset();
+      }).catch((reason) => {
+        console.log("------>> "+reason);
+      })
+    },
+
+    deleteProduct(index) {
+      let id = this.items[index]._id
+      // console.log(this.items[index].imgName);
+      axios.delete('http://localhost:3000/products/delete/'+id, {imgName: this.items[index].imgName})
+      .then((response) => {
+        console.log(response);
+        this.items.splice(index, 1)
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    insertUser() {
+      let userObj = {
+        username: $('input[name=addusername]').val(),
+        password: $('input[name=addpassword]').val(),
+        email: $('input[name=addemail]').val(),
+        phone: $('input[name=addphone]').val()
+      }
+
+      axios.post('http://localhost:3000/users/insert', userObj)
+      .then((response) => {
+        if (response.data.data) {
+          this.users.push(response.data.data)
+          $('.adduserform').hide(200)
+          $('.adminuser').show(200)
+        } else {
+          let err = response.data.message.errmsg.split(" ")
+
+          alert(err[err.length-2]+" Already used");
+        }
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    editUser(index) {
+      let user = this.users[index]
+      $('.edituserform').show(200)
+      $('.adminuser').hide(200)
+
+      this.user = user
+      this.user.index = index
+      // console.log(this.user);
+      // console.log(this.users);
+    },
+
+    updateUser(index) {
+      let id = this.user._id
+      // console.log(id);
+      let userObj = {
+        username: $('input[name=editusername]').val(),
+        email: $('input[name=editemail]').val(),
+        phone: $('input[name=editphone]').val()
+      }
+
+      // console.log(this.user);
+      // console.log(userObj);
+      axios.put('http://localhost:3000/users/update/'+id, userObj)
+      .then((response) => {
+        if (response.data.data) {
+          this.users[index].username = userObj.username
+          this.users[index].email = userObj.email
+          this.users[index].phone = userObj.phone
+
+          this.user = {}
+          $('.edituserform').hide(200)
+          $('.adminuser').show(200)
+        } else {
+          // console.log(response);
+          let err = response.data.message.errmsg.split(" ")
+
+          alert(err[err.length-2]+" Already used");
+        }
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
+    deleteUser(index) {
+      let id = this.users[index]._id
+      axios.delete('http://localhost:3000/users/delete/'+id)
+      .then((response) => {
+        this.users.splice(index, 1)
       }).catch((reason) => {
         console.log(reason);
       })
@@ -62,7 +223,8 @@ new Vue({
         let arrObj = {
           id: this.items[index].id,
           name: this.items[index].name,
-          url: this.items[index].url,
+          imgName: this.items[index].imgName,
+          imgUrl: this.items[index].imgUrl,
           price: this.items[index].price,
           totalHarga: 0,
           formatHarga: "Rp 0",
@@ -163,7 +325,9 @@ new Vue({
         // alert(response.data.message)
         if (!response.data.data) {
           // console.log(response);
-          alert(response.data.message.errmsg);
+          let err = response.data.message.errmsg.split(" ")
+
+          alert(err[err.length-2]+" Already used");
         } else {
           alert(response.data.message)
           localStorage.setItem('token', response.data.data)
@@ -184,7 +348,9 @@ new Vue({
   },
 
   created: function(){
-    this.findAll();
+    this.findAllProduct();
+    this.findAllUser();
+    this.findAllTransaction();
     // console.log(this.items);
   }
 })

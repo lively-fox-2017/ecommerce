@@ -11,10 +11,11 @@ module.exports = {
     }
   },
 
-  dataProduct: (reqBody, quantity = 0) => {
+  dataProduct: (reqBody, reqFile) => {
     let Obj = {
       name: reqBody.name,
-      url: reqBody.url,
+      imgName: reqFile.cloudStorageObject,
+      imgUrl: reqFile.cloudStoragePublicUrl,
       price: reqBody.price,
       stock: reqBody.stock,
       info: reqBody.info

@@ -9,7 +9,8 @@ const schema = new mongoose.Schema({
     type: String,
     required: true
   },
-  url: String,
+  imgName: String,
+  imgUrl: String,
   price: {
     type: Number,
     required: true
