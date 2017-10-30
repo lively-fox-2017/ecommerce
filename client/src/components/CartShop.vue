@@ -34,7 +34,7 @@
                   </tr>
                   <tr class="info">
                     <td colspan="2"></td>
-                    <!-- <td>Rp.{{ total }}</td> -->
+                    <td>Total : Rp.{{ total }}</td>
                     <!-- <td v-if="false">Rp.{{ total }}</td> -->
                   </tr>
                 </table>
@@ -60,13 +60,12 @@ export default {
     ...mapState([
       'barangJualan'
     ]),
-    total (total = 0) {
-      console.log('ini barangJualan', this.barangJualan)
-      this.barangJualan.forEach(dataItem => {
-        total += (dataItem.harga * dataItem.quantity)
-        console.log('ini hasil total ---->', total)
-      })
-      return total
+    total () {
+      return this.barangJualan.reduce((prevValue, itemPrice) => {
+        console.log('ini  hasil prevValue', prevValue)
+        console.log('ini hasil itemPrice', itemPrice)
+        return prevValue + (itemPrice.harga * itemPrice.quantity)
+      }, 0)
     }
   },
   methods: {
