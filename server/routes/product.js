@@ -5,6 +5,7 @@ const aut = require('../helper/aut')
 
 router.get('/', productController.all)
 router.post('/', aut.login, aut.logAdmin, productController.create)
+// router.post('/', productController.create)
 router.put('/:id', productController.update)
 router.delete('/:id', productController.remove)
 

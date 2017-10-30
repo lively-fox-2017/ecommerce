@@ -11,7 +11,7 @@ module.exports = {
     let admin = new Admin({
       username: req.body.username,
       password: hash,
-      role: req.body.role
+      role: 'admin'
     })
     admin.save((err, dataUser) => {
       if (err) {

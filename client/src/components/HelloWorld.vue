@@ -2,11 +2,9 @@
   <div>
     <Navbar></Navbar>
     <div class="container">
-      <div class="col-md-3">
-        <Sidebar></Sidebar>
-      </div>
-      <div class="col-md-9">
+      <div class="col-md-12">
         <MainContent></MainContent>
+        <CartShop></CartShop>
       </div>
     </div>
     <FooterEcommerce></FooterEcommerce>
@@ -16,7 +14,7 @@
 <script>
 import Navbar from '@/components/Navbar'
 import MainContent from '@/components/MainContent'
-import Sidebar from '@/components/Sidebar'
+import CartShop from '@/components/CartShop'
 import FooterEcommerce from '@/components/FooterEcommerce'
 export default {
   name: 'HelloWorld',
@@ -28,7 +26,7 @@ export default {
   components: {
     Navbar,
     MainContent,
-    Sidebar,
+    CartShop,
     FooterEcommerce
   }
 }

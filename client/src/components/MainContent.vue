@@ -45,78 +45,32 @@
     </div>
     <div class="row">
       <!-- product -->
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="https://www.penabiru.com/wp-content/uploads/2015/11/Makanan-Khas-Daerah-Sumatera.jpg" alt="maknan">
-          <div class="caption">
-            <h3 class="product-font-h3">Daging rendang</h3>
-            <p>Rp.200.000</p>
-            <p><a href="#" class="btn btn-primary glyphicon glyphicon-plus  btn-sm" role="button"> Add</a> <a href="#" class="btn btn-default glyphicon glyphicon-resize-full btn-sm" role="button"> Detail</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="https://www.penabiru.com/wp-content/uploads/2015/11/Makanan-Khas-Daerah-Sumatera.jpg" alt="maknan">
-          <div class="caption">
-            <h3 class="product-font-h3">Daging rendang</h3>
-            <p>Rp.200.000</p>
-            <p><a href="#" class="btn btn-primary glyphicon glyphicon-plus  btn-sm" role="button"> Add</a> <a href="#" class="btn btn-default glyphicon glyphicon-resize-full btn-sm" role="button"> Detail</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="https://www.penabiru.com/wp-content/uploads/2015/11/Makanan-Khas-Daerah-Sumatera.jpg" alt="maknan">
-          <div class="caption">
-            <h3 class="product-font-h3">Daging rendang</h3>
-            <p>Rp.200.000</p>
-            <p><a href="#" class="btn btn-primary glyphicon glyphicon-plus  btn-sm" role="button"> Add</a> <a href="#" class="btn btn-default glyphicon glyphicon-resize-full btn-sm" role="button"> Detail</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="https://www.penabiru.com/wp-content/uploads/2015/11/Makanan-Khas-Daerah-Sumatera.jpg" alt="maknan">
-          <div class="caption">
-            <h3 class="product-font-h3">Daging rendang</h3>
-            <p>Rp.200.000</p>
-            <p><a href="#" class="btn btn-primary glyphicon glyphicon-plus  btn-sm" role="button"> Add</a> <a href="#" class="btn btn-default glyphicon glyphicon-resize-full btn-sm" role="button"> Detail</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="https://www.penabiru.com/wp-content/uploads/2015/11/Makanan-Khas-Daerah-Sumatera.jpg" alt="maknan">
-          <div class="caption">
-            <h3 class="product-font-h3">Daging rendang</h3>
-            <p>Rp.200.000</p>
-            <p><a href="#" class="btn btn-primary glyphicon glyphicon-plus  btn-sm" role="button"> Add</a> <a href="#" class="btn btn-default glyphicon glyphicon-resize-full btn-sm" role="button"> Detail</a></p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <img src="https://www.penabiru.com/wp-content/uploads/2015/11/Makanan-Khas-Daerah-Sumatera.jpg" alt="maknan">
-          <div class="caption">
-            <h3 class="product-font-h3">Daging rendang</h3>
-            <p>Rp.200.000</p>
-            <p><a href="#" class="btn btn-primary glyphicon glyphicon-plus  btn-sm" role="button"> Add</a> <a href="#" class="btn btn-default glyphicon glyphicon-resize-full btn-sm" role="button"> Detail Maknan</a></p>
-          </div>
-        </div>
-      </div>
+      <DaftarProduct  v-for="makanan in allProduct"  v-bind:menuMakanan="makanan" v-bind:key="makanan.id"></DaftarProduct>
       <!-- / product -->
     </div>
   </div>
 </template>
 
 <script>
+import DaftarProduct from '@/components/DaftarProduct'
+import { mapActions, mapState } from 'vuex'
 export default {
+  components: {
+    DaftarProduct
+  },
+  computed: {
+    ...mapState([
+      'allProduct'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'getProduct'
+    ])
+  },
+  created () {
+    this.getProduct()
+  }
 }
 </script>
 

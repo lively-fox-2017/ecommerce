@@ -11,7 +11,7 @@ module.exports = {
         namaProduct: req.body.namaProduct,
         harga: req.body.harga,
         gambar: req.body.gambar,
-        quantity: 0
+        quantity: 1
       })
       console.log(product, 'ber hasil di tambah');
       product.save((err, dataProduct) => {
