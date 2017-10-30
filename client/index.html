@@ -208,105 +208,105 @@
 </head>
 
 <body class="pushable">
+    <div id="app">
+        <!-- Sidebar Menu -->
+        <div class="pusher">
+            <div class="ui vertical inverted sidebar menu right">
+                <a class="active item">Your Shopping Items</a>
+                <div class="ui inverted segment">
+                    <div class="ui inverted relaxed divided list">
+                        <div class="item">
+                            {{cart}}
+                            <i class="shopping basket icon"></i>
+                        </div>
+                    </div>
+                </div>
     
-    <!-- Sidebar Menu -->
-    <div class="ui vertical inverted sidebar menu right" id="shoppingbasket">
-        <a class="active item">Your Shopping Items</a>
-        <div class="ui inverted segment">
-            <div class="ui inverted relaxed divided list">
-                <div class="item">
-                    Item
-                    <i class="shopping basket icon"></i>
-                </div>
+                <!-- Di sini nanti bikin si jason buat ngelist item dan harga -->
+                <a class="item" href="#">Checkout</a>
             </div>
         </div>
+        <!-- Following Menu -->
+        <div class="ui large top fixed menu transition hidden">
 
-        <!-- Di sini nanti bikin si jason buat ngelist item dan harga -->
-        <a class="item" href="#">Checkout</a>
-    </div>
-    <!-- Following Menu -->
-    <div class="ui large top fixed menu transition hidden">
-
-            <a class="active item">Home</a>
-            <div class="dropdown">
-                <button class="dropbtn">Categories</button>
-                <div class="dropdown-content">
-                    <a href="#">Your Suites</a>
-                    <a href="#">Your Swords</a>
-                    <a href="#">Your Hand Guns</a>
+                <a class="active item">Home</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Categories</button>
+                    <div class="dropdown-content">
+                        <a href="#">Your Suites</a>
+                        <a href="#">Your Swords</a>
+                        <a href="#">Your Hand Guns</a>
+                    </div>
                 </div>
-            </div>
-            <div class="right menu">
-                <div class="item">
-                    <a class="ui button" id="shoppingcart">Shopping Cart</a>
+                <div class="right menu">
+                    <div class="item">
+                        <a class="ui button" id="shoppingcart">Shopping Cart</a>
+                    </div>
                 </div>
-            </div>
-    </div>
+        </div>
 
-    <!-- Page Contents -->
-    <div class="pusher">
-
-        <div class="ui inverted vertical masthead center aligned segment">
-
-            <div class="ui container">
-                <div class="ui large secondary inverted pointing menu">
-                    <a class="active item">Home</a>
-                    <div class="dropdown">
-                        <button class="dropbtn">Categories</button>
-                        <div class="dropdown-content">
-                            <a href="#">Your Suites</a>
-                            <a href="#">Your Swords</a>
-                            <a href="#">Your Hand Guns</a>
+        <!-- Page Contents -->
+        <div class="pusher">
+            <div class="ui inverted vertical masthead center aligned segment">
+                <div class="ui container">
+                    <div class="ui large secondary inverted pointing menu">
+                        <a class="active item">Home</a>
+                        <div class="dropdown">
+                            <button class="dropbtn">Categories</button>
+                            <div class="dropdown-content">
+                                <a href="#">Your Suites</a>
+                                <a href="#">Your Swords</a>
+                                <a href="#">Your Hand Guns</a>
+                            </div>
                         </div>
-                    </div>
-                    <a class="item">Company</a>
-                    <div class="right item">
-                        <a class="ui inverted button" id="cooladvance">Shopping Cart</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ui text container">
-                <h1 class="ui inverted header">
-                    Pirate's Stuff
-                </h1>
-                <h2>What you want is what we need</h2>
-                <a href="#iliketosteal"><div class="ui huge primary button" >Start Shopping
-                    <i class="right arrow icon"></i>
-                </div></a>
-            </div>
-        </div>
-        <div id="iliketosteal">
-            <div id="app">
-                <h1 class="ui header">{{message}}</h1>
-                    <div class="ui vertical stripe segment">
-                        <div class="ui middle aligned stackable grid container">
-                            <div class="ui container">
-                                <div class="ui grid">
-                                <todo-item v-for="todo in items" v-bind:todo="todo" v-bind:key="todo._id">
-                                </todo-item>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="center aligned column">
-                                    <a class="ui huge button">Check Your Stolen Things</a>
-                                </div>
-                            </div>
+                        <a class="item">Company</a>
+                        <div class="right item">
+                            <a class="ui inverted button" id="cooladvance">Shopping Cart</a>
                         </div>
                     </div>
                 </div>
+
+                <div class="ui text container">
+                    <h1 class="ui inverted header">
+                        Pirate's Stuff
+                    </h1>
+                    <h2>What you want is what we need</h2>
+                    <a href="#iliketosteal"><div class="ui huge primary button" >Start Shopping
+                        <i class="right arrow icon"></i>
+                    </div></a>
+                </div>
             </div>
-    </div>
-    <script src="script.js"></script>
-    <div class="ui black inverted vertical footer segment">
-        <div class="ui center aligned container">
-            <div class="ui stackable inverted grid">
-                <div class="eight wide column">
+            <div id="iliketosteal">
+
+                    <h1 class="ui header">{{message}}</h1>
+                        <div class="ui vertical stripe segment">
+                            <div class="ui middle aligned stackable grid container">
+                                <div class="ui container">
+                                    <div class="ui grid">
+                                    <product-item v-for="product in items" v-bind:product="product" v-bind:key="product._id">
+                                    </product-item>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="center aligned column">
+                                        <a class="ui huge button">Check Your Stolen Things</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="ui black inverted vertical footer segment">
+            <div class="ui center aligned container">
+                <div class="ui stackable inverted grid">
                     <h4 class="ui inverted header">Support US</h4>
                 </div>
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
