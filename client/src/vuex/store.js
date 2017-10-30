@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 const http = axios.create({
   baseURL: 'http://localhost:3000'
@@ -116,6 +117,11 @@ const actions = {
       commit('registerMutations', data)
     })
     .catch((err) => console.error(err))
+  },
+  selesaiPembelian () {
+    state.barangJualan = []
+    swal('Terimakasi sudah berbelanja', 'data anda sedang di proses silahkan click lanjutkan belanja untuk ke MENU utama', 'success')
+    // this.$router.push('/')
   }
 }
 

@@ -4,6 +4,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+
+          <button type="button" name="button" @click="lanjutkanBelanja" class="btn btn-danger glyphicon glyphicon-shopping-cart"> Lanjutkan Belanja</button> <br><br>
           <!-- daftar makanan yang di pilih -->
           <div class="panel panel-primary">
             <div class="panel-heading">
@@ -37,8 +39,7 @@
             </div>
           </div>
           <!-- / daftar makanan yang di pilih -->
-          <button type="button" name="button" @click="lanjutkanBelanja" class="btn btn-primary"> Kembali Belanja</button>
-          <button type="button" name="button" class="btn btn-success" @click="kembaliHome"> Selesai</button>
+          <button type="button" name="button" class="btn btn-success" @click="selesaiPembelian"> Selesai</button>
         </div>
       </div>
     </div>
@@ -60,13 +61,9 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getAddCart'
+      'getAddCart',
+      'selesaiPembelian'
     ]),
-    kembaliHome () {
-      // sweetalert('Sedang di proses')
-      this.$router.push('/')
-      this.barangJualan = []
-    },
     lanjutkanBelanja () {
       this.$router.push('/')
     }
