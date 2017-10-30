@@ -114,6 +114,7 @@ const actions = {
     http.post('/admin/register', dataRegier)
     // console.log('ini register sudah bisa masuk', dataRegier)
     .then(({ data }) => {
+      swal('berhasil register sebagai admin', 'admin baru berhasil di tambah', 'success')
       commit('registerMutations', data)
     })
     .catch((err) => console.error(err))

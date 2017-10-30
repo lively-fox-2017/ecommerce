@@ -61,6 +61,5 @@ nav.navbar.navbar-default {
 b.bran-style {
   font-family: 'Lobster', cursive;
   font-size: 29px;
-  color: #00ff19;
 }
 </style>
