@@ -7,8 +7,8 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
     <script type="text/javascript" src="./assets/js/container.js"></script>
+
     <link rel="stylesheet" href="./assets/css/container.css">
     <link rel="stylesheet" href="./assets/css/footer.css">
   </head>
@@ -42,7 +42,7 @@
           <!-- CART -->
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#myModal" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> {{count}} - Items<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#myModal" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> {{count}} - Item<span class="caret"></span></a>
               <ul class="dropdown-menu dropdown-cart" role="menu">
               </ul>
             </li>
@@ -95,11 +95,26 @@
           <h4 class="modal-title">Your Cart</h4>
         </div>
 
-        <div class="modal-body" v-for="cart in allCart">
-          <img v-bind:src= "cart.data.data.img" class="img-responsive" width="100" height="150">
-          {{ cart.data.data.nama_item }}
-          {{ cart.data.data.harga }}
+        <div class="modal-body" v-for="(cart, index) in allCart">
+          <img v-bind:src="cart.img" class="img-responsive" width="100" height="150">
+          {{ cart.nama_item }}
+          {{ cart.harga }}
+            <!-- <div class="input-group">
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                    <span class="glyphicon glyphicon-minus"></span>
+                  </button>
+              </span>
+              <input type="text" name="quant[2]" class="form-control input-number" v-model="cart.qty">
+              <span class="input-group-btn">
+                  <button @click="addQty(index)" type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                      <span class="glyphicon glyphicon-plus"></span>
+                  </button>
+              </span>
+          </div> -->
+          <p>TOTAL : {{cart.harga * count }}</p>
         </div>
+
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -122,14 +137,14 @@
               <button class="btn btn-default filter-button" data-filter="camera">Camera</button>
             </div>
             <!-- thumbnail -->
-            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter" v-for="(item,index) in allItem" >
+            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter" v-for="item in allItem" >
               <div class="thumbnail">
                 <img v-bind:src= "item.img" class="img-responsive">
                 <div class="caption ">
                   <p style="text-align:center">{{ item.nama_item }}</p>
                   <h3 style="text-align:center">{{ item.harga }}</h3>
                   <!-- <a href="#" v-on:click="addCart(item._id,item) countCart()" class="btn btn-primary glyphicon glyphicon-shopping-cart center-block"> AddCart </a></p> -->
-                  <button class="btn btn-primary glyphicon glyphicon-shopping-cart center-block"  v-on:click="countCart(),addCart(item._id)"> AddCart </button>
+                  <button class="btn btn-primary glyphicon glyphicon-shopping-cart center-block"  v-on:click="addCart(item)"> AddCart </button>
                 </div>
               </div>
             </div>
@@ -231,6 +246,8 @@
         </div>
       </div>
     </div>
-    <script src="./assets/js/script.js" charset="utf-8"></script>
   </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
+  <script src="./assets/js/script.js" charset="utf-8"></script>
+  <!-- <script type="text/javascript" src="./assets/js/cart.js"></script> -->
 </html>

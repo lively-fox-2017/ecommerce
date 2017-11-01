@@ -6,8 +6,7 @@ new Vue({
       category: '',
       harga: '',
       jumlah: '',
-      img: '',
-
+      img: ''
     },
     allItem: [],
     allCart: [],
@@ -37,42 +36,34 @@ new Vue({
       console.log('berak',id);
       axios.delete('http://localhost:3000/items/'+id)
       .then((response)=>{
-        // console.log(response.data);
         console.log('Deleted');
       })
       .catch(err=>{
         console.log(err);
       })
     },
-    addCart(id,item){
-      // event.preventDefault()
-      // localStorage.setItem("ID", id);
-      this.allCart.push(item.id,item);
-    },
-    getItemById(){
-      var local = localStorage.getItem("ID")
-      axios.get('http://localhost:3000/items/'+local)
-      .then(response=>{
-        console.log("BERAKK",localStorage.getItem("ID"));
-        this.allCart.push(response)
+
+    addCart(item){
+      var itemIdx = this.allCart.findIndex(function (itemInCart) {
+        return itemInCart._id === item._id
       })
-      .catch(err=>{
-        console.log(err);
-      })
+      if (itemIdx == -1) {
+         item.qty = 1
+         this.allCart.push(item);
+         this.count+=1
+      }  else {
+         return -1
+      }
     },
-    countCart(){
-      this.count++;
+    addQty (itemIdx) {
+      this.allCart[itemIdx].qty++
     }
   },
   created () {
     console.log('Created!');
-    this.getAllItem()
-  },
-  beforeMount() {
-    this.getItemById()
   },
   mounted (){
-    this.getItemById()
-    console.log('Mounted');
+    this.getAllItem()
+    console.log('Mounted',this.getAllItem());
   }
 })
