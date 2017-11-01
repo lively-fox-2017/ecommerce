@@ -16,7 +16,7 @@ const carts = require('./routes/carts')
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/libraryMongoose', (err) => {
+mongoose.connection.openUri('mongodb://localhost/libraryMongoose', (err) => {
   if(err) {
     console.log('database unconnect');
   } else {

@@ -23,6 +23,7 @@ class CartCRUD{
     }
 
     static create(body, cb){
+        console.log(body);
         let cart = new Cart(body)
         cart.save()
             .then(cart => {

@@ -154,10 +154,10 @@
                     })
             });
 
-            $Menu = $('#dropdownMenu')
-            $Menu.dropdown({
-                fullTextSearch: true
-            })
+            // $Menu = $('#dropdownMenu')
+            // $Menu.dropdown({
+            //     fullTextSearch: true
+            // })
 
     </script>
     <style>
@@ -215,14 +215,14 @@
                 <a class="active item">Your Shopping Items</a>
                 <div class="ui inverted segment">
                     <div class="ui inverted relaxed divided list">
-                        <div class="item">
-                            {{cart}}
-                            <i class="shopping basket icon"></i>
-                        </div>
+                        <cart-product
+                        v-for="item in cart"
+                        :key="item.id"
+                        v-bind:cart="item"
+                        >
+                        </cart-product>
                     </div>
                 </div>
-    
-                <!-- Di sini nanti bikin si jason buat ngelist item dan harga -->
                 <a class="item" href="#">Checkout</a>
             </div>
         </div>
@@ -239,9 +239,8 @@
                     </div>
                 </div>
                 <div class="right menu">
-                    <div class="item">
-                        <a class="ui button" id="shoppingcart">Shopping Cart</a>
-                    </div>
+                    <cart-product v-for="item in cart" :key="item.id" v-bind:cart="item">
+                    </cart-product>
                 </div>
         </div>
 
@@ -283,13 +282,13 @@
                             <div class="ui middle aligned stackable grid container">
                                 <div class="ui container">
                                     <div class="ui grid">
-                                    <product-item v-for="product in items" v-bind:product="product" v-bind:key="product._id">
+                                    <product-item v-for="product in items" v-bind:product="product" v-bind:key="product._id" @buy="buy(product)">
                                     </product-item>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="center aligned column">
-                                        <a class="ui huge button">Check Your Stolen Things</a>
+                                        <a class="ui huge button" v-on:click="checkout()">Check Your Stolen Things</a>
                                     </div>
                                 </div>
                             </div>

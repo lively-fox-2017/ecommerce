@@ -9,6 +9,8 @@ class CartCRUD{
     }
 
     static create(req, res){
+        console.log(req.body);
+        // res.send(req.body)
         Cart.create(req.body, (err, cart)=>{
             if(err) res.send(err)
             res.send(cart)
