@@ -17,7 +17,7 @@
       <div class="ui header">
         <div class="ui attached stackable menu">
           <div class="ui item">
-            <img class="ui small circular image" src="http://thepittshop.com/SiteImages/178-SchoolImages/178-shopImages/178-logo_shop.png">
+            <img class="ui small circular image" src="">
           </div>
           <a class="item">
             <i class="sign in icon"></i> Sign in
@@ -32,7 +32,7 @@
             <input placeholder="Search..." type="text">
             <div class="ui teal button">Search</div>
           </div>
-          <a class="item" id="inCart"><i class="in cart icon"></i> <p>{{ carts.qty }} Carts </p></a>
+          <a class="item" id="inCart"><i class="in cart icon"></i> <p>{{ counter }} Carts </p></a>
         </div>
       </div>
       <div class="ui grid">
@@ -89,29 +89,6 @@
                   </div>
                 </div>
               </div>
-              <div class="item">
-                <div class="header">CMS Solutions</div>
-                <div class="menu">
-                  <a class="item">Rails</a>
-                  <a class="item">Python</a>
-                  <a class="item">PHP</a>
-                </div>
-              </div>
-              <div class="item">
-                <div class="header">Hosting</div>
-                <div class="menu">
-                  <a class="item">Shared</a>
-                  <a class="item">Dedicated</a>
-                </div>
-              </div>
-              <div class="item">
-                <div class="header">Support</div>
-                <div class="menu">
-                  <a class="item">E-mail Support</a>
-                  <a class="item">FAQs</a>
-                </div>
-              </div>
-
             </div>
           </div>
           </div>
@@ -124,7 +101,7 @@
                   <img class="ui medium image" v-bind:src="item.img">
                 </div>
 
-                <div class="ui primary button" v-on:click="addCart">
+                <div class="ui primary button" v-on:click="addCart(item)">
                   <i class="shop icon"></i> Add to Cart
                 </div>
                 <div class="ui animated fade button" tabindex="0">
@@ -144,14 +121,16 @@
             <div class="header">
               Your Item List :
             </div>
-            <div class="image content"  v-for="item in items">
+            <div class="image content"  v-for="item in carts"
+            :key="item.id"
+            v-bind:item="item">
               <div class="ui medium image">
                 <img v-bind:src="item.img">
               </div>
               <div class="description">
-                <div class="ui header">We've auto-chosen a profile image for you.</div>
-                <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-                <p>Is it okay to use this photo?</p>
+                <div class="ui header">{{item.nama}}</div>
+                <p>{{item.cost}} </p>
+                <p>{{ item.nama }}</p>
               </div>
             </div>
             <div class="actions">

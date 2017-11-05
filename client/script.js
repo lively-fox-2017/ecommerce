@@ -3,22 +3,23 @@ new Vue({
   data: {
     message: 'hello',
     counter:0,
-    carts:
-    {
-      id: 0,
-      item: [],
-      price: 0,
-      qty: 0,
-      imgUrl: '',
-      total: 0
-    },
     items:[]
   }, methods:{
-    addCart: function () {
-      this.carts.qty++
-      this.carts.item.push(this.items[0].nama)
-      console.log(this.carts.item);
+    addCart: function (product) {
+      if (this.carts) {
+        let obj_cart = this.carts
+        obj_cart.push(product)
+        localStorage.setItem('cart', JSON.stringify(obj_cart));
+      }else {
+        var cart2 = []
+        cart2.push(product)
+        localStorage.setItem('cart', JSON.stringify(cart2))
+      }
+      this.qty()
+    },
 
+    qty() {
+      this.counter = this.carts.length
     }
   },
 
@@ -30,6 +31,15 @@ new Vue({
     .catch(err=>{
       console.log(err);
     })
+  },
+
+  computed: {
+    carts:{
+      get() {
+        let carts = localStorage.getItem("cart")
+        return JSON.parse(carts);
+      }
+    }
   }
 
 })
