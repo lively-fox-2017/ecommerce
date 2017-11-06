@@ -27,11 +27,25 @@ new Vue({
             return product;
           }
         })
-        var obj = this.products[index];
-        obj.qty = 1;
-        obj.totalPrice = obj.price * obj.qty;
-        this.carts.push(obj);
-        this.calculateHargaTotal()
+        var checkDulu = this.carts.findIndex((product) => {
+          if(product._id == this.products[index]._id) {
+            return product
+          }
+        })
+        console.log(checkDulu)
+        if (checkDulu > -1) {
+          console.log(this.carts[checkDulu]);
+          this.carts[checkDulu].qty = this.carts[checkDulu].qty + 1
+          this.carts[checkDulu].totalPrice = this.carts[checkDulu].price * this.carts[checkDulu].qty
+          this.calculateHargaTotal()
+        } else {
+          var obj = this.products[index];
+          obj.qty = 1;
+          obj.totalPrice = obj.price * obj.qty;
+          this.carts.push(obj);
+          this.calculateHargaTotal()
+        }
+
       } else {
         alert('login dulu bosq')
       }
