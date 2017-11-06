@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="E-Commerce Materialize" />
+  <meta name="author" content="lokiloko" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commaterialize Dashboard</title>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+  <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js"></script>
+  <script>
+  axios.post('http://commaterialize-api.lokilokostudio.tk/api/auth/isAdmin', {token:localStorage.getItem('accessToken')}).then((response) => {
+    console.log(response);
+  }).catch((err) => {
+    console.error(err)
+    window.location.href = "/";
+  })
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <!-- nav start -->
+      <div class="navbar">
+        <nav class="light-blue" role="navigation">
+          <div class="nav-wrapper">
+            <div class="row">
+              <div class="col l2 m4">
+                <ul class="left">
+                  <li>
+                    <img src="assets/img/logo.png" class="image-logo"></img>
+                  </li>
+                </ul>
+              </div>
+              <div class="col l10 m4">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                  <li><a href="/">Shop</a></li>
+                  <li><a href="/product.html">Product</a></li>
+                  <li><a href="/customer.html">Customer</a></li>
+                  <li><a href="/transaction.html">Transaction</a></li>
+                </ul>
+              </div>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+              <ul class="side-nav" id="mobile-demo">
+                <li><a href="/">Shop</a></li>
+                <li><a href="/product.html">Product</a></li>
+                <li><a href="/customer.html">Customer</a></li>
+                <li><a href="/transaction.html">Transaction</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col l12 m12 s12">
+            <div class="card">
+              <div class="card-title center-align">
+                <h4>Table Item</h4>
+              </div>
+              <div class="card-content">
+
+                <table id="example" class="bordered">
+                  <thead>
+                    <tr>
+                      <th>Item Name</th>
+                      <th>Item Price</th>
+                      <th>Item Description</th>
+                      <th>Item imageUrl</th>
+                      <th>Item Category</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="product in products">
+                      <td>{{product.name}}</td>
+                      <td>{{product.price}}</td>
+                      <td>{{product.description}}</td>
+                      <td><img v-bind:src="product.imageUrl" class="image-logo"></td>
+                      <td>{{product.category}}</td>
+                      <td><button v-on:click="populateForm(product._id)" class="btn-floating"><i class="material-icons">mode_edit</i></button><button v-on:click="deleteData(product._id)" class="btn-floating"><i class="material-icons">delete_forever</i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button class="btn" v-on:click="addNewData">Add New Data</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="form">
+      <div class="container">
+        <div class="row">
+          <div class="col l12 m12 s12">
+            <div class="card">
+              <div class="card-title center-align">
+                <h4>Form Item</h4>
+              </div>
+              <form v-on:submit.prevent="saveData">
+                <div class="card-content">
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" class="form-control" placeholder="Item Name" v-model:value="formData.name" id="name" name="name" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="form-group">
+                        <label>Price</label>
+                        <input type="text" class="form-control" placeholder="Price" v-model:value="formData.price" id="price" name="price" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" placeholder="Description" v-model:value="formData.description" id="description" name="description" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="text" class="form-control" placeholder="Image URL" v-model:value="formData.imageUrl" id="imageUrl" name="imageUrl" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12">
+                      <div class="form-group">
+                        <label>Image Category</label>
+                        <input type="text" class="form-control" placeholder="Image Category" v-model:value="formData.category" id="category" name="category" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s4">
+                    </div>
+                    <div class="col s4">
+                      <div class="form-group center-align">
+                        <input type="submit" class="form-control btn" value="SUBMIT">
+                      </div>
+                    </div>
+                    <div class="col s4">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<!--Import jQuery before materialize.js-->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="assets/js/product.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $(".button-collapse").sideNav();
+  });
+  $(document).ready(function() {
+    $('#example').DataTable();
+    $('select').material_select();
+    $('#form').hide();
+  });
+
+  function showForm() {
+    $('#form').show(1000)
+    $("body, html").animate({
+      scrollTop: $($('#form')).offset().top
+    }, 600);
+  }
+</script>
+
+</html>
