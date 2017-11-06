@@ -91,6 +91,23 @@ new Vue({
         console.log(err);
       })
     },
+    checkAdmin () {
+      var promise = new Promise((resolve, reject) => {
+        axios.post('http://commaterialize-api.lokilokostudio.tk/api/auth/isAdmin', {token:localStorage.getItem('accessToken')}).then((response) => {
+          resolve()
+        }).catch((err) => {
+          reject()
+        })
+      })
+      return promise
+    },
+    isAdmin () {
+      this.checkAdmin().then(()=>{
+        return true
+      }).catch((err) =>{
+        return false
+      })
+    },
     doLogin() {
       var email = $('#email').val();
       var password = $('#password').val();
