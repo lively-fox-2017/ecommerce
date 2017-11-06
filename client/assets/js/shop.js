@@ -130,21 +130,25 @@ new Vue({
       location.reload()
     },
     checkout() {
-      var totalHarga = this.hargaTotal;
-      var customer_id = localStorage.getItem('accessToken');
-      var productlist = [];
-      this.carts.forEach((cart) => {
-        productlist.push(cart._id);
-      })
-      axios.post('http://commaterialize-api.lokilokostudio.tk/api/transaction', {
-        customer_id: customer_id,
-        productlist: productlist,
-        totalHarga: totalHarga
-      }).then((response) => {
-        console.log(response)
-      }).catch((err) => {
-        console.error(err);
-      })
+      if (this.carts.length) {
+        var totalHarga = this.hargaTotal;
+        var customer_id = localStorage.getItem('accessToken');
+        var productlist = [];
+        this.carts.forEach((cart) => {
+          productlist.push(cart._id);
+        })
+        axios.post('http://commaterialize-api.lokilokostudio.tk/api/transaction', {
+          customer_id: customer_id,
+          productlist: productlist,
+          totalHarga: totalHarga
+        }).then((response) => {
+          console.log(response)
+        }).catch((err) => {
+          console.error(err);
+        })
+      } else {
+        alert('Cart minimum have 1 item')
+      }
     }
   },
   created() {
