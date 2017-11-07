@@ -2,7 +2,7 @@ Vue.component('cart-product', {
     props: ['cart'],
     template: `
     <div class="item">
-        {{ cart.name }}
+        {{ cart.name }}       {{ cart.counter }}
         <i class="shopping basket icon"></i>
     </div>
     `
@@ -29,19 +29,64 @@ Vue.component('product-item', {
     }
 })
 
+Vue.component('modal', {
+    template: `
+<div class="ui modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
+            <slot name="header">
+              default header
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <slot name="body">
+              default body
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+              <button class="modal-default-button" @click="$emit('close')">
+                OK
+              </button>
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+<div>`
+})
+
 new Vue({
     el: "#app",
     data: {
+        showModal: false,
         message: 'Welcome Aboard!',
         items: [],
         cart: []
     },
     methods: {
         buy: function (product) {
-
-            console.log(this.cart);
-            this.cart.push({_id: product._id, name: product.itemname, price: product.price})
-            console.log(this.cart);
+            console.log('ini produknya yang dibeli ',product);
+            let idx = this.cart.findIndex((itemcart)=>{return itemcart._id === product._id})
+            if (idx == -1) {
+                let obj = {
+                    _id: product._id,
+                    name: product.itemname,
+                    price: product.price,
+                    counter: 1
+                }
+                this.cart.push(obj)
+                console.log('ini isi cartnya ya ',this.cart);
+            } else {
+                this.cart[idx].counter += 1
+                console.log('ini kalo itemnya sama ', this.cart);
+            }
         },
         checkout: function () {
             // localStorage.setItem('buyItem', cart)

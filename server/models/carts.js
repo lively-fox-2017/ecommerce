@@ -4,7 +4,15 @@ const Schema = mongoose.Schema;
 const cartSchema = new Schema({
     "customers": { type: Schema.Types.ObjectId, ref: 'Customers'},
     "transactiondate": { type: Date, default: Date.now },
-    "itemlist": [{ type: Schema.Types.ObjectId, price: Schema.Types.price, ref: 'Items' }]
+    "itemlist": [{ 
+        type: Schema.Types.ObjectId, 
+        price: Schema.Types.price,
+        counter: {
+            type: Number,
+            default: 0
+        },
+        ref: 'Items' 
+    }]
 })
 
 const Cart = mongoose.model('Carts', cartSchema)

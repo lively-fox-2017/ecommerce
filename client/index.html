@@ -206,7 +206,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
 </head>
-
+        <modal v-if="showModal" @close="showModal = false">        </modal>
 <body class="pushable">
     <div id="app">
         <!-- Sidebar Menu -->
@@ -223,7 +223,9 @@
                         </cart-product>
                     </div>
                 </div>
-                <a class="item" href="#">Checkout</a>
+                <button class="ui button" id="show-modal" @click="showModal = true">
+                    Checkout
+                </button>
             </div>
         </div>
         <!-- Following Menu -->
@@ -288,14 +290,16 @@
                                 </div>
                                 <div class="row">
                                     <div class="center aligned column">
-                                        <a class="ui huge button" v-on:click="checkout()">Check Your Stolen Things</a>
+                                        <button class="ui button" id="show-modal" @click="showModal = true">
+                                            Checkout Your Stolen Things
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                 </div>
         </div>
-        
+
         <!-- Footer -->
         <div class="ui black inverted vertical footer segment">
             <div class="ui center aligned container">
