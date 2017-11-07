@@ -15,6 +15,7 @@
     "express": "^4.15.5",
     "mongoose": "^4.12.3",
     "morgan": "~1.8.1",
+    "rupiah": "0.0.4-beta",
     "serve-favicon": "~2.4.2"
   }
 }

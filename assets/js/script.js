@@ -1,18 +1,21 @@
 new Vue({
+  // var Rp = require('../helpers/rupiah')
   el: '#app',
   data: {
     item: {
       nama_item: '',
       category: '',
       harga: '',
-      jumlah: '',
+      jumlah: 0,
       img: ''
     },
     allItem: [],
     allCart: [],
-    count: 0
+    count: 0,
+    total: 0
   },
   methods: {
+
     addedItem(item) {
       axios.post('http://localhost:3000/items', item)
         .then(response => {
@@ -57,6 +60,23 @@ new Vue({
     },
     addQty (itemIdx) {
       this.allCart[itemIdx].qty++
+    },
+    checkOut () {
+      window.location.href = 'http://localhost:5000/purchase.html';
+    },
+    sumTotalCart(id){
+
+    },
+    removeCart(id){
+      let remCart=this.allCart;
+      for (var i = 0; i < this.allCart.length; i++) {
+        if (this.allCart[i]._id==id) {
+          remCart.splice(i,1);
+          break;
+        }
+      }
+      this.allCart=remCart;
+      this.count-=1;
     }
   },
   created () {
