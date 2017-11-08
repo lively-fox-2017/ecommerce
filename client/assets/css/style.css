@@ -8,6 +8,20 @@ a{
   text-decoration: none;
 }
 
+#loading {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-image: url("../images/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .flex-container{
   width: 100%;
   display: flex;
@@ -300,7 +314,7 @@ footer{
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-.loginform, .registerform, .edituserform, .adduserform, .addproductform{
+.loginform, .registerform, .edituserform, .adduserform, .addproductform, .editproductform{
   width: 40%;
   margin-top: 3%;
   padding: 30px;
@@ -316,7 +330,7 @@ footer{
   display: flex;
 }
 
-.loginform h1, .registerform h1, .edituserform h2, .adduserform h2, .addproductform h2{
+.loginform h1, .registerform h1, .edituserform h2, .adduserform h2, .addproductform h2, .editproductform h2{
   width: 90%;
   background-color: white;
   margin-bottom: 20px;
@@ -336,7 +350,7 @@ footer{
   box-shadow: 1px 1px 2px 5px red;
 }
 
-.loginform label, .registerform label, .edituserform label, .adduserform label, .addproductform label{
+.loginform label, .registerform label, .edituserform label, .adduserform label, .addproductform label, .editproductform label{
   width: 96%;
   background-color: white;
   padding: 10px;
@@ -349,7 +363,8 @@ footer{
 .registerform input[type="text"], .registerform input[type="password"], .registerform input[type="email"], .registerform input[type="number"],
 .edituserform input[type="text"], .edituserform input[type="email"], .edituserform input[type="number"],
 .adduserform input[type="text"], .adduserform input[type="password"], .adduserform input[type="email"], .adduserform input[type="number"],
-.addproductform input[type="text"], .addproductform input[type="number"], .addproductform input[type="file"], .addproductform textarea{
+.addproductform input[type="text"], .addproductform input[type="number"], .addproductform input[type="file"], .addproductform textarea,
+.editproductform input[type="text"], .editproductform input[type="number"], .editproductform textarea{
   width: 96%;
   background-color: white;
   padding: 10px;
@@ -370,7 +385,8 @@ footer{
 .registerform input[type="submit"],
 .edituserform input[type="submit"],
 .adduserform input[type="submit"],
-.addproductform input[type="submit"]{
+.addproductform input[type="submit"],
+.editproductform input[type="submit"]{
   width: 52%;
   margin-top: 20px;
   border: 0px;

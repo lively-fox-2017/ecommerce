@@ -2,6 +2,7 @@ new Vue({
   el: ".flex-container",
   data: {
     items: [],
+    item: {},
     users: [],
     user: {},
     transactions: [],
@@ -70,7 +71,18 @@ new Vue({
     findAllTransaction() {
       axios.get('http://localhost:3000/transactions')
       .then((response) => {
-        this.transactions = response.data.data
+        // console.log(response.data.data);
+        response.data.data.forEach((row) => {
+          let Obj = {
+            _id: row._id,
+            user: row.user.username,
+            product: row.product,
+            quantity: row.quantity,
+            totalprice: this.formatRupiah(row.totalprice)
+          }
+
+          this.transactions.push(Obj)
+        })
       }).catch((reason) => {
         console.log(reason);
       })
@@ -89,6 +101,7 @@ new Vue({
     },
 
     insertProduct(file) {
+      $('#loading').show(1000)
       // let image = $('input[name=addimage]').val()
       let name = $('input[name=addname]').val()
       let price = $('input[name=addprice]').val()
@@ -109,6 +122,7 @@ new Vue({
         }
       })
       .then((response) => {
+        $('#loading').hide(200)
         // console.log(response);
         response.data.data.rupiah = this.formatRupiah(response.data.data.price)
         this.items.push(response.data.data)
@@ -122,12 +136,58 @@ new Vue({
       })
     },
 
+    editProduct(index) {
+      let item = this.items[index]
+      $('.editproductform').show(200)
+      $('.adminproduct').hide(200)
+
+      this.item = item
+      this.item.index = index
+    },
+
+    updateProduct(index) {
+      let id = this.item._id
+      // console.log(id);
+      let productObj = {
+        name : $('input[name=editname]').val(),
+        price : $('input[name=editprice]').val(),
+        stock : $('input[name=editstock]').val(),
+        info : $('textarea[name=editinfo]').val()
+      }
+
+      // console.log(productObj)
+      axios.put('http://localhost:3000/products/update/'+id, productObj)
+      .then((response) => {
+        if (response.data.data) {
+          console.log(this.items[index]);
+          this.items[index].name = productObj.name
+          this.items[index].price = productObj.price
+          this.items[index].rupiah = this.formatRupiah(productObj.price)
+          this.items[index].stock = productObj.stock
+          this.items[index].info = productObj.info
+
+          this.item = {}
+          $('.editproductform').hide(200)
+          $('.adminproduct').show(200)
+        } else {
+          alert(response.message);
+        }
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
     deleteProduct(index) {
       let id = this.items[index]._id
-      // console.log(this.items[index].imgName);
-      axios.delete('http://localhost:3000/products/delete/'+id, {imgName: this.items[index].imgName})
+      console.log(this.items[index].imgName);
+      axios.delete('http://localhost:3000/products/delete/'+id,
+        {
+          headers: {
+            'imgname': this.items[index].imgName
+          }
+        })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         this.items.splice(index, 1)
       }).catch((reason) => {
         console.log(reason);
@@ -211,17 +271,28 @@ new Vue({
       })
     },
 
+    deleteTransaction(index) {
+      let id = this.transactions[index]._id
+      console.log();
+      axios.delete(`http://localhost:3000/transactions/delete/`+id)
+      .then((response) => {
+        this.transactions.splice(index, 1)
+      }).catch((reason) => {
+        console.log(reason);
+      })
+    },
+
     addItem(index){
       // console.log(index);
       if (localStorage.getItem('token')) {
         for (let i = 0; i < this.cart.length; i++) {
-          if (this.cart[i].id === this.items[index].id) {
+          if (this.cart[i].id === this.items[index]._id) {
             return "nothing to push"
           }
         }
 
         let arrObj = {
-          id: this.items[index].id,
+          id: this.items[index]._id,
           name: this.items[index].name,
           imgName: this.items[index].imgName,
           imgUrl: this.items[index].imgUrl,
@@ -233,9 +304,9 @@ new Vue({
         }
 
         this.cart.push(arrObj)
-        this.productObjectId.push(this.items[index].id)
+        // console.log(this.cart);
+        this.productObjectId.push(this.items[index]._id)
         this.quantity.push(0)
-        // console.log(JSON.stringify(this.cart[this.cart.length-1]));
       } else {
         alert("You must login to Add Item")
       }
@@ -266,6 +337,7 @@ new Vue({
           totalprice: this.totalPrice
         }
 
+        // console.log(dataCart);
         axios.post("http://localhost:3000/transactions/insert", dataCart).then((response) => {
           // console.log(response);
           alert(response.data.message)

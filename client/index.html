@@ -73,7 +73,7 @@
               <form action="#" method="post" v-on:submit.prevent>
                 <table>
                   <tr v-for="(value, index) in cart">
-                    <td><img class="imgcart" v-bind:src="value.imUrl" v-bind:alt="value.imgName"></td>
+                    <td><img class="imgcart" v-bind:src="value.imgUrl" v-bind:alt="value.imgName"></td>
                     <td><input v-bind:id="'quantity'+index" v-on:change="quantityChange(index)" type="number" name="quantity" min="1" placeholder="Qty" required></td>
                     <td>{{value.formatHarga}}</td>
                     <td v-on:click="removeItem(index)"><img class="removeCart" src="assets/images/icons/false.png" alt=""></td>
@@ -87,7 +87,7 @@
       </header>
       <div class="content">
 <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-        <div class="adminproduct">
+        <div id="adminproduct" class="adminproduct">
           <div class="search">
             <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button class='addProduct' type="button" name="add">Add</button>
           </div>
@@ -110,7 +110,7 @@
                 <td>{{ value.rupiah }}</td>
                 <td>{{ value.stock }}</td>
                 <td>
-                  <button name="edit">Edit</button>
+                  <button name="edit" v-on:click="editProduct(index)">Edit</button>
                   <button name="delete" v-on:click="deleteProduct(index)">Delete</button>
                 </td>
               </tr>
@@ -131,6 +131,20 @@
           <input id="file" type="file" name="addimage" v-on:change="fileChange" required><br><br>
           <input type="submit" value="Add">
         </form>
+
+        <form name="editproductform" id="editproductform" class="editproductform" v-on:submit.prevent="updateProduct(item.index)" method="post">
+          <h2>Edit Product</h2>
+          <label>Name</label><br><br>
+          <input type="text" name="editname" v-bind:value="item.name" required><br><br>
+          <label>Price</label><br><br>
+          <input type="number" name="editprice" min="0" v-bind:value="item.price" required><br><br>
+          <label>Stock</label><br><br>
+          <input type="number" name="editstock" min="0" v-bind:value="item.stock" required><br><br>
+          <label>Info</label><br><br>
+          <textarea name="editinfo" rows="8" v-bind:value="item.info"></textarea><br><br>
+          <input type="submit" value="Edit">
+        </form>
+        <div id="loading"></div>
 
         <div class="adminuser">
           <div class="search">
@@ -191,21 +205,29 @@
           <table class="order-table table" cellspacing="0">
             <thead>
               <th>No.</th>
-              <th>Product Id</th>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Stock</th>
+              <th>Username</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
               <th>Actions</th>
             </thead>
             <tbody>
-              <tr>
-                <td>1.</td>
-                <td>001</td>
-                <td>Topi Babe 1</td>
-                <td>Rp. 1.000.000</td>
-                <td>10</td>
+              <tr v-for="(value, index) in transactions">
+                <td>{{ index+1 }}</td>
+                <td>{{ value.user }}</td>
                 <td>
-                  <button name="delete">Delete</button>
+                  <ol style="list-style:none">
+                    <li v-for="prd in value.product">{{ prd.name }}</li>
+                  </ol>
+                </td>
+                <td>
+                  <ol style="list-style:none">
+                    <li v-for="qty in value.quantity">{{ qty }}</li>
+                  </ol>
+                </td>
+                <td>{{ value.totalprice }}</td>
+                <td>
+                  <button name="delete" @click="deleteTransaction(index)">Delete</button>
                 </td>
               </tr>
             </tbody>
@@ -271,6 +293,8 @@
     </div>
     <script type="text/javascript" src="assets/js/cart.js"></script>
     <script type="text/javascript">
+      $('#loading').hide()
+
       if (localStorage.getItem('token') && localStorage.getItem('role') === "user") {
         $('.login').hide(200)
         $('.logout').show(200)
@@ -294,6 +318,7 @@
           $('.edituserform').hide(200)
           $('.adduserform').hide(200)
           $('.addproductform').hide(200)
+          $('.editproductform').hide(200)
         })
 
         $('#addUser').on('click', function() {
@@ -308,6 +333,7 @@
           $('.edituserform').hide(200)
           $('.adduserform').hide(200)
           $('.addproductform').hide(200)
+          $('.editproductform').hide(200)
         })
 
         $('.addProduct').on('click', function() {
@@ -322,6 +348,7 @@
           $('.edituserform').hide(200)
           $('.adduserform').hide(200)
           $('.addproductform').hide(200)
+          $('.editproductform').hide(200)
         })
 
         $('.title').text("Admin Site")

@@ -44,6 +44,7 @@ function uploadFile(req, res, next) {
 }
 
 function deleteFile(fileName){
+  // console.log('-------------------------->', fileName)
   bucket.deleteFiles({prefix: `assets/images/products/${fileName}`}, (err) => {
     if (!err) {
       console.log("Berhasil Hapus File di Google Cloud Storage");

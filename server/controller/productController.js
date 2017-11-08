@@ -49,7 +49,14 @@ module.exports = {
   },
 
   update: (req, res) => {
-    Product.update({_id: req.params.id}, {$set: helper.dataProduct(req.body)}).then((rowUpdateProduct) => {
+    Product.update({_id: req.params.id}, {
+      $set: {
+        name: req.body.name,
+        price: req.body.price,
+        stock: req.body.stock,
+        info: req.body.info
+      }
+    }).then((rowUpdateProduct) => {
       if (rowUpdateProduct.n != 0) {
         res.json({
           message: "Berhasil Update",
@@ -71,7 +78,9 @@ module.exports = {
     // console.log(req.body.imgName);
     Product.remove({_id: req.params.id}).then((rowDeleteProduct) => {
       if (rowDeleteProduct.result.n != 0) {
-        image.deleteFile(req.body.imgName)
+        // console.log('cuuuuuukkkkkk', req.headers)
+        // console.log('wooooooooooooyyyyyyyyyyyyy', req.headers.imgname)
+        image.deleteFile(req.headers.imgname)
         res.json({
           message: "Berhasil Hapus",
           data: rowDeleteProduct
