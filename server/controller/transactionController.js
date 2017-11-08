@@ -5,12 +5,12 @@ module.exports = {
   findAll: (req, res) => {
     // 'title' = asc by title, '-title' = desc by title
     Transaction.find().populate('user').populate('product').sort('user').then((rowsTransaction) => {
-      res.json({
+      res.status(200).json({
         message: "Tampil Semua Data Transaction",
         data: rowsTransaction
       })
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
@@ -19,12 +19,12 @@ module.exports = {
   insert: (req, res) => {
     let user = helper.getUserId(req.body.user)
     Transaction(helper.dataTransaction(req.body, user)).save().then((rowTransactionInserted) => {
-      res.json({
+      res.status(200).json({
         message: "Berhasil Memasukan Data",
         data: rowTransactionInserted
       })
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
@@ -34,17 +34,17 @@ module.exports = {
     Transaction.remove({_id: req.params.id}).then((rowDeleteTransaction) => {
       // console.log(rowDeleteTransaction);
       if (rowDeleteTransaction.result.n != 0){
-        res.json({
+        res.status(200).json({
           message: "Berhasil Hapus",
           data: rowDeleteTransaction
         })
       } else {
-        res.json({
+        res.status(400).json({
           message: "Maaf Id tersebut tidak ada"
         })
       }
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })

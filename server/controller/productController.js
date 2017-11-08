@@ -5,12 +5,12 @@ const image = require('../helper/images')
 module.exports = {
   findAll: (req, res) => {
     Product.find().sort('name').then((rowsProduct) => {
-      res.json({
+      res.status(200).json({
         message: "Tampil Semua Data Product",
         data: rowsProduct
       })
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
@@ -19,17 +19,17 @@ module.exports = {
   findOne: (req, res) => {
     Product.findOne({_id: req.params.id}).then((rowProduct) => {
       if (rowProduct) {
-        res.json({
+        res.status(200).json({
           message: "Tampil Satu Data Product",
           data: rowProduct
         })
       } else {
-        res.json({
+        res.status(400).json({
           message: "Maaf Id tersebut tidak ada"
         })
       }
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
@@ -37,12 +37,12 @@ module.exports = {
 
   insert: (req, res) => {
     Product(helper.dataProduct(req.body, req.file)).save().then((rowProductInserted) => {
-      res.json({
+      res.status(200).json({
         message: "Berhasil Memasukan Data",
         data: rowProductInserted
       })
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
@@ -58,17 +58,17 @@ module.exports = {
       }
     }).then((rowUpdateProduct) => {
       if (rowUpdateProduct.n != 0) {
-        res.json({
+        res.status(200).json({
           message: "Berhasil Update",
           data: rowUpdateProduct
         })
       } else {
-        res.json({
+        res.status(400).json({
           message: "Data tidak ditemukan"
         })
       }
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
@@ -81,17 +81,17 @@ module.exports = {
         // console.log('cuuuuuukkkkkk', req.headers)
         // console.log('wooooooooooooyyyyyyyyyyyyy', req.headers.imgname)
         image.deleteFile(req.headers.imgname)
-        res.json({
+        res.status(200).json({
           message: "Berhasil Hapus",
           data: rowDeleteProduct
         })
       } else {
-        res.json({
+        res.status(400).json({
           message: "Maaf Id tersebut tidak ada"
         })
       }
     }).catch((reason) => {
-      res.json({
+      res.status(404).json({
         message: reason
       })
     })
