@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Belanja Kuy</title>
+    <link rel="icon" type="icon" href="assets/images/icons/icon.jpg">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/animation.css">
+    <link rel="stylesheet" href="assets/css/slider.css">
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous">
+    </script>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.leanModal.min.js"></script>
+    <script src="assets/js/filter.js"></script>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="lineheader"></div>
+      <header class="flex-item header">
+        <div class="header-logo">
+          <img src="assets/images/icons/icon.jpg" alt="my web icon">
+          <h1 class="title">Beli Topi Kuy</h1>
+        </div>
+        <nav>
+          <a class="logout" v-on:click="logout()" href="#">Logout</a>
+          <a class="home" href="#">Home</a>
+          <a class="product" href="#someitem">Product</a>
+          <a class="user" href="#">User</a>
+          <a class="transaction" href="#">Transaction</a>
+          <a class="contact" href="#">Contact</a>
+          <a class="login" id="popup" href=".loginform">Login</a>
+
+          <form class="loginform" v-on:submit.prevent="login()" method="post">
+            <div class="sub">
+              <h1>Sign in</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
+            </div>
+            <label>Username</label><br><br>
+            <input type="text" name="username" required>
+            <label>Password</label><br><br>
+            <input type="password" name="password" required>
+            <div class="sub">
+              <input type="submit" value="Login"> <a id="regpopup" href=".registerform" name="register">Register</a>
+            </div>
+          </form>
+
+          <form class="registerform" v-on:submit.prevent="register()" method="post">
+            <div class="sub">
+              <h1>Sign up</h1> <img class="modal_close" src="assets/images/icons/false.png" alt="close icon">
+            </div>
+            <label>Username</label><br><br>
+            <input type="text" name="signusername" required><br><br>
+            <label>Password</label><br><br>
+            <input type="password" name="signpassword" required><br><br>
+            <label>Email</label><br><br>
+            <input class="email" type="email" name="email" required><br><br>
+            <label>Phone</label><br><br>
+            +62<input type="number" name="phone" min="0" required>
+            <div class="sub">
+              <input type="submit" value="Register"> <a id="logpopup" name="back">Back</a>
+            </div>
+          </form>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ini Cart~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+          <ul>
+            <img id="cart" src="assets/images/icons/shoppingcart.png" alt="cart">
+            <li class="cart">
+              <h3>List of Items</h3>
+              <form action="#" method="post" v-on:submit.prevent>
+                <table>
+                  <tr v-for="(value, index) in cart">
+                    <td><img class="imgcart" v-bind:src="value.imgUrl" v-bind:alt="value.imgName"></td>
+                    <td><input v-bind:id="'quantity'+index" v-on:change="quantityChange(index)" type="number" name="quantity" min="1" placeholder="Qty" required></td>
+                    <td>{{value.formatHarga}}</td>
+                    <td v-on:click="removeItem(index)"><img class="removeCart" src="assets/images/icons/false.png" alt=""></td>
+                  </tr>
+                </table>
+                <input type="submit" v-on:click="saveItems()" value="Checkout"> <span>{{totalPriceRupiah}}</span>
+              </form>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <div class="content">
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div id="adminproduct" class="adminproduct">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button class='addProduct' type="button" name="add">Add</button>
+          </div>
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Product Id</th>
+              <th>Photo</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr v-for="(value, index) in items">
+                <td>{{ index + 1 }}</td>
+                <td>{{ value._id }}</td>
+                <td><img class='adminProductImg' v-bind:src="value.imgUrl" v-bind:alt="value.imgName"></td>
+                <td>{{ value.name }}</td>
+                <td>{{ value.rupiah }}</td>
+                <td>{{ value.stock }}</td>
+                <td>
+                  <button name="edit" v-on:click="editProduct(index)">Edit</button>
+                  <button name="delete" v-on:click="deleteProduct(index)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <form name="addproductform" id="addproductform" class="addproductform" v-on:submit.prevent="insertProduct" method="post" enctype="multipart/form-data">
+          <h2>Add Product</h2>
+          <label>Name</label><br><br>
+          <input type="text" name="addname" required><br><br>
+          <label>Price</label><br><br>
+          <input type="number" name="addprice" min="0" required><br><br>
+          <label>Stock</label><br><br>
+          <input type="number" name="addstock" min="0" required><br><br>
+          <label>Info</label><br><br>
+          <textarea name="addinfo" rows="8"></textarea><br><br>
+          <label>Image</label><br><br>
+          <input id="file" type="file" name="addimage" v-on:change="fileChange" required><br><br>
+          <input type="submit" value="Add">
+        </form>
+
+        <form name="editproductform" id="editproductform" class="editproductform" v-on:submit.prevent="updateProduct(item.index)" method="post">
+          <h2>Edit Product</h2>
+          <label>Name</label><br><br>
+          <input type="text" name="editname" v-bind:value="item.name" required><br><br>
+          <label>Price</label><br><br>
+          <input type="number" name="editprice" min="0" v-bind:value="item.price" required><br><br>
+          <label>Stock</label><br><br>
+          <input type="number" name="editstock" min="0" v-bind:value="item.stock" required><br><br>
+          <label>Info</label><br><br>
+          <textarea name="editinfo" rows="8" v-bind:value="item.info"></textarea><br><br>
+          <input type="submit" value="Edit">
+        </form>
+        <div id="loading"></div>
+
+        <div class="adminuser">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here"> <button id="addUser" type="button" name="add">Add</button>
+          </div>
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>User Id</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr v-for="(value, index) in users">
+                <td>{{ index+1 }}</td>
+                <td>{{ value._id }}</td>
+                <td>{{ value.username }}</td>
+                <td>{{ value.email }}</td>
+                <td>+62{{ value.phone }}</td>
+                <td>
+                  <button name="edit" v-on:click="editUser(index)">Edit</button>
+                  <button name="delete" v-on:click="deleteUser(index)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <form class="adduserform" v-on:submit.prevent="insertUser()" method="post">
+          <h2>Add User</h2>
+          <label>Username</label><br><br>
+          <input type="text" name="addusername" required><br><br>
+          <label>Password</label><br><br>
+          <input type="password" name="addpassword" required><br><br>
+          <label>Email</label><br><br>
+          <input class="email" type="email" name="addemail" required><br><br>
+          <label>Phone</label><br><br>
+          +62<input type="number" name="addphone" min="0" required><br><br>
+          <input type="submit" value="Add">
+        </form>
+
+        <form class="edituserform" v-on:submit.prevent="updateUser(user.index)" method="post">
+          <h2>Edit User</h2>
+          <label>Username</label><br><br>
+          <input type="text" name="editusername" v-bind:value="user.username" required><br><br>
+          <label>Email</label><br><br>
+          <input class="email" type="email" name="editemail" v-bind:value="user.email" required><br><br>
+          <label>Phone</label><br><br>
+          +62<input type="number" name="editphone" min="0" v-bind:value="user.phone" required><br><br>
+          <input type="submit" value="Edit">
+        </form>
+
+        <div class="admintransaction">
+          <div class="search">
+            <input class="light-table-filter" data-table="order-table" type="text" name="filter" placeholder="Search Here">
+          </div>
+          <table class="order-table table" cellspacing="0">
+            <thead>
+              <th>No.</th>
+              <th>Username</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr v-for="(value, index) in transactions">
+                <td>{{ index+1 }}</td>
+                <td>{{ value.user }}</td>
+                <td>
+                  <ol style="list-style:none">
+                    <li v-for="prd in value.product">{{ prd.name }}</li>
+                  </ol>
+                </td>
+                <td>
+                  <ol style="list-style:none">
+                    <li v-for="qty in value.quantity">{{ qty }}</li>
+                  </ol>
+                </td>
+                <td>{{ value.totalprice }}</td>
+                <td>
+                  <button name="delete" @click="deleteTransaction(index)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~User~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <div id="slider">
+          <div id="mask">
+            <ul>
+              <li id="first" class="firstanimation">
+                <img src="assets/images/hat1.jpg" alt="Hat Babe 1">
+              </li>
+              <li id="second" class="secondanimation">
+                <img src="assets/images/hat2.png" alt="Hat Babe 2">
+              </li>
+              <li id="third" class="thirdanimation">
+                <img src="assets/images/hat3.png" alt="Hat Babe 3">
+              </li>
+              <li id="fourth" class="fourthanimation">
+                <img src="assets/images/hat4.jpg" alt="Hat Babe 4">
+              </li>
+              <li id="fifth" class="fifthanimation">
+                <img src="assets/images/hat5.png" alt="Hat Babe 5">
+              </li>
+            </ul>
+          </div>
+          <div class="progress-bar"></div>
+        </div>
+        <div class="someitem" id="someitem">
+          <h2>Products</h2>
+          <div class="itemlist">
+            <figure v-for="(item, index) in items">
+              <ul>
+                <img v-bind:src="item.imgUrl" v-bind:alt="item.imgName">
+                <p>
+                  <h4>{{item.name}}</h4>
+                </p>
+                <li v-on:click="addItem(index)">
+                  <h5>Click to add to Shopping Chart</h5>
+                  <div class="titledetail">Price</div>
+                  <p class='detail'>
+                    {{item.rupiah}}
+                  </p>
+                  <div class="titledetail">Stock</div>
+                  <p class='detail'>
+                    {{item.stock}} pieces
+                  </p>
+                  <div class="titledetail">Product Info</div>
+                  <p class='detail'>
+                    {{item.info}}
+                  </p>
+                </li>
+              </ul>
+            </figure>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <span>&copy 2017 Redhaputra @hacktiv8</span>
+      </footer>
+    </div>
+    <script type="text/javascript" src="assets/js/cart.js"></script>
+    <script type="text/javascript">
+      $('#loading').hide()
+
+      if (localStorage.getItem('token') && localStorage.getItem('role') === "user") {
+        $('.login').hide(200)
+        $('.logout').show(200)
+        $('.user').hide(200)
+        $('.transaction').hide(200)
+      } else if (localStorage.getItem('token') && localStorage.getItem('role') === "admin"){
+        $('.login').hide(200)
+        $('.logout').show(200)
+        $('.home').hide(200)
+        $('.contact').hide(200)
+        $('.user').show(200)
+        $('.transaction').show(200)
+        $('#slider').hide(200)
+        $('#someitem').hide(200)
+        $('#cart').hide(200)
+
+        $('.user').on('click', function(){
+          $('.adminuser').toggle(200);
+          $('.adminproduct').hide(200);
+          $('.admintransaction').hide(200);
+          $('.edituserform').hide(200)
+          $('.adduserform').hide(200)
+          $('.addproductform').hide(200)
+          $('.editproductform').hide(200)
+        })
+
+        $('#addUser').on('click', function() {
+          $('.adduserform').show(200)
+          $('.adminuser').hide(200)
+        })
+
+        $('.product').on('click', function(){
+          $('.adminproduct').toggle(200);
+          $('.adminuser').hide(200);
+          $('.admintransaction').hide(200);
+          $('.edituserform').hide(200)
+          $('.adduserform').hide(200)
+          $('.addproductform').hide(200)
+          $('.editproductform').hide(200)
+        })
+
+        $('.addProduct').on('click', function() {
+          $('.addproductform').show(200)
+          $('.adminproduct').hide(200)
+        })
+
+        $('.transaction').on('click', function(){
+          $('.admintransaction').toggle(200);
+          $('.adminuser').hide(200);
+          $('.adminproduct').hide(200);
+          $('.edituserform').hide(200)
+          $('.adduserform').hide(200)
+          $('.addproductform').hide(200)
+          $('.editproductform').hide(200)
+        })
+
+        $('.title').text("Admin Site")
+      } else {
+        $('.login').show(200)
+        $('.logout').hide(200)
+        $('.user').hide(200)
+        $('.transaction').hide(200)
+      }
+
+      $('.email').on('keypress', function(){
+        let pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (!pattern.test(this.value)) {
+          $(".email").css({"border":"2px solid red","padding":"10px"})
+        } else {
+          $(".email").css({"border":"2px solid green","padding":"10px"})
+        }
+      })
+
+      $("#popup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+      $("#regpopup").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+      $("#logpopup").on('click', function(){
+        $('.registerform').hide(200)
+      })
+
+      $('#cart').on('click', function(){
+        $('.cart').fadeToggle(300)
+      })
+
+      $('.home').on('click', function(){
+        $(this).addClass('active');
+        $('.contact').removeClass('active');
+        $('.product').removeClass('active');
+        $('.user').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.contact').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.product').removeClass('active');
+        $('.user').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.product').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.user').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.user').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.product').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.transaction').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.user').removeClass('active');
+        $('.product').removeClass('active');
+        $('.login').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+
+      $('.login').on('click', function(){
+        $(this).addClass('active');
+        $('.home').removeClass('active');
+        $('.contact').removeClass('active');
+        $('.user').removeClass('active');
+        $('.product').removeClass('active');
+        $('.transaction').removeClass('active');
+        $('.logout').removeClass('active');
+      })
+    </script>
+  </body>
+</html>

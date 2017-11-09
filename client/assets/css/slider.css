@@ -1,0 +1,96 @@
+#slider {
+	background:white;
+	height:500px;
+	width:60%;
+	overflow:visible;
+	position:relative;
+	border-bottom: 1px solid #ffe700;
+	/*box-shadow:1px 1px 10px rgba(0,0,0,5);
+	-webkit-box-shadow:1px 1px 10px rgba(0,0,0,5);
+	-moz-box-shadow:1px 1px 10px rgba(0,0,0,5);*/
+}
+
+#mask {
+	overflow:hidden;
+	height:500px;
+	width: 100%;
+}
+
+#slider ul {
+	margin:0;
+	padding:0;
+	position:relative;
+}
+
+#slider li {
+	width:100%;
+	height:500px;
+	position:absolute;
+	top: 0px;
+	list-style:none;
+}
+
+#slider li.firstanimation {
+	-moz-animation:cycle 25s linear infinite;
+	-ms-animation:cycle 25s linear infinite;
+	-webkit-animation:cycle 25s linear infinite;
+	-o-animation:cycle 25s linear infinite;
+	animation:cycle 25s linear infinite;
+}
+#slider li.secondanimation {
+	-moz-animation:cycletwo 25s linear infinite;
+	-ms-animation:cycletwo 25s linear infinite;
+	-webkit-animation:cycletwo 25s linear infinite;
+	-o-animation:cycletwo 25s linear infinite;
+	animation:cycletwo 25s linear infinite;
+}
+#slider li.thirdanimation {
+	-moz-animation:cyclethree 25s linear infinite;
+	-ms-animation:cyclethree 25s linear infinite;
+	-webkit-animation:cyclethree 25s linear infinite;
+	-o-animation:cyclethree 25s linear infinite;
+	animation:cyclethree 25s linear infinite;
+}
+#slider li.fourthanimation {
+	-moz-animation:cyclefour 25s linear infinite;
+	-ms-animation:cyclefour 25s linear infinite;
+	-webkit-animation:cyclefour 25s linear infinite;
+	-o-animation:cyclefour 25s linear infinite;
+	animation:cyclefour 25s linear infinite;
+}
+#slider li.fifthanimation {
+	-moz-animation:cyclefive 25s linear infinite;
+	-ms-animation:cyclefive 25s linear infinite;
+	-webkit-animation:cyclefive 25s linear infinite;
+	-o-animation:cyclefive 25s linear infinite;
+	animation:cyclefive 25s linear infinite;
+}
+
+#slider li#first:hover .msg,
+#slider li#second:hover .msg,
+#slider li#third:hover .msg,
+#slider li#fourth:hover .msg,
+#slider li#fifth:hover .msg {
+	left:0px;
+}
+
+#slider:hover li,
+#slider:hover .progress-bar {
+	-moz-animation-play-state:paused;
+	-webkit-animation-play-state:paused;
+	-o-animation-play-state:paused;
+	animation-play-state:paused;
+}
+
+div.progress-bar{
+	position: absolute;
+	top: 490px;
+	width: 100%;
+	height: 10px;
+	background: #ffe700;
+	-moz-animation: fullexpand 25s ease-out infinite;
+	-ms-animation: fullexpand 25s ease-out infinite;
+	-webkit-animation: fullexpand 25s ease-out infinite;
+	-o-animation: fullexpand 25s ease-out infinite;
+	animation: fullexpand 25s ease-out infinite;
+}

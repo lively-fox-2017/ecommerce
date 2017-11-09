@@ -1,0 +1,515 @@
+*{
+  margin: auto;
+  padding: auto;
+  font-family: 'Black Ops One', cursive;
+}
+
+a{
+  text-decoration: none;
+}
+
+#loading {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(192, 192, 192, 0.5);
+  background-image: url("../images/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.flex-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  box-sizing: content-box;
+}
+
+.flex-container .lineheader{
+  width: 100%;
+  height: 50px;
+  border-radius: 0px 0px 50px 50px;
+  background-color: #ffe700;
+}
+
+.flex-item{
+  width: 60%;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+/*.header{
+  background-color: white;
+}*/
+
+.header-logo{
+  width: 50%;
+  display: flex;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.header-logo img{
+  width: 200px;
+  border-radius: 0px 0px 100px 100px;
+  align-self: center;
+}
+
+.header-logo h1{
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+}
+
+nav{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+nav .home, nav .product, nav .contact, nav .login, nav .user, nav .transaction{
+  color: #f4d100;
+  padding: 30px;
+  font-weight: bold;
+  /*border-bottom: 1px solid white;*/
+  /*box-sizing: border-box;*/
+}
+
+nav .logout{
+  color: #f4d100;
+  padding: 30px;
+  font-weight: bold;
+  /*border-bottom: 1px solid white;*/
+  /*box-sizing: border-box;*/
+}
+
+nav .home:hover, nav .product:hover, nav .contact:hover, nav .login:hover, nav .user:hover, nav .transaction:hover{
+  border-bottom: 1px solid #ffe700;
+  /*box-sizing: border-box;*/
+}
+
+nav .logout:hover{
+  border-bottom: 1px solid red;
+  color: red;
+  /*box-sizing: border-box;*/
+}
+
+.active{
+  border-bottom: 1px solid #ffe700;
+}
+
+nav ul{
+  display: inline-block;
+  list-style: none;
+  position: relative;
+}
+
+nav ul #cart{
+  position: relative;
+  padding: 30px;
+  left: -20px;
+  width: 50px;
+  z-index: 11;
+  cursor: pointer;
+}
+
+nav ul li{
+  width: 290px;
+  display:none;
+  color: white;
+  background-color: #ffe700;
+  position: absolute;
+  text-align: left;
+  left: -80px;
+  top: 60px;
+  /*border-radius: 0px 100px 0px 0px;*/
+  border: 1px solid orange;
+  padding: 10px;
+  z-index: 10;
+}
+
+.cart h3{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.cart .imgcart{
+  width: 50px;
+}
+
+.cart .removeCart{
+  width: 30px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.cart .removeCart:hover{
+  box-shadow: 0px 0px 1px 1px red;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+}
+
+.cart table{
+  width: 100%;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.cart td{
+  color: black;
+  border-bottom: 1px solid #ffe700;
+}
+
+.cart input[type='number']{
+  width: 50px;
+}
+
+.cart span{
+  float: right;
+  margin-top: 5px;
+  margin-right: 15px;
+}
+
+.content{
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/*.content #slider{
+  margin-bottom: 50px;
+}*/
+
+.content img{
+  width: 100%;
+  height: 100%;
+  align-self: center;
+}
+
+.someitem{
+  background-color: white;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.someitem h2{
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 30px;
+  margin-bottom: 10px;
+  box-sizing: content-box;
+  background-color: white;
+  color: black;
+}
+
+.itemlist{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.itemlist figure{
+  width: 300px;
+  padding: 10px;
+  background: white;
+  margin: 10px;
+  border-bottom: 1px solid #ffe700;
+}
+
+.itemlist figure:hover{
+  box-shadow: 1px 1px 10px 5px rgba(255,231,0,0.5);
+  border-radius: 10px;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  border-bottom: 0px solid #ffe700;
+}
+
+.itemlist figure ul{
+  width: 100%;
+  display: block;
+  padding-left: 0px;
+  position: relative;
+  list-style: none;
+  background: white;
+}
+
+.itemlist figure img{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.itemlist figure ul h4{
+  width: 100%;
+  text-align: center;
+}
+
+.itemlist ul li {
+  width: 100%;
+  height: 100%;
+  display:none;
+  color: white;
+  background-color: black;
+  opacity: 0.8;
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  border-radius: 10px;
+  padding: 10px;
+  overflow: auto;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.itemlist figure ul li h5{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ffe700;
+}
+
+.itemlist figure:hover ul li{
+  display: inline;
+}
+
+.titledetail{
+  color: #ffe700;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.detail{
+  color: white;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+footer{
+  width: 60%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  background-color: #ffe700;
+  padding: 20px;
+  box-sizing: content-box;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Admin~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.loginform, .registerform, .edituserform, .adduserform, .addproductform, .editproductform{
+  width: 40%;
+  margin-top: 3%;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px 5px #ffe700;
+  display: none;
+  flex-direction: column;
+  box-sizing: content-box;
+  background-color: white;
+}
+
+.loginform div, .registerform div{
+  display: flex;
+}
+
+.loginform h1, .registerform h1, .edituserform h2, .adduserform h2, .addproductform h2, .editproductform h2{
+  width: 90%;
+  background-color: white;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+
+.loginform .modal_close, .registerform .modal_close{
+  width: 6%;
+  height: 30px;
+  border-radius: 100%;
+  background-color: red;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+.loginform .modal_close:hover, .registerform .modal_close:hover{
+  box-shadow: 1px 1px 2px 5px red;
+}
+
+.loginform label, .registerform label, .edituserform label, .adduserform label, .addproductform label, .editproductform label{
+  width: 96%;
+  background-color: white;
+  padding: 10px;
+  color: #f4d100;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.loginform input[type="text"], .loginform input[type="password"],
+.registerform input[type="text"], .registerform input[type="password"], .registerform input[type="email"], .registerform input[type="number"],
+.edituserform input[type="text"], .edituserform input[type="email"], .edituserform input[type="number"],
+.adduserform input[type="text"], .adduserform input[type="password"], .adduserform input[type="email"], .adduserform input[type="number"],
+.addproductform input[type="text"], .addproductform input[type="number"], .addproductform input[type="file"], .addproductform textarea,
+.editproductform input[type="text"], .editproductform input[type="number"], .editproductform textarea{
+  width: 96%;
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ffe700;
+  margin-bottom: 10px;
+  color: #f4d100;
+  text-align: center;
+}
+
+.loginform .sub, .registerform .sub{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.loginform input[type="submit"],
+.registerform input[type="submit"],
+.edituserform input[type="submit"],
+.adduserform input[type="submit"],
+.addproductform input[type="submit"],
+.editproductform input[type="submit"]{
+  width: 52%;
+  margin-top: 20px;
+  border: 0px;
+  padding: 10px;
+  background-color: #ffe700;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+
+.loginform a, .registerform a{
+  width: 42%;
+  margin-top: 20px;
+  border: 0px;
+  padding: 10px;
+  background-color: #ffe700;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+
+/*~~~~~~~~~~~~~~~~~~Content~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+.adminproduct, .adminuser, .admintransaction{
+  display: none;
+  width: 80%;
+  background: white;
+  /*display: flex;*/
+  flex-direction: column;
+  overflow: auto;
+}
+
+.adminproduct .search{
+  width: 100%;
+}
+
+.adminproduct .search input[name="filter"], .adminuser .search input[name="filter"], .admintransaction .search input[name="filter"]{
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ffe700;
+  box-sizing: content-box;
+}
+
+.adminproduct .search button[name="add"], .adminuser .search button[name="add"], .admintransaction .search button[name="add"]{
+  width: 22%;
+  padding: 10px;
+  font-weight: bold;
+  border: 1px solid #ffe700;
+  background-color: white;
+  box-sizing: content-box;
+  cursor: pointer;
+}
+
+.adminproduct button[name="add"]:hover, .adminuser button[name="add"]:hover{
+  background-color: #ffe700;
+  box-shadow: 1px 1px 10px 3px rgba(0,0,0,0.5);
+  color: white;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+}
+
+.adminproduct table, .adminuser table, .admintransaction table{
+  width: 100%;
+  margin-top: 20px;
+  background: white;
+  border: none;
+  text-align: center;
+  box-sizing: content-box;
+}
+
+.adminproduct table .adminProductImg{
+  width: 50px;
+}
+
+.adminproduct tr:nth-child(even), .adminuser tr:nth-child(even), .admintransaction tr:nth-child(even){
+  background-color: #eaeaea;
+}
+
+.adminproduct tr, .adminproduct td, .adminuser tr, .adminuser td, .admintransaction tr, .admintransaction td{
+  padding: 5px;
+  border-bottom: 1px solid #ffe700;
+  font-weight: normal;
+}
+
+.adminproduct th, .adminuser th, .admintransaction th{
+  background-color: #ffe700;
+  padding: 10px;
+  box-sizing: content-box;
+}
+
+.adminproduct button[name="edit"], .adminproduct button[name="delete"], .adminuser button[name="edit"], .adminuser button[name="delete"], .admintransaction button[name="delete"]{
+  border: 1px solid #ffe700;
+  box-sizing: content-box;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.adminproduct button[name="edit"], .adminuser button[name="edit"]{
+  background-color: white;
+}
+
+.adminproduct button[name="edit"]:hover, .adminuser button[name="edit"]:hover{
+  background-color: #ffe700;
+  box-shadow: 1px 1px 10px 3px rgba(0,0,0,0.5);
+  color: white;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+}
+
+.adminproduct button[name="delete"], .adminuser button[name="delete"], .admintransaction button[name="delete"]{
+  background-color: red;
+  color: white;
+}
+
+.adminproduct button[name="delete"]:hover, .adminuser button[name="delete"]:hover, .admintransaction button[name="delete"]:hover{
+  box-shadow: 1px 1px 10px 3px rgba(255,0,0,0.5);
+  color: white;
+  transition: all 1s ease;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+}
