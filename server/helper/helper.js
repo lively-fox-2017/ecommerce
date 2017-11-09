@@ -69,7 +69,7 @@ module.exports = {
     let token = jwt.sign({
       id: input._id,
       username: input.username
-    }, 'hacktiv8');
+    }, process.env.token_secret);
 
     return token
   },
@@ -81,17 +81,4 @@ module.exports = {
 
     return decode
   }
-
-  // countFine: (in_date, due_date) => {
-  //   let fine = 0
-  //   let indateNum = moment(in_date).format('YYYYMMD')
-  //   let duedateNum = moment(due_date).format('YYYYMMD')
-  //   let hariDenda = indateNum - duedateNum
-  //
-  //   if (hariDenda > 0) {
-  //     fine = hariDenda * 1000
-  //   }
-  //
-  //   return fine
-  // }
 }

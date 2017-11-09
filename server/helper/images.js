@@ -3,7 +3,7 @@
 const Multer = require('multer')
 const Storage = require('@google-cloud/storage')
 const storage = Storage({
-  projectId: "api-project-721451771393",
+  projectId: process.env.project_id,
   keyFilename: "keyFile.json"
 })
 const bucket = storage.bucket("olshop.belitopikuy.xyz")

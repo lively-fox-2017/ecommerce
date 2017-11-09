@@ -35,7 +35,7 @@ new Vue({
     },
 
     findAllProduct() {
-      axios.get("http://localhost:3000/products").then((response) => {
+      axios.get("http://35.198.195.64/products").then((response) => {
         // console.log(response.data.data);
         response.data.data.forEach((row) => {
 
@@ -59,7 +59,7 @@ new Vue({
     },
 
     findAllUser() {
-      axios.get("http://localhost:3000/users")
+      axios.get("http://35.198.195.64/users")
       .then((response) => {
         // console.log(response.data.data);
         this.users = response.data.data
@@ -69,7 +69,7 @@ new Vue({
     },
 
     findAllTransaction() {
-      axios.get('http://localhost:3000/transactions')
+      axios.get('http://35.198.195.64/transactions')
       .then((response) => {
         // console.log(response.data.data);
         response.data.data.forEach((row) => {
@@ -116,7 +116,7 @@ new Vue({
       formData.append('info', info);
 
       // console.log(imageFile.files[0]);
-      axios.post('http://localhost:3000/products/insert', formData, {
+      axios.post('http://35.198.195.64/products/insert', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -156,7 +156,7 @@ new Vue({
       }
 
       // console.log(productObj)
-      axios.put('http://localhost:3000/products/update/'+id, productObj)
+      axios.put('http://35.198.195.64/products/update/'+id, productObj)
       .then((response) => {
         if (response.data.data) {
           console.log(this.items[index]);
@@ -180,7 +180,7 @@ new Vue({
     deleteProduct(index) {
       let id = this.items[index]._id
       console.log(this.items[index].imgName);
-      axios.delete('http://localhost:3000/products/delete/'+id,
+      axios.delete('http://35.198.195.64/products/delete/'+id,
         {
           headers: {
             'imgname': this.items[index].imgName
@@ -202,7 +202,7 @@ new Vue({
         phone: $('input[name=addphone]').val()
       }
 
-      axios.post('http://localhost:3000/users/insert', userObj)
+      axios.post('http://35.198.195.64/users/insert', userObj)
       .then((response) => {
         if (response.data.data) {
           this.users.push(response.data.data)
@@ -240,7 +240,7 @@ new Vue({
 
       // console.log(this.user);
       // console.log(userObj);
-      axios.put('http://localhost:3000/users/update/'+id, userObj)
+      axios.put('http://35.198.195.64/users/update/'+id, userObj)
       .then((response) => {
         if (response.data.data) {
           this.users[index].username = userObj.username
@@ -263,7 +263,7 @@ new Vue({
 
     deleteUser(index) {
       let id = this.users[index]._id
-      axios.delete('http://localhost:3000/users/delete/'+id)
+      axios.delete('http://35.198.195.64/users/delete/'+id)
       .then((response) => {
         this.users.splice(index, 1)
       }).catch((reason) => {
@@ -274,7 +274,7 @@ new Vue({
     deleteTransaction(index) {
       let id = this.transactions[index]._id
       console.log();
-      axios.delete(`http://localhost:3000/transactions/delete/`+id)
+      axios.delete(`http://35.198.195.64/transactions/delete/`+id)
       .then((response) => {
         this.transactions.splice(index, 1)
       }).catch((reason) => {
@@ -338,7 +338,7 @@ new Vue({
         }
 
         // console.log(dataCart);
-        axios.post("http://localhost:3000/transactions/insert", dataCart).then((response) => {
+        axios.post("http://35.198.195.64/transactions/insert", dataCart).then((response) => {
           // console.log(response);
           alert(response.data.message)
         }).catch((reason) => {
@@ -372,7 +372,7 @@ new Vue({
         password: $('input[name=password]').val()
       }
 
-      axios.post("http://localhost:3000/users/login", data).then((response) => {
+      axios.post("http://35.198.195.64/users/login", data).then((response) => {
         if (!response.data.data) {
           alert(response.data.message)
         } else {
@@ -381,7 +381,7 @@ new Vue({
           window.location.reload()
         }
       }).catch((reason) => {
-        console.log(reason);
+        alert("Invalid Username and Password");
       })
     },
 
@@ -393,7 +393,7 @@ new Vue({
         phone: $('input[name=phone]').val()
       }
 
-      axios.post("http://localhost:3000/users/register", data).then((response) => {
+      axios.post("http://35.198.195.64/users/register", data).then((response) => {
         // alert(response.data.message)
         if (!response.data.data) {
           // console.log(response);
