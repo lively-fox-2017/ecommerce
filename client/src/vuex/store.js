@@ -4,7 +4,7 @@ import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://localhost:3005'
 })
 
 Vue.use(Vuex)
@@ -180,6 +180,7 @@ const actions = {
     })
     .then(({data}) => {
       // console.log('Sudah di Store', data)
+      state.semuaCart = []
     })
   },
   getTransaksi ({commit}) {

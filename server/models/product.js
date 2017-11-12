@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/ecommerce')
 
 let schema = new mongoose.Schema({
   linkimage:'string',
@@ -8,6 +7,6 @@ let schema = new mongoose.Schema({
   harga: 'number'
 })
 
-var products = mongoose.model('products', schema)
+var productsecommerce = mongoose.model('productsecommerce', schema)
 
-module.exports = products
+module.exports = productsecommerce

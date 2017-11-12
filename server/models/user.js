@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/ecommerce')
 
 let schema = new mongoose.Schema({
   username:'string',
@@ -8,6 +7,6 @@ let schema = new mongoose.Schema({
   role: 'string'
 })
 
-var users = mongoose.model('users', schema)
+var usersecommerce = mongoose.model('usersecommerce', schema)
 
-module.exports = users
+module.exports = usersecommerce

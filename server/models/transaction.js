@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/ecommerce')
 
 let schema = new mongoose.Schema({
-  idmember:[{type:mongoose.Schema.Types.ObjectId, ref: 'users'}],
+  idmember:[{type:mongoose.Schema.Types.ObjectId, ref: 'usersecommerce'}],
   date: Date,
   produk: [
-    {idproduct: [{type:mongoose.Schema.Types.ObjectId, ref: 'products'}],
+    {idproduct: [{type:mongoose.Schema.Types.ObjectId, ref: 'productsecommerce'}],
     jumlahitem: ['string']}
   ]
   // idproduct:[{type:mongoose.Schema.Types.ObjectId, ref: 'products'}],
@@ -14,6 +13,6 @@ let schema = new mongoose.Schema({
   // date: Date
 })
 
-var transactions = mongoose.model('transactions', schema)
+var transactionsecommerce = mongoose.model('transactionsecommerce', schema)
 
-module.exports = transactions
+module.exports = transactionsecommerce

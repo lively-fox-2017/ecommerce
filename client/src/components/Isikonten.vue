@@ -86,6 +86,11 @@ export default {
         linkimage: this.linkimage,
         harga: Number(this.harga)
       })
+      this.namaproduct = ''
+      this.deskripsi = ''
+      this.linkimage = ''
+      this.harga = 0
+      this.getFormulir()
     },
     ...mapActions([
       'getProductAll',
@@ -100,7 +105,8 @@ export default {
       'formulir',
       'produkbaru',
       'transaksi',
-      'sementara'
+      'sementara',
+      'getFormulir'
     ])
   },
   created () {
@@ -126,6 +132,7 @@ export default {
 }
 .juduldeskripsi {
   height: 100px;
+  overflow-y: auto;
 }
 .form-control {
   margin-bottom: 10px;

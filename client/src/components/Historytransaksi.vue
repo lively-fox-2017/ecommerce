@@ -34,13 +34,13 @@ export default {
   methods: {
     ...mapActions([
       'getTransaksi',
-      'token'
+      'getToken'
     ])
   },
   computed: {
     ...mapState([
       'transaksi',
-      'getToken'
+      'token'
     ])
   },
   created () {
@@ -49,15 +49,18 @@ export default {
       this.$router.push('/')
       console.log('kosong')
     } else {
-
+      this.getTransaksi()
     }
-    this.getTransaksi()
     // console.log('data', this.transaksi)
   },
   watch: {
     transaksi: function (test) {
       // this.getTransaksi()
       console.log('Perbaharui')
+    },
+    token: function (test) {
+      console.log('perbaharuitoken')
+      this.$router.push('/')
     }
   }
 }
