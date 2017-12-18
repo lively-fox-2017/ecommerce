@@ -29,10 +29,10 @@
           </div>
           <div class="ui action left icon input">
             <i class="search icon"></i>
-            <input placeholder="Search..." type="text">
+            <input placeholder="Search..." v-model="search" type="text">
             <div class="ui teal button">Search</div>
           </div>
-          <a class="item" id="inCart"><i class="in cart icon"></i> <p>Carts </p></a>
+          <a class="item" id="inCart"><p>Carts <i class="in cart icon"></i>{{ counter }}</p></a>
         </div>
       </div>
       <div class="ui grid">
@@ -51,42 +51,6 @@
                       <a class="item"><i class="settings icon"></i> Account Settings</a>
                     </div>
                   </div>
-                  <div class="ui simple dropdown item">
-                    Computer PC and Laptop
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
-                      <a class="item"><i class="globe icon"></i> Choose Language</a>
-                      <a class="item"><i class="settings icon"></i> Account Settings</a>
-                    </div>
-                  </div>
-                  <div class="ui simple dropdown item">
-                    Fashion and Beauty
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
-                      <a class="item"><i class="globe icon"></i> Choose Language</a>
-                      <a class="item"><i class="settings icon"></i> Account Settings</a>
-                    </div>
-                  </div>
-                  <div class="ui simple dropdown item">
-                    Health and Medical
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
-                      <a class="item"><i class="globe icon"></i> Choose Language</a>
-                      <a class="item"><i class="settings icon"></i> Account Settings</a>
-                    </div>
-                  </div>
-                  <div class="ui simple dropdown item">
-                    Sports and Entertainment
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
-                      <a class="item"><i class="globe icon"></i> Choose Language</a>
-                      <a class="item"><i class="settings icon"></i> Account Settings</a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -94,14 +58,12 @@
           </div>
           <div class="ten wide column">
             <div class="ui grid">
-              <!-- product -->
-              <div class="four wide column" v-for="item in items">
+              <div class="four wide column" v-for="item in filteredProduct">
                 <br>
                 <div class="ui segment">
-                  <img class="ui medium image" v-bind:src="item.img">
+                  <img class="ui medium image" :src="item.img">
                 </div>
-
-                <div class="ui primary button" v-on:click="addCart(item)">
+                <div class="ui primary button" @click="addCart(item)">
                   <i class="shop icon"></i> Add to Cart
                 </div>
                 <div class="ui animated fade button" tabindex="0">
@@ -110,10 +72,7 @@
                       <p>{{ item.cost }}</p>
                     </div>
                 </div>
-
               </div>
-
-          <!-- / product -->
             </div>
           </div>
           <div class="ui modal">
@@ -128,17 +87,19 @@
                 <img v-bind:src="item.img">
               </div>
               <div class="description">
-                <div class="ui header">{{item.nama}}</div>
-                <p>{{item.cost}} </p>
+                <div class="ui header">
+                  Item Name : {{item.nama}}
+                </div>
+                <p>Price : {{item.cost}} </p>
                 <p>{{ item.nama }}</p>
               </div>
             </div>
             <div class="actions">
               <div class="ui black deny button">
-                Nope
+                Cancel
               </div>
               <div class="ui positive right labeled icon button">
-                Yep, that's me
+                Next to payment
                 <i class="checkmark icon"></i>
               </div>
             </div>
