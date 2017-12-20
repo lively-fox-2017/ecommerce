@@ -2,69 +2,63 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let itemSchema = new Schema({
-  name:{
+  item_Name:{
     type: String
   },
-  itemid:{
-    type: String
-  },
-  qty:{
+  item_Qty:{
     type: Number
   },
-  cost:{
+  item_Price:{
+    type: Number
+  },
+  total_price:{
     type: Number
   },
   img:{
     type: String
-  },
-  nama:{
-    type: String
   }
 })
 
-let items = mongoose.model('items', itemSchema);
+let items = mongoose.model('Items', itemSchema);
 
-class Items {
-  //get books
-  static getItems(callback, limit) {
-    items.find(callback).limit(limit);
+class ItemsModel {
+
+  static getItems(req, res) {
+    items.find()
+    .then((dataItems) => {
+      res.status(200).json({dataItems})
+    }).catch((err) => {
+      res.status(400).send(err)
+    })
   };
 
-  //add item
-  static addItem(body, callback) {
-    var data_item = {
-      "name": `${body.named}`,
-      "itemid": `${body.itemid}`,
-      "qty": body.qty,
-      "cost": body.cost,
-      "img": `${body.img}`,
-      "nama": `${body.nama}`
-    }
-    // console.log(body.name);
-    items.create(data_item, callback);
+  static addItem(req, res) {
+    var data_item = new items(req.body)
+    data_item.save().then((dataItems) => {
+      res.status(200).json({dataItems})
+    }).catch((err) => {
+      res.status(400).send(err)
+    })
   };
 
-  //update item
-  static updateItem(params, body, callback) {
-    var id = {
-      _id : params.id
-    }
-    var update = {
-      "name": `${body.name}`,
-      "itemid": `${body.itemid}`,
-      "qty": body.qty,
-      "cost": body.cost,
-      "img": `${body.img}`,
-      "nama": `${body.nama}`
-    }
-    items.findByIdAndUpdate(id, update, callback);
-  };
-    //delete items
-  static deleteItem(params, callback){
-    var id = {
-      _id : params.id
-    }
-    items.deleteOne(id, callback)
+  static updateItem(req, res) {
+    items.findByIdAndUpdate(req.params.id,{$set:req.body})
+    .then((updatedItem) => {
+      res.json({message: 'Succesfully Updated Item', updatedItem})
+    }).catch((err) => {
+      res.send(err);
+    })
   }
+
+  static deleteItem(req, res) {
+    items.remove({_id : req.params.id})
+      .then((result) => {
+      res.json({ message: "items successfully deleted!", result });
+    })
+    .catch((err) => {
+      res.send(err)
+    })
+  }
+
 }
-module.exports = Items;
+module.exports = ItemsModel;

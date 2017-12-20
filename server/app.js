@@ -1,19 +1,24 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var cors = require('cors');
-var index = require('./routes/index');
-var customers = require('./routes/customers');
-var items = require('./routes/items');
-var carts = require('./routes/carts');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const customers = require('./routes/customers');
+const items = require('./routes/items');
+const categories = require('./routes/categories')
+const carts = require('./routes/carts');
 
-var app = express();
-mongoose.connect('mongodb://localhost/shopping-cart', { useMongoClient: true })
+const app = express();
+mongoose.connection.openUri('mongodb://kalibani:admin@cluster0-shard-00-00-xrrgq.mongodb.net:27017,cluster0-shard-00-01-xrrgq.mongodb.net:27017,cluster0-shard-00-02-xrrgq.mongodb.net:27017/ecommerce?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', { useMongoClient: true })
 mongoose.Promise = global.Promise;
+mongoose.connection.once('open', () => {
+  console.log('mongoose connection success');
+}).on('error', (error) => {
+  console.log('connection error');
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -27,11 +32,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
-app.use('/', index);
-app.use('/customers', customers);
-app.use('/items', items);
-app.use('/carts', carts);
-
-
+app.use('/api/customers', customers);
+app.use('/api/items', items);
+app.use('/api/categories', categories);
+app.use('/api/carts', carts);
 
 module.exports = app;

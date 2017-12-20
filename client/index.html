@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Ecommerce</title>
     <link rel="stylesheet" type="text/css" href="node_modules/semantic-ui/dist/semantic.min.css">
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -41,14 +41,12 @@
             <div class="ui left vertical menu">
               <div class="item">
                 <div class="header">Categories Product</div>
-                <div class="menu">
+                <div class="menu" v-for="item in categories">
                   <div class="ui simple dropdown item">
-                    Handphone and Tablet
+                    {{ item.category_name}}
                     <i class="dropdown icon"></i>
                     <div class="menu">
-                      <a class="item"><i class="edit icon"></i> Edit Profile</a>
-                      <a class="item"><i class="globe icon"></i> Choose Language</a>
-                      <a class="item"><i class="settings icon"></i> Account Settings</a>
+                      <a class="item" v-for="i in item.item_id"><i class="shop icon"></i>{{ i.item_Name }}</a>
                     </div>
                   </div>
                 </div>
@@ -63,13 +61,13 @@
                 <div class="ui segment">
                   <img class="ui medium image" :src="item.img">
                 </div>
-                <div class="ui primary button" @click="addCart(item)">
+                <div class="ui primary button" @click="addCart(item)" style="font-size:90%">
                   <i class="shop icon"></i> Add to Cart
                 </div>
                 <div class="ui animated fade button" tabindex="0">
-                  <div class="visible content">{{ item.nama }}</div>
+                  <div class="visible content">{{ item.item_Name }}</div>
                     <div class="hidden content">
-                      <p>{{ item.cost }}</p>
+                      <p>Rp. {{ item.item_Price }}</p>
                     </div>
                 </div>
               </div>
@@ -80,18 +78,15 @@
             <div class="header">
               Your Item List :
             </div>
-            <div class="image content"  v-for="item in carts"
-            :key="item.id"
-            v-bind:item="item">
+            <div class="image content" v-for="item in carts":key="item.id">
               <div class="ui medium image">
                 <img v-bind:src="item.img">
               </div>
               <div class="description">
                 <div class="ui header">
-                  Item Name : {{item.nama}}
+                  Item Name : {{item.item_Name}}
                 </div>
-                <p>Price : {{item.cost}} </p>
-                <p>{{ item.nama }}</p>
+                <p>Item Price : Rp. {{item.item_Price}}</p>
               </div>
             </div>
             <div class="actions">
@@ -104,7 +99,6 @@
               </div>
             </div>
           </div>
-          <br><br>
           <br>
           <div class="ui attached stackable menu">
             <div class="ui container">
@@ -126,10 +120,10 @@
                   <a class="item"><i class="settings icon"></i> Account Settings</a>
                 </div>
               </div>
-
           </div>
         </div>
         <div class="ui raised very padded text container segment">
+          <br>
           <h2 class="ui header">We are ready to serve you on: </h2>
           <p>Monday - Friday, 09:00-18:00 Wib</p>
           <p>Saturday - Sunday, 09:00-14:00</p>
@@ -162,10 +156,5 @@
         .modal('show')
       ;
     })
-
-
   </script>
-
-
-
 </html>

@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const customers = require('../controllers/customers');
+const customers = require('../controllers/customerCtrl');
 
-router.get('/', customers.findAll)
-router.post('/', customers.create)
-router.put('/:id', customers.update)
-router.delete('/:id', customers.delete)
+router.post('/register', customers.register)
+router.post('/login', customers.login)
 
 module.exports = router;

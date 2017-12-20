@@ -3,6 +3,7 @@ new Vue({
   data: {
     counter:'',
     items:[],
+    categories:[],
     search:''
   },
 
@@ -11,7 +12,8 @@ new Vue({
       get(){
         let carts = localStorage.getItem("cart")
         if (carts) {
-          return JSON.parse(carts);
+          let unique = JSON.parse(carts).filter((set => f => !set.has(f.item_Name) && set.add(f.item_Name))(new Set))
+          return unique
         }else {
           console.log('carts kosong');
         }
@@ -21,13 +23,14 @@ new Vue({
     filteredProduct() {
       var self = this
       return this.items.filter(function(item){
-        return item.nama.toLowerCase().indexOf(self.search.toLowerCase())>=0;
+        return item.item_Name.toLowerCase().indexOf(self.search.toLowerCase())>=0;
       });
     }
   },
 
   beforeMount(){
     this.getAll(),
+    this.getCategories(),
     this.qty()
   },
 
@@ -36,7 +39,8 @@ new Vue({
       if (this.carts) {
         let obj_cart = this.carts
         obj_cart.push(product)
-        localStorage.setItem('cart', JSON.stringify(obj_cart));
+        localStorage.setItem('cart', JSON.stringify(obj_cart))
+        location.reload()
       }else {
         var cart2 = []
         cart2.push(product)
@@ -55,9 +59,19 @@ new Vue({
     },
 
     getAll(){
-      axios.get('http://localhost:3001/items')
+      axios.get('http://localhost:3001/api/items')
       .then((response)=>{
-        this.items = response.data
+        this.items = response.data.dataItems
+      })
+      .catch(err=>{
+        console.log(err);
+      })
+    },
+
+    getCategories(){
+      axios.get('http://localhost:3001/api/categories')
+      .then((response)=>{
+        this.categories = response.data.dataCategories
       })
       .catch(err=>{
         console.log(err);
