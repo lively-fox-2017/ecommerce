@@ -59,7 +59,7 @@ new Vue({
     },
 
     getAll(){
-      axios.get('http://localhost:3001/api/items')
+      axios.get('http://104.199.192.134/api/items')
       .then((response)=>{
         this.items = response.data.dataItems
       })
@@ -69,7 +69,7 @@ new Vue({
     },
 
     getCategories(){
-      axios.get('http://localhost:3001/api/categories')
+      axios.get('http://104.199.192.134/api/categories')
       .then((response)=>{
         this.categories = response.data.dataCategories
       })
