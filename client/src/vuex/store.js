@@ -73,7 +73,8 @@ const mutations = {
         sementara.push({
           namaproduct: prod[j].namaproduct,
           harga: prod[j].harga,
-          quantity: qwt[j]
+          quantity: qwt[j],
+          date: payload[i].date
         })
       }
       ambil.push(sementara)

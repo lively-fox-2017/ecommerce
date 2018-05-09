@@ -37,7 +37,7 @@
                       <form @submit.prevent="masuk({ username, password})" class="form" action="index.html" method="post"  accept-charset="UTF-8" id="login-nav">
                         <div class="form-group">
                           <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                          <input v-model="username" type="text" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                          <input v-model="username" type="text" class="form-control" id="exampleInputEmail2" placeholder="Username" required>
                         </div>
 
                         <div class="form-group">
@@ -138,6 +138,7 @@ export default {
     logout: function () {
       localStorage.removeItem('token')
       this.getToken()
+      this.perubahan()
       // this.getDataUser()
     },
     perubahan: function () {

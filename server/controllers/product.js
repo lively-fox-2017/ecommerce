@@ -22,7 +22,20 @@ const getProduct = (req,res) => {
     res.send(data)
   })
 }
+
+const deleteProduct = (req,res) => {
+  // console.log(req.params);
+  product.remove({
+    _id:req.params.id
+  }).then((data)=>{
+    res.send(data)
+  }).catch((err)=>{
+    res.send(err)
+  })
+}
+
 module.exports = {
   addProduct,
-  getProduct
+  getProduct,
+  deleteProduct
 }

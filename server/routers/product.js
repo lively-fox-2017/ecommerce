@@ -5,5 +5,6 @@ let user = require('../controllers/product.js')
 // router.post('/login',user.addLogin)
 router.post('/',user.addProduct)
 router.get('/',user.getProduct)
+router.delete('/:id',user.deleteProduct)
 
 module.exports = router

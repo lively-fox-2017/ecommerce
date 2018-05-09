@@ -5,6 +5,9 @@
       <div class="container">
         <table class="">
           <tr>
+            <th>Pembelian Tanggal: {{new Date(data[0].date).getDate()}} / {{new Date(data[0].date).getMonth()+1}} / {{new Date(data[0].date).getFullYear()}} - Jam: {{new Date(data[0].date).getHours()}}:{{new Date(data[0].date).getMinutes()}}:{{new Date(data[0].date).getSeconds()}}</th>
+          </tr>
+          <tr>
             <th>Nama Produk</th>
             <th>Harga Produk</th>
             <th>quantity</th>
@@ -18,7 +21,7 @@
           </tr>
         </table>
       </div>
-      <p class="transaksi">===========================================</p>
+      <p class="transaksi">............</p>
     </div>
   </div>
 </template>
@@ -90,10 +93,12 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    /* background-color: #dddddd; */
 }
 
 .transaksi {
   padding-top: 10px;
+  /* padding-left: 15px; */
+  /* text-align: left; */
 }
 </style>
