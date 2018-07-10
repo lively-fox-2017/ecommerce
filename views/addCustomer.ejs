@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <form action='/customers' method='post'>
+        <input type='text' name='name' placeholder='Name'>
+        <input type='text' name='memberid' placeholder='Member Id'>
+        <input type='text' name='address' placeholder='Address'>
+        <input type='text' name='zipcode' placeholder='Zipcode'>
+        <input type='text' name='phone' placeholder='Phone'>
+        <button type='submit'>Submit</button>
+    </form>
+    <a href='/customers'>Customers</a>
+    <a href='/books'>Books</a>
+    <a href='/collections'>Transactions</a>
+    <a href='/'>Home</a>
+  </body>
+</html>
