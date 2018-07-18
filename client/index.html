@@ -1,0 +1,315 @@
+<html>
+
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properties -->
+    <title>Homepage - Semantic</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.12.0/css/semantic.min.css"/>
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/site.css">
+
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/container.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/grid.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/header.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/image.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/menu.css">
+
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/divider.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/dropdown.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/segment.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/button.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/list.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/icon.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="./semantic/out/components/transition.css">
+
+    <style type="text/css">
+        .hidden.menu {
+            display: none;
+        }
+
+        .masthead.segment {
+            min-height: 700px;
+            padding: 1em 0em;
+        }
+
+        .masthead .logo.item img {
+            margin-right: 1em;
+        }
+
+        .masthead .ui.menu .ui.button {
+            margin-left: 0.5em;
+        }
+
+        .masthead h1.ui.header {
+            margin-top: 3em;
+            margin-bottom: 0em;
+            font-size: 4em;
+            font-weight: normal;
+        }
+
+        .masthead h2 {
+            font-size: 1.7em;
+            font-weight: normal;
+        }
+
+        .ui.vertical.stripe {
+            padding: 8em 0em;
+        }
+
+        .ui.vertical.stripe h3 {
+            font-size: 2em;
+        }
+
+        .ui.vertical.stripe .button+h3,
+        .ui.vertical.stripe p+h3 {
+            margin-top: 3em;
+        }
+
+        .ui.vertical.stripe .floated.image {
+            clear: both;
+        }
+
+        .ui.vertical.stripe p {
+            font-size: 1.33em;
+        }
+
+        .ui.vertical.stripe .horizontal.divider {
+            margin: 3em 0em;
+        }
+
+        .quote.stripe.segment {
+            padding: 0em;
+        }
+
+        .quote.stripe.segment .grid .column {
+            padding-top: 5em;
+            padding-bottom: 5em;
+        }
+
+        .footer.segment {
+            padding: 5em 0em;
+        }
+
+        .secondary.pointing.menu .toc.item {
+            display: none;
+        }
+
+        @media only screen and (max-width: 700px) {
+            .ui.fixed.menu {
+                display: none !important;
+            }
+            .secondary.pointing.menu .item,
+            .secondary.pointing.menu .menu {
+                display: none;
+            }
+            .secondary.pointing.menu .toc.item {
+                display: block;
+            }
+            .masthead.segment {
+                min-height: 350px;
+            }
+            .masthead h1.ui.header {
+                font-size: 2em;
+                margin-top: 1.5em;
+            }
+            .masthead h2 {
+                margin-top: 0.5em;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+
+    <script src="./node_modules/semantic-ui/examples/assets/library/jquery.min.js"></script>
+    <script src="./semantic/out/components/visibility.js"></script>
+    <script src="./semantic/out/components/sidebar.js"></script>
+    <script src="./semantic/out/components/transition.js"></script>
+    <script>
+        $(document).ready(function () {
+
+                // fix menu when passed
+                $('.masthead')
+                    .visibility({
+                        once: false,
+                        onBottomPassed: function () {
+                            $('.fixed.menu').transition('fade in');
+                        },
+                        onBottomPassedReverse: function () {
+                            $('.fixed.menu').transition('fade out');
+                        }
+                    })
+                    ;
+
+                // create sidebar and attach to menu open
+                
+                $("#cooladvance").on('click', function () {
+                    $('.ui.sidebar').sidebar('toggle');
+                })
+
+                $("#shoppingcart").on('click', function () {
+                        $('.ui.sidebar').sidebar('toggle');
+                    })
+            });
+
+            // $Menu = $('#dropdownMenu')
+            // $Menu.dropdown({
+            //     fullTextSearch: true
+            // })
+
+    </script>
+    <style>
+        .dropbtn {
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+    
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+    
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f30b0b;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+    
+        .dropdown-content a {
+            color: #FFFFFF;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+    
+        .dropdown-content a:hover {
+            background-color: #75ff04
+        }
+    
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    
+        .dropdown:hover .dropbtn {
+            background-color: #000000;
+        }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://npmcdn.com/axios/dist/axios.min.js"></script>
+</head>
+        <modal v-if="showModal" @close="showModal = false">        </modal>
+<body class="pushable">
+    <div id="app">
+        <!-- Sidebar Menu -->
+        <div class="pusher">
+            <div class="ui vertical inverted sidebar menu right">
+                <a class="active item">Your Shopping Items</a>
+                <div class="ui inverted segment">
+                    <div class="ui inverted relaxed divided list">
+                        <cart-product
+                        v-for="item in cart"
+                        :key="item.id"
+                        v-bind:cart="item"
+                        >
+                        </cart-product>
+                    </div>
+                </div>
+                <button class="ui button" id="show-modal" @click="showModal = true">
+                    Checkout
+                </button>
+            </div>
+        </div>
+        <!-- Following Menu -->
+        <div class="ui large top fixed menu transition hidden">
+
+                <a class="active item">Home</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Categories</button>
+                    <div class="dropdown-content">
+                        <a href="#">Your Suites</a>
+                        <a href="#">Your Swords</a>
+                        <a href="#">Your Hand Guns</a>
+                    </div>
+                </div>
+                <div class="right menu">
+                    <cart-product v-for="item in cart" :key="item.id" v-bind:cart="item">
+                    </cart-product>
+                </div>
+        </div>
+
+        <!-- Page Contents -->
+        <div class="pusher">
+            <div class="ui inverted vertical masthead center aligned segment">
+                <div class="ui container">
+                    <div class="ui large secondary inverted pointing menu">
+                        <a class="active item">Home</a>
+                        <div class="dropdown">
+                            <button class="dropbtn">Categories</button>
+                            <div class="dropdown-content">
+                                <a href="#">Your Suites</a>
+                                <a href="#">Your Swords</a>
+                                <a href="#">Your Hand Guns</a>
+                            </div>
+                        </div>
+                        <a class="item">Company</a>
+                        <div class="right item">
+                            <a class="ui inverted button" id="cooladvance">Shopping Cart</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui text container">
+                    <h1 class="ui inverted header">
+                        Pirate's Stuff
+                    </h1>
+                    <h2>What you want is what we need</h2>
+                    <a href="#iliketosteal"><div class="ui huge primary button" >Start Shopping
+                        <i class="right arrow icon"></i>
+                    </div></a>
+                </div>
+            </div>
+            <div id="iliketosteal">
+
+                    <h1 class="ui header">{{message}}</h1>
+                        <div class="ui vertical stripe segment">
+                            <div class="ui middle aligned stackable grid container">
+                                <div class="ui container">
+                                    <div class="ui grid">
+                                    <product-item v-for="product in items" v-bind:product="product" v-bind:key="product._id" @buy="buy(product)">
+                                    </product-item>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="center aligned column">
+                                        <button class="ui button" id="show-modal" @click="showModal = true">
+                                            Checkout Your Stolen Things
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="ui black inverted vertical footer segment">
+            <div class="ui center aligned container">
+                <div class="ui stackable inverted grid">
+                    <h4 class="ui inverted header">Support US</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
